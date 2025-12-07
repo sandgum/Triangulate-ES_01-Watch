@@ -9,7 +9,7 @@ To top it all off, the watch is completely workout-friendly, with rubberised sid
 The watch features a sleek design, with each component being laid out single file and in its own separate segment of the watch. These segments can all bend around the watch, preserving a uniform thickness all around.
 The main microcontroller running the watch is an ESP32-S3 with inbuilt Bluetooth capabilities, which also allow for it to sync with a smartphone to relay notifications, workout data etc. (Coming soon!)
 
-# Find extensive journalling on my Hack Club Blueprint Project: https://blueprint.hackclub.com/projects/4721
+*Find extensive journalling on my Hack Club Blueprint Project: https://blueprint.hackclub.com/projects/4721*
 
 <img width="2360" height="1640" alt="IMG_0538" src="https://github.com/user-attachments/assets/29ea409e-d1ab-4e36-963a-3770688083d4" />
 <img width="2360" height="1640" alt="IMG_0539" src="https://github.com/user-attachments/assets/b72db3b0-0940-4957-9b33-440178231ea5" />
