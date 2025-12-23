@@ -9,6 +9,7 @@ The watch has built-in heart rate and spO2 sensing via an Analog Devices MAX3010
 To top it all off, the ES_01 is completely workout-friendly, with rubberised sides and no pesky side buttons that get pressed mid-pushup (Every physical input is at the top of the watch)!
 The watch features a sleek design, with each component being laid out single file and in its own separate segment of the watch. These segments can all bend around the watch, preserving a uniform thickness all around, which also adds the benefit of being aesthetically pleasing.
 The main microcontroller running the watch is an Espressif ESP32-S3 running with Bluetooth capabilities, which also allow for it to sync with a smartphone to relay notifications, workout data etc through firmware based on ESP-IDF. (Coming soon!)
+
 ---
 *Find extensive journalling on my Hack Club Blueprint Project: https://blueprint.hackclub.com/projects/4721*
 ---
