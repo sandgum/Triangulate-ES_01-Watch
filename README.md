@@ -22,6 +22,7 @@ The main microcontroller running the watch is an Espressif ESP32-S3 running with
 -  Single-sided component placement
 -  0.2mm board thickness
 -  Added 0.1mm FR4 stiffeners
+-  All resistors and capacitors are 0402 size
 
 *Schematics:*
 <img width="2993" height="2115" alt="E-ink watch sensors schematic" src="https://github.com/user-attachments/assets/d2e8a765-7ff3-49c3-917e-8c7fe9fb490c" />
@@ -70,13 +71,13 @@ The main microcontroller running the watch is an Espressif ESP32-S3 running with
 ---
 ## Bill of materials:
 
-*Electronic Components:*
+*Electronic Components: (Order quantities account for minimum order quantity of parts from the chosen retailer)*
 
 | Manufacturer Part Number | Mfr.                        | Order Qty. | Unit Price(USD) | Ext.Price(USD) | Package                               | Description                                                                                                                | Product Link                                       |
 |--------------------------|-----------------------------|------------|-----------------|----------------|---------------------------------------|----------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------|
 | CC0402JRNPO9BN110        | YAGEO                       | 100        | 0.0012          | 0.12           | 0402                                   | 11pF ±5% 50V Ceramic Capacitor NP0 0402                                                                                    | https://www.lcsc.com/product-detail/C527000.html   |
 | GRM155R61E475ME15D       | muRata                      | 20         | 0.0377          | 0.75           | 0402                                   | 4.7uF ±20% 25V Ceramic Capacitor X5R 0402                                                                                  | https://www.lcsc.com/product-detail/C2858031.html  |
-| ESP32-S3                 | ESPRESSIF                   | 2          | 2.7791          | 5.56           | QFN-56-EP(7x7)                         | 150Mbps 2.4GHz 2.412GHz~2.484GHz QFN-56-EP(7x7) RF Transceiver ICs RoHS                                                    | https://www.lcsc.com/product-detail/C2913192.html  |
+| ESP32-S3                 | ESPRESSIF                   | 1          | 2.7791          | 2.78           | QFN-56-EP(7x7)                         | 150Mbps 2.4GHz 2.412GHz~2.484GHz QFN-56-EP(7x7) RF Transceiver ICs RoHS                                                    | https://www.lcsc.com/product-detail/C2913192.html  |
 | 2328702-6                | TE Connectivity             | 5          | 0.1654          | 0.83           | SMD,P=0.5mm,Surface Mount,Right Angle  | FFC/FPC Connector 6 Position 0.5mm Pitch Double-Sided Contacts, Top and Bottom Entry Surface Mount, Right Angle -40℃~+85℃  | https://www.lcsc.com/product-detail/C3151647.html  |
 | FFC2B28-24-G             | Global Connector Technology | 1          | 0.5754          | 0.58           | SMD,P=0.5mm,Surface Mount,Right Angle  | FFC/FPC Connector 24 Position 0.5mm Pitch Double-Sided Contacts, Top and Bottom Entry Surface Mount, Right Angle -25℃~+85℃ | https://www.lcsc.com/product-detail/C3151659.html  |
 | BHI260AP                 | Bosch                       | 1          | 8.7882          | 8.79           | LGA-44                                 | LGA-44 IMUs (Inertial Measurement Units) RoHS                                                                              | https://www.lcsc.com/product-detail/C3288651.html  |
@@ -118,7 +119,7 @@ The main microcontroller running the watch is an Espressif ESP32-S3 running with
 | 401225                   | -                           | 3          | 2.66            | 7.98           | -                                      | 3.7V 100mAh Lithium Polymer Lipo Rechargeable Battery                                                                      | https://www.aliexpress.com/item/1005006129236699.html?spm=a2g0o.cart.0.0.157538daxZfUfb&mp=1&pdp_npi=5%40dis%21AUD%21AUD%204.73%21AUD%204.02%21%21AUD%204.02%21%21%21%402103212317648973370843232e461d%2112000035892453159%21ct%21AU%216047249797%21%211%210 |
 | 0619AAC                  | -                           | 1          | 3.06            | 3.06           | -                                      | Brushless X-axis 1.2V 100mA Max Precision Vibration Motor                                                                  | https://www.aliexpress.com/item/1005006421331249.html?spm=a2g0o.tesla.0.0.24f1nmtsnmts4h&pdp_npi=6%40dis%21AUD%21AU%244.13%21AU%241.54%21%21%21%21%21%402101d9ef17624709252885249e887e%2112000049883253246%21btfpre%21%21%21%211%210%21&afTraceInfo=1005006421331249__pc__c_ppc_item_bridge_pc_main__epipcn9__1762470925359 |
 
-Total: $84.29 USD
+Total: $81.51 USD
 
 
 *Manufactured Components*
@@ -135,7 +136,7 @@ Total: $84.29 USD
 Total: $136.48 USD
 
 ---
-## Grand Total (Excl. Shipping): $220.77 USD
+## Grand Total (Excl. Shipping): $217.99 USD
 ---
 *Find extensive journalling on my Hack Club Blueprint Project: https://blueprint.hackclub.com/projects/4721*
 ---
