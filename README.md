@@ -6,7 +6,7 @@ The watch has built-in heart rate and spO2 sensing via an Analog Devices MAX3010
 <img width="3840" height="2160" alt="render1" src="https://github.com/user-attachments/assets/fb7dc05c-c978-4ac6-91fd-225cae70b5f9" />
 <img width="3840" height="2160" alt="render10" src="https://github.com/user-attachments/assets/e5543c91-088c-427f-89b5-0b45ddf50308" />
 
-*ACKNOWLEDGMENT: Most of the materials and the human hand model you see in the renders are not my own work, but is free content legitimately downloaded from BlenderKit using their free plan*
+*ACKNOWLEDGMENT: Most of the materials and the human hand model you see in the renders are not my own work, but is Royalty-free or CC0 licensed work legitimately downloaded from BlenderKit using their free plan*
 
 ---
 
