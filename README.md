@@ -23,10 +23,11 @@ The main microcontroller running the watch is an Espressif ESP32-S3 running with
 
 
 *Schematics:*
-[E-ink watch main schematic.pdf](https://github.com/user-attachments/files/24319560/E-ink.watch.main.schematic.pdf)
-[E-ink watch sensors schematic.pdf](https://github.com/user-attachments/files/24319562/E-ink.watch.sensors.schematic.pdf)
-[E-ink watch displays schematic.pdf](https://github.com/user-attachments/files/24319563/E-ink.watch.displays.schematic.pdf)
-[E-ink watch drivers schematic.pdf](https://github.com/user-attachments/files/24319564/E-ink.watch.drivers.schematic.pdf)
+<img width="2993" height="2115" alt="E-ink watch sensors schematic" src="https://github.com/user-attachments/assets/d2e8a765-7ff3-49c3-917e-8c7fe9fb490c" />
+<img width="2993" height="2115" alt="E-ink watch main schematic" src="https://github.com/user-attachments/assets/ff548654-77bf-4317-9524-009f5500d615" />
+<img width="2993" height="2115" alt="E-ink watch drivers schematic" src="https://github.com/user-attachments/assets/70d8513a-2852-4016-9230-cde40bc6e5e5" />
+<img width="2993" height="2115" alt="E-ink watch displays schematic" src="https://github.com/user-attachments/assets/374afe60-b3ea-41e2-b6da-ca43353d284f" />
+
 
 
 *PCB Layout and render:*
