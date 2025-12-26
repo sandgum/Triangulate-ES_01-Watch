@@ -1,6 +1,6 @@
 # Triangulate ES_01 E-ink Watch
 ---
-An ultra-thin ESP32S3-based smartwatch (at just 5mm thick at its thickest point) which uses an E-ink display and two OLEDs to display information while consuming very little power. The main E-ink panel is touch-enabled, with the two additional OLED panels above and below it displaying auxiliary information, such as notifications, background activities etc. 
+An ultra-thin ESP32S3-based smartwatch (at just 5mm thick at its thickest point) which uses an E-ink display and two OLEDs to display information while consuming a small amount of power. The main E-ink panel is touch-enabled, with the two additional OLED panels above and below it displaying auxiliary information, such as notifications, background activities etc. 
 The watch has built-in heart rate and spO2 sensing via an Analog Devices MAX30102, high-precision smart movement sensing via a Bosch BH260AP IMU and a Bosch BMP585 barometric pressure sensor.
 
 <img width="3840" height="2160" alt="render1" src="https://github.com/user-attachments/assets/fb7dc05c-c978-4ac6-91fd-225cae70b5f9" />
@@ -12,7 +12,7 @@ The watch has built-in heart rate and spO2 sensing via an Analog Devices MAX3010
 
 To top it all off, the ES_01 is completely workout-friendly, with rubberised sides and no pesky side buttons that get pressed mid-pushup (Every physical input is at the top of the watch)!
 The watch features a sleek design, with each component being laid out single file and in its own separate segment of the watch. These segments can all bend around the watch, preserving a uniform thickness all around, which also adds the benefit of being aesthetically pleasing.
-The main microcontroller running the watch is an Espressif ESP32-S3 running with Bluetooth capabilities, which also allow for it to sync with a smartphone to relay notifications, workout data etc through firmware based on ESP-IDF. (Coming soon!)
+The main microcontroller running the watch is an Espressif ESP32-S3 running with Bluetooth LE capabilities, which also allow for it to sync with a smartphone to relay notifications, workout, and weather data etc. through firmware based on ESP-IDF and host smartphone software for iPhone based on Swift (Coming soon, and Android support will come later!)
 
 ---
 ## PCB:
