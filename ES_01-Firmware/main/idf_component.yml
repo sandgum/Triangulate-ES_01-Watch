@@ -1,0 +1,8 @@
+dependencies:
+  idf:
+    version: '>=4.0.0'
+  lvgl/lvgl:
+    git: https://github.com/lvgl/lvgl.git
+    path: .
+    version: master
+  

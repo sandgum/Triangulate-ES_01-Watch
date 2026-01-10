@@ -28,12 +28,12 @@ void epd_spi_init(void)
 
     // Initialize the SPI bus
     ESP_LOGI(TAG, "Initializing SPI bus...");
-    esp_err = spi_bus_initialize(HSPI_HOST, &bus_config, 0);
+    esp_err = spi_bus_initialize(SPI3_HOST, &bus_config, 0);
     ESP_ERROR_CHECK(esp_err);
 
     // Attach the device to the SPI bus
     ESP_LOGI(TAG, "Attaching device to SPI bus...");
-    esp_err = spi_bus_add_device(HSPI_HOST, &device_config, &spi);
+    esp_err = spi_bus_add_device(SPI3_HOST, &device_config, &spi);
     ESP_ERROR_CHECK(esp_err);
 
     ESP_LOGI(TAG, "SPI bus initialized.");

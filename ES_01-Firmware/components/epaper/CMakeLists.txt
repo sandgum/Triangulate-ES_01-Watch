@@ -1,9 +1,9 @@
 idf_component_register(
-    SRCS 
+    SRCS
         "source/epd_basic.c"
         "source/epd_paint.cpp"
         "source/epd_spi.c"
-    
+
         "fonts/font8.cpp"
         "fonts/font12.cpp"
         "fonts/font16.cpp"
@@ -12,8 +12,10 @@ idf_component_register(
         # "fonts/font12CN.c"
         # "fonts/font24CN.c"
 
-    INCLUDE_DIRS 
+    INCLUDE_DIRS
         "."
         "include"
         "fonts"
+
+    REQUIRES driver
 )

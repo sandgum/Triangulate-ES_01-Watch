@@ -1,0 +1,19 @@
+dependencies:
+  idf:
+    source:
+      type: idf
+    version: 5.1.0
+  lvgl/lvgl:
+    component_hash: b4b7a7df48a39085459753589ae869143b243b20f41db0455602e0b7b0661e12
+    dependencies: []
+    source:
+      git: https://github.com/lvgl/lvgl.git
+      path: .
+      type: git
+    version: e7d8ab0e1477b908b13c96b18d4d418e4f349516
+direct_dependencies:
+- idf
+- lvgl/lvgl
+manifest_hash: b297959e813bf80d655a0cccdc9e33ed295344dd67f7af12da86c288791d0a17
+target: esp32s3
+version: 2.0.0
