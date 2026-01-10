@@ -1,0 +1,20 @@
+{
+  "C_Cpp.intelliSenseEngine": "default",
+  "idf.espIdfPath": "/Users/sanyamsaharan/esp/v5.1-rc2/esp-idf",
+  "idf.pythonInstallPath": "/opt/miniconda3/bin/python",
+  "idf.openOcdConfigs": [
+    "interface/ftdi/esp32_devkitj_v1.cfg",
+    "target/esp32s3.cfg"
+  ],
+  "idf.port": "detect",
+  "idf.toolsPath": "/Users/sanyamsaharan/.espressif",
+  "idf.customExtraVars": {
+    "IDF_TARGET": "esp32s3"
+  },
+  "clangd.path": "/Users/sanyamsaharan/.espressif/tools/esp-clang/15.0.0-23786128ae/esp-clang/bin/clangd",
+  "clangd.arguments": [
+    "--background-index",
+    "--query-driver=**",
+    "--compile-commands-dir=/Users/sanyamsaharan/Documents/GitHub/Triangulate-ES_01-Watch/ES_01-Firmware/build"
+  ]
+}
