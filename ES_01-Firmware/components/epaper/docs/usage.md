@@ -1,1 +1,0 @@
-# Usage of GDEY0154D67-esp32-driver
