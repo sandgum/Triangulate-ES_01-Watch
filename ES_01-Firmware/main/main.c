@@ -8,9 +8,15 @@
 #include "driver/i2c.h"
 
 #include "lvgl.h"
+#include "esp_timer.h"
 
 #include "epd_ssd1681.h"
 #include "ft6336.h"
+
+#include "esp_lcd_panel_io.h"
+#include "esp_lcd_panel_ssd1306.h"
+#include "esp_lcd_panel_vendor.h"
+#include "esp_lcd_panel_ops.h"
 
 /* =======================
  *  Display (SPI / EPD)
@@ -22,6 +28,9 @@
 #define PIN_NUM_DC     17
 #define PIN_NUM_RST    16
 #define PIN_NUM_BUSY    4
+
+#define OLED1_ADDR 0x3C
+#define OLED2_ADDR 0x3D
 
 /* =======================
  *  Touch (I2C / FT6336)
@@ -38,7 +47,18 @@
 
 static spi_device_handle_t spi;
 static epd_t epd;
-static lv_display_t *disp;
+static lv_display_t *e_ink_disp;
+static esp_lcd_panel_io_handle_t io_hndl_oled1 = NULL;
+static esp_lcd_panel_handle_t oled1 = NULL;
+static esp_lcd_panel_io_handle_t io_hndl_oled2 = NULL;
+static esp_lcd_panel_handle_t oled2 = NULL;
+
+/* ===============================
+ *  OLED flush callbacks forward declarations
+ * =============================== */
+
+static void lv_oled1_flush_cb(lv_display_t *disp, const lv_area_t *area, uint8_t *px_map);
+static void lv_oled2_flush_cb(lv_display_t *disp, const lv_area_t *area, uint8_t *px_map);
 
 /* =======================
  *  I2C init
@@ -176,24 +196,58 @@ static void lvgl_flush_cb(lv_display_t *disp,
  *  LVGL display init
  * ======================= */
 
-static void lvgl_display_init(void)
+static void lvgl_displays_init(void)
 {
-    static lv_draw_buf_t draw_buf;
+    static lv_draw_buf_t draw_buf_ep;
     static lv_color_t buf1[EPD_WIDTH * 40];   // 40 lines buffer
 
+    static lv_draw_buf_t draw_buf_oled1;
+    static lv_color_t buf_oled1[128 * 32]; // 128 x 32 oled
+
+    static lv_draw_buf_t draw_buf_oled2;
+    static lv_color_t buf_oled2[128 * 32]; // 128 x 32 oled
+
     lv_draw_buf_init(
-        &draw_buf,
-        EPD_WIDTH,            // buffer width
-        40,                   // buffer height (lines)
+        &draw_buf_ep,
+        EPD_WIDTH,
+        40,
         LV_COLOR_FORMAT_NATIVE,
-        EPD_WIDTH * sizeof(lv_color_t), // stride in bytes
-        buf1,                 // primary buffer
-        0                     // no second buffer
+        EPD_WIDTH * sizeof(lv_color_t),
+        buf1,
+        sizeof(buf1)
     );
 
-    disp = lv_display_create(EPD_WIDTH, EPD_HEIGHT);
-    lv_display_set_draw_buffers(disp, &draw_buf, NULL);
-    lv_display_set_flush_cb(disp, lvgl_flush_cb);
+    lv_draw_buf_init(
+        &draw_buf_oled1,
+        128,
+        32,
+        LV_COLOR_FORMAT_NATIVE,
+        128 * sizeof(lv_color_t),
+        buf_oled1,
+        sizeof(buf_oled1)
+    );
+
+    lv_draw_buf_init(
+        &draw_buf_oled2,
+        128,
+        32,
+        LV_COLOR_FORMAT_NATIVE,
+        128 * sizeof(lv_color_t),
+        buf_oled2,
+        sizeof(buf_oled2)
+    );
+
+    e_ink_disp = lv_display_create(EPD_WIDTH, EPD_HEIGHT);
+    lv_display_set_draw_buffers(e_ink_disp, &draw_buf_ep, NULL);
+    lv_display_set_flush_cb(e_ink_disp, lvgl_flush_cb);
+
+    lv_display_t *oled1_disp = lv_display_create(128, 32);
+    lv_display_set_draw_buffers(oled1_disp, &draw_buf_oled1, NULL);
+    lv_display_set_flush_cb(oled1_disp, lv_oled1_flush_cb);
+
+    lv_display_t *oled2_disp = lv_display_create(128, 32);
+    lv_display_set_draw_buffers(oled2_disp, &draw_buf_oled2, NULL);
+    lv_display_set_flush_cb(oled2_disp, lv_oled2_flush_cb);
 }
 
 /* =======================
@@ -215,6 +269,79 @@ static void touch_init(void)
 }
 
 /* =======================
+ *  OLED1 init
+ * ======================= */
+
+static void oled1_init(void)
+{
+    esp_lcd_panel_io_i2c_config_t io_i2c_cfg_oled1 = {
+        .dev_addr = OLED1_ADDR,
+        .control_phase_bytes = 1,
+    };
+    esp_lcd_new_panel_io_i2c(I2C_PORT, &io_i2c_cfg_oled1, &io_hndl_oled1);
+    
+    esp_lcd_panel_dev_config_t oled_cfg = {
+        .bits_per_pixel = 1,
+    };
+
+    ESP_ERROR_CHECK(
+        esp_lcd_new_panel_ssd1306(io_hndl_oled1, &oled_cfg, &oled1)
+    );
+
+    esp_lcd_panel_reset(oled1);
+    esp_lcd_panel_init(oled1);
+}
+
+/* =======================
+ *  OLED2 init
+ * ======================= */
+
+static void oled2_init(void)
+{
+    esp_lcd_panel_io_i2c_config_t io_i2c_cfg_oled2 = {
+    .dev_addr = OLED2_ADDR,
+    .control_phase_bytes = 1,
+};
+    esp_lcd_new_panel_io_i2c(I2C_PORT, &io_i2c_cfg_oled2, &io_hndl_oled2);
+
+    esp_lcd_panel_dev_config_t oled_cfg = {
+        .bits_per_pixel = 1,
+    };
+    ESP_ERROR_CHECK(
+        esp_lcd_new_panel_ssd1306(io_hndl_oled2, &oled_cfg, &oled2)
+    );
+
+    esp_lcd_panel_reset(oled2);
+    esp_lcd_panel_init(oled2);
+}
+
+/* ===============================
+ *  OLED flush callbacks for LVGL
+ * =============================== */
+
+static void lv_oled1_flush_cb(lv_display_t *disp,
+                              const lv_area_t *area,
+                              uint8_t *px_map)
+{
+    esp_lcd_panel_draw_bitmap(oled1,
+                               area->x1, area->y1,
+                               area->x2+1, area->y2+1,
+                               px_map);
+    lv_display_flush_ready(disp);
+}
+
+static void lv_oled2_flush_cb(lv_display_t *disp,
+                              const lv_area_t *area,
+                              uint8_t *px_map)
+{
+    esp_lcd_panel_draw_bitmap(oled2,
+                               area->x1, area->y1,
+                               area->x2+1, area->y2+1,
+                               px_map);
+    lv_display_flush_ready(disp);
+}
+
+/* =======================
  *  UI
  * ======================= */
 
@@ -223,6 +350,15 @@ static void ui_init(void)
     lv_obj_t *label = lv_label_create(lv_scr_act());
     lv_label_set_text(label, "Hello e-paper");
     lv_obj_center(label);
+}
+
+/* =======================
+ *  LVGL tick callback
+ * ======================= */
+
+static void lv_tick_cb(void *arg)
+{
+    lv_tick_inc(1);
 }
 
 /* =======================
@@ -250,8 +386,20 @@ void app_main(void)
     i2c_init();
     touch_init();
 
+    oled1_init();
+    oled2_init();
+
     lv_init();
-    lvgl_display_init();
+
+    const esp_timer_create_args_t lvgl_tick_timer_args = {
+        .callback = &lv_tick_cb,
+        .name = "lvgl_tick"
+    };
+    esp_timer_handle_t lvgl_tick_timer;
+    esp_timer_create(&lvgl_tick_timer_args, &lvgl_tick_timer);
+    esp_timer_start_periodic(lvgl_tick_timer, 1000);
+
+    lvgl_displays_init();
     lvgl_touch_init();
 
     ui_init();
