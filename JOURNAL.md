@@ -1,3 +1,7 @@
+# Total Time Spent on Project: 36.0 hours
+---
+---
+---
 # Journal Entry 1: Initial Design (12/5/2025)
 *Time spent: 3.0 hours*
 
@@ -251,3 +255,34 @@ In the end, I was left with 10 really nice-looking renders (while using all my B
 <img width="3840" height="2160" alt="render3" src="https://github.com/user-attachments/assets/950db5fc-a4ea-45e8-a2b3-8b68f4625ec5" />
 <img width="3840" height="2160" alt="render2" src="https://github.com/user-attachments/assets/4d66424a-04e7-413b-8710-025cb7367b60" />
 
+---
+
+# Journal Entry 9: Started working on firmware and implemented displays (01/13/2026)
+*Time spent: 5.0 hours*
+
+After a restful holiday (and some feedback from Blueprint reviewers that I should include firmware), I set out on a journey to learn ESP-IDF (the main FreeRTOS-based framework used to develop REAL apps on ESP32) and to implement components for all of my physical electronic components in the watch, and most of all, to make them all work together. That is my main goal for now.
+
+<img width="816" height="556" alt="Screenshot 2026-01-09 at 7 30 36 pm" src="https://github.com/user-attachments/assets/3b9cda18-db38-4bb6-b4ac-4e90ec151eff" />
+
+
+First of all, I assumed that ESP-IDF would have way more support from the community as in most components I would need would have already been available, much like the situation with libraries on Arduino. I was wrong. I only found one component to drive my main e-ink display, and that required me to completely change my ESP-IDF project from C to C++!
+
+<img width="1800" height="1169" alt="Screenshot 2026-01-09 at 7 29 53 pm" src="https://github.com/user-attachments/assets/32a0bedc-386c-4ee9-b0b2-5df58975577f" />
+
+
+I was not having that, so I turned to the sample Arduino code that GooDisplay themselves provided as a demo for their e-ink display on ESP32. As this was written in Arduino in C++, it did require major changes to the code to be able to import it into my project as a component, and ChatGPT assisted quite a bit with actually interpreting the COMPLETELY COMMENT-LESS code and condensing the functions into simpler versions compatible with ESP-IDF.
+
+<img width="1800" height="1169" alt="Screenshot 2026-01-10 at 7 19 42 pm" src="https://github.com/user-attachments/assets/fcb72788-d7fd-4b20-a9bc-b4ce8c95fa61" />
+
+
+And there it was! A display driver for the SSD1681 driver IC (used in my e-ink display) which supported all the fancy features listed in the data sheet, namely the screen’s ability to perform partial refreshes (which only take 0.3 seconds) and fast refreshes (which only take 1.5 seconds). Next, I had to try and figure out how to implement touch functionality in my project using the e-ink display’s built-in FT6336 touch driver IC. Again, I turned to the internet to hopefully find a nice, well-maintained open-source component I could use, but alas, I had to resort to the same thing I did with the e-ink display. I used the demo code from GooDisplay and got ChatGPT to assist in writing a driver for it.
+
+Next up was actually figuring out how LVGL works. See, to create nice-looking UIs on ESP32, you can pick from a bunch of different libraries, but none is as full-featured and as FREE as LVGL. Buuuuut with such a full-featured library comes a complicated API to use. Eventually, I figured out display flush callbacks and also learnt a surprising amount about how LVGL actually works, and I was able to successfully link my touch driver and e-ink driver with LVGL.
+
+Now here’s where a HUGE roadblock showed itself. I wanted to add in the two OLED panels which use the SSD1306 driver IC into LVGL. Since this is a very widely-used display in the world of Arduino and ESP32, I found a bunch of drivers for it, the most-used ones developed by Espressif themselves. I found a particular component which was actually built into ESP-IDF itself, and didn’t need importing into my project at all. So I implemented the component into my project, and added two of these displays to my LVGL instance, but when I tried to build the project, it kept saying that it couldn’t find that built-in component at all. That’s when I found out that that component was only added in ESP-IDF 5.3 and later, and my project was in ESP-IDF 5.1. So I changed the version, but all of a sudden, several MORE errors which hadn’t been there before began to appear. The WHOLE PROJECT was filled with red and yellow lines. Feeling utterly hopeless, I turned to ChatGPT again, which explained all the changes Espressif made between 5.1 and 5.3, and that I was using functions and structs which had been renamed and revised. After implementing ChatGPT’s suggested fixes…
+
+<img width="1326" height="437" alt="Screenshot 2026-01-12 at 10 20 56 pm" src="https://github.com/user-attachments/assets/423f57e7-d22c-408d-8677-e85a7ce7c64d" />
+
+IT BUILDS!!! IT FINALLY BUILDS!!!!!!
+
+Now that the main displays are implemented, I can write the logic for BLE and the other sensors, like heart rate and altitude.
