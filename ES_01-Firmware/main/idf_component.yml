@@ -16,3 +16,4 @@ dependencies:
   #   public: true
   espressif/esp_lvgl_port: ^2.7.0
   lvgl/lvgl: ^9.4.0
+  espressif/arduino-esp32: ^3.3.5

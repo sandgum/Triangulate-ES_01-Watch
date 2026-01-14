@@ -18,6 +18,8 @@
 #include "esp_lcd_panel_vendor.h"
 #include "esp_lcd_panel_ops.h"
 
+#include "max30102.h"
+
 /* =======================
  *  Display (SPI / EPD)
  * ======================= */
@@ -42,6 +44,17 @@
 #define I2C_FREQ 400000
 
 /* =======================
+ *  Sensors
+ * ======================= */
+
+ #define HR_FREQUENCY_HZ 50
+ #define HR_TIME_WINDOW_MS 6000
+ #define HR_SAMPLES (HR_FREQUENCY_HZ * HR_TIME_WINDOW_MS / 1000)
+ #define HR_MIN_INTERVAL_MS   300     // 200 BPM max
+ #define HR_MAX_INTERVAL_MS  2000     // 30 BPM min
+ #define AC_WINDOW_SAMPLES   (HR_FREQUENCY_HZ * 2)   // 2 seconds
+
+/* =======================
  *  Globals
  * ======================= */
 
@@ -52,6 +65,11 @@ static esp_lcd_panel_io_handle_t io_hndl_oled1 = NULL;
 static esp_lcd_panel_handle_t oled1 = NULL;
 static esp_lcd_panel_io_handle_t io_hndl_oled2 = NULL;
 static esp_lcd_panel_handle_t oled2 = NULL;
+static max30102_t hr_sensor;
+static float heart_rate = 0.0;
+static bool hr_resuming = true;
+
+static TaskHandle_t hr_task_handle;
 
 /* ===============================
  *  OLED flush callbacks forward declarations
@@ -59,6 +77,29 @@ static esp_lcd_panel_handle_t oled2 = NULL;
 
 static void lv_oled1_flush_cb(lv_display_t *disp, const lv_area_t *area, uint8_t *px_map);
 static void lv_oled2_flush_cb(lv_display_t *disp, const lv_area_t *area, uint8_t *px_map);
+
+/* =======================
+ *  Signal processing helpers
+ * ======================= */
+
+static float mean_u32(const uint32_t *buf, int len)
+{
+    uint64_t sum = 0;
+    for (int i = 0; i < len; i++) {
+        sum += buf[i];
+    }
+    return (float)sum / len;
+}
+
+static float rms_u32(const uint32_t *buf, int len, float mean)
+{
+    float sum_sq = 0.0f;
+    for (int i = 0; i < len; i++) {
+        float v = buf[i] - mean;
+        sum_sq += v * v;
+    }
+    return sqrtf(sum_sq / len);
+}
 
 /* =======================
  *  I2C init
@@ -372,22 +413,163 @@ static void lvgl_task(void *arg)
         vTaskDelay(pdMS_TO_TICKS(5));
     }
 }
-
 /* =======================
- *  app_main
- * ======================= */
+*  Heart Rate Init
+* ======================= */
 
-void app_main(void)
+static void heart_rate_init(void)
+{
+    esp_err_t err = max30102_init(&hr_sensor, I2C_PORT);
+    if (err != ESP_OK) {
+        printf("Failed to initialize MAX30102 sensor\n");
+        vTaskDelete(NULL);
+        return;
+    }
+
+    max30102_configure(&hr_sensor,
+                       0x1F, // LED brightness
+                       4, // Sample average
+                       3, // LED mode
+                       3, // Sample rate
+                       3, // Pulse width
+                       3  // ADC range
+    );
+}
+
+/* ========================
+*  Heart Rate Reading Task
+* ========================= */
+
+static void heart_rate_task(void *arg)
+{
+    uint32_t ir_buf[HR_SAMPLES] = {0};
+    int buf_idx = 0;
+    bool buffer_filled = false;
+
+    uint32_t last_peak_time = 0;
+    float bpm_sum = 0.0f;
+    int bpm_count = 0;
+
+    uint32_t prev_ir = 0;
+    uint32_t curr_ir = 0;
+
+    while (1) {
+        if (hr_resuming) {
+            buffer_filled = false;
+            buf_idx = 0;
+            last_peak_time = 0;
+            bpm_sum = 0;
+            bpm_count = 0;
+            first_run = false;
+        }
+        // Sample IR
+        if (max30102_read_ir(&hr_sensor, &curr_ir) != ESP_OK) {
+            vTaskDelay(pdMS_TO_TICKS(20));
+            continue;
+        }
+
+        ir_buf[buf_idx++] = curr_ir;
+        if (buf_idx >= HR_SAMPLES) {
+            buf_idx = 0;
+            buffer_filled = true;
+        }
+
+        if (buffer_filled) {
+            // DC over full window
+            float dc = mean_u32(ir_buf, HR_SAMPLES);
+
+            // AC over shorter window
+            int ac_start = (buf_idx - AC_WINDOW_SAMPLES + HR_SAMPLES) % HR_SAMPLES;
+            uint32_t ac_buf[AC_WINDOW_SAMPLES];
+
+            for (int i = 0; i < AC_WINDOW_SAMPLES; i++) {
+                ac_buf[i] = ir_buf[(ac_start + i) % HR_SAMPLES];
+            }
+
+            float ac_rms = rms_u32(ac_buf, AC_WINDOW_SAMPLES, dc);
+
+            // Signal quality check
+            if ((ac_rms / dc) > 0.005f) {
+                float threshold = 0.5f * ac_rms;
+
+                float prev_ac = (float)prev_ir - dc;
+                float curr_ac = (float)curr_ir - dc;
+
+                uint32_t now = esp_timer_get_time() / 1000; // ms
+
+                // Peak detection
+                if (prev_ac < threshold && curr_ac >= threshold) {
+                    if (last_peak_time != 0) {
+                        uint32_t interval = now - last_peak_time;
+
+                        if (interval > HR_MIN_INTERVAL_MS &&
+                            interval < HR_MAX_INTERVAL_MS) {
+
+                            float bpm = 60000.0f / interval;
+
+                            bpm_sum += bpm;
+                            bpm_count++;
+
+                            if (bpm_count >= 3) {
+                                heart_rate = bpm_sum / bpm_count;
+                                bpm_sum = 0;
+                                bpm_count = 0;
+                            }
+                        }
+                    }
+                    last_peak_time = now;
+                }
+            }
+        }
+
+        prev_ir = curr_ir;
+        vTaskDelay(pdMS_TO_TICKS(1000 / HR_FREQUENCY_HZ));
+    }
+}
+
+/* ===========================
+*  Stop heart rate measurement
+* ============================ */
+
+void stop_hr_measurement(void)
+{
+    vTaskSuspend(hr_task_handle);
+    max30102_shutdown(&hr_sensor);
+}
+
+/* =============================
+*  Resume heart rate measurement
+* ============================== */
+
+void resume_hr_measurement(void)
+{
+    hr_resuming = true;
+    max30102_wakeup(&hr_sensor);
+    max30102_configure(&hr_sensor,
+                   0x1F,
+                   4,
+                   3,
+                   3,
+                   3,
+                   3);
+    vTaskResume(hr_task_handle);
+}
+
+/* ==========================
+ *  Initialize all components
+ * ========================== */
+
+void startup_sequence(void)
 {
     gpio_init();
     spi_init();
-    epd_driver_init();
+    epd_driver_init(); // Start main E-ink panel
 
     i2c_init();
-    touch_init();
+    touch_init(); // Start touch controller on E-ink panel
 
     oled1_init();
-    oled2_init();
+    oled2_init(); // Start both OLED displays
 
     lv_init();
 
@@ -402,14 +584,38 @@ void app_main(void)
     lvgl_displays_init();
     lvgl_touch_init();
 
-    ui_init();
+    ui_init(); // Bunch of LVGL initialisation and UI setup
 
-    xTaskCreate(
+    xTaskCreatePinnedToCore( // Create LVGL task
         lvgl_task,
         "lvgl",
         4096,
         NULL,
         5,
-        NULL
+        NULL,
+        1
+    ); 
+
+    heart_rate_init(); // Initialize heart rate sensor
+
+    xTaskCreatePinnedToCore( // Create heart rate measurement task (can be suspended/resumed)
+        heart_rate_task,
+        "heart_rate",
+        4096,
+        NULL,
+        4,
+        &hr_task_handle,
+        1
     );
+}
+
+/* =======================
+ *  app_main
+ * ======================= */
+
+void app_main(void)
+{
+startup_sequence();
+
+
 }
