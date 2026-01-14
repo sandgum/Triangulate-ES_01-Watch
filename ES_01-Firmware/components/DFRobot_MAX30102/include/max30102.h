@@ -3,6 +3,7 @@
 #include "driver/i2c.h"
 #include "esp_err.h"
 #include <stdint.h>
+#include <math.h>
 
 #define MAX30102_I2C_ADDR 0x57
 

@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <math.h>
 
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
@@ -460,7 +461,7 @@ static void heart_rate_task(void *arg)
             last_peak_time = 0;
             bpm_sum = 0;
             bpm_count = 0;
-            first_run = false;
+            hr_resuming = false;
         }
         // Sample IR
         if (max30102_read_ir(&hr_sensor, &curr_ir) != ESP_OK) {
