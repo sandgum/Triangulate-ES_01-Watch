@@ -25,10 +25,10 @@ The main microcontroller running the watch is an Espressif ESP32-S3 running with
 -  All resistors and capacitors are 0402 size
 
 *Schematics:*
-<img width="2993" height="2115" alt="E-ink watch sensors schematic" src="https://github.com/user-attachments/assets/d2e8a765-7ff3-49c3-917e-8c7fe9fb490c" />
-<img width="2993" height="2115" alt="E-ink watch main schematic" src="https://github.com/user-attachments/assets/ff548654-77bf-4317-9524-009f5500d615" />
-<img width="2993" height="2115" alt="E-ink watch drivers schematic" src="https://github.com/user-attachments/assets/70d8513a-2852-4016-9230-cde40bc6e5e5" />
-<img width="2993" height="2115" alt="E-ink watch displays schematic" src="https://github.com/user-attachments/assets/374afe60-b3ea-41e2-b6da-ca43353d284f" />
+<img width="3508" height="2481" alt="E-ink watch_Page_1" src="https://github.com/user-attachments/assets/8557f5ce-50b9-4a70-bc67-07ef80d45b39" />
+<img width="3508" height="2481" alt="E-ink watch_Page_2" src="https://github.com/user-attachments/assets/6b48b829-c0db-4831-97b4-03c067bcd552" />
+<img width="3508" height="2481" alt="E-ink watch_Page_3" src="https://github.com/user-attachments/assets/1923c514-c36d-40d3-8bb7-d231716e2212" />
+<img width="3508" height="2481" alt="E-ink watch_Page_4" src="https://github.com/user-attachments/assets/ab370c10-27c5-4128-a0f0-e80f1baa1fbb" />
 
 *PCB Layout and render:*
 <img width="1454" height="585" alt="Screenshot 2025-12-14 at 1 22 46 pm" src="https://github.com/user-attachments/assets/16a535e6-246d-4e0d-91d4-3cafa5ae3504" />
