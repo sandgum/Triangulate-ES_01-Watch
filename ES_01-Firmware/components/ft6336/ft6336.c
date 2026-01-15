@@ -4,6 +4,8 @@
 #include "driver/gpio.h"
 #include <string.h>
 
+extern SemaphoreHandle_t i2c_mux;
+
 #define FT6336_ADDR_DEFAULT 0x38
 
 // Registers
@@ -16,7 +18,8 @@ static ft6336_config_t dev;
 
 static esp_err_t ft_i2c_read(uint8_t reg, uint8_t *buf, size_t len)
 {
-    return i2c_master_write_read_device(
+    xSemaphoreTake(i2c_mux, portMAX_DELAY);
+    esp_err_t ret = i2c_master_write_read_device(
         dev.i2c_port,
         dev.i2c_addr,
         &reg,
@@ -25,6 +28,8 @@ static esp_err_t ft_i2c_read(uint8_t reg, uint8_t *buf, size_t len)
         len,
         pdMS_TO_TICKS(100)
     );
+    xSemaphoreGive(i2c_mux);
+    return ret;
 }
 
 static esp_err_t ft_i2c_write(uint8_t reg, const uint8_t *buf, size_t len)
@@ -33,13 +38,16 @@ static esp_err_t ft_i2c_write(uint8_t reg, const uint8_t *buf, size_t len)
     tmp[0] = reg;
     memcpy(&tmp[1], buf, len);
 
-    return i2c_master_write_to_device(
+    xSemaphoreTake(i2c_mux, portMAX_DELAY);
+    esp_err_t ret = i2c_master_write_to_device(
         dev.i2c_port,
         dev.i2c_addr,
         tmp,
         len + 1,
         pdMS_TO_TICKS(100)
     );
+    xSemaphoreGive(i2c_mux);
+    return ret;
 }
 
 // ---------------- Public API ----------------

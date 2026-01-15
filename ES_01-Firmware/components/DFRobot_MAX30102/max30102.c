@@ -2,21 +2,27 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 
+extern SemaphoreHandle_t i2c_mux;
+
 static esp_err_t write_reg(i2c_port_t port, uint8_t reg, uint8_t val)
 {
     uint8_t data[2] = { reg, val };
-    return i2c_master_write_to_device(
+    xSemaphoreTake(i2c_mux, portMAX_DELAY);
+    esp_err_t ret = i2c_master_write_to_device(
         port,
         MAX30102_I2C_ADDR,
         data,
         sizeof(data),
         pdMS_TO_TICKS(100)
     );
+    xSemaphoreGive(i2c_mux);
+    return ret;
 }
 
 static esp_err_t read_regs(i2c_port_t port, uint8_t reg, uint8_t *buf, size_t len)
 {
-    return i2c_master_write_read_device(
+    xSemaphoreTake(i2c_mux, portMAX_DELAY);
+    esp_err_t ret = i2c_master_write_read_device(
         port,
         MAX30102_I2C_ADDR,
         &reg,
@@ -25,6 +31,8 @@ static esp_err_t read_regs(i2c_port_t port, uint8_t reg, uint8_t *buf, size_t le
         len,
         pdMS_TO_TICKS(100)
     );
+    xSemaphoreGive(i2c_mux);
+    return ret;
 }
 
 esp_err_t max30102_init(max30102_t *dev, i2c_port_t port)

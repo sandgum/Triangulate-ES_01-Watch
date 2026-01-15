@@ -1,0 +1,3 @@
+- [x] Add #include "freertos/semphr.h" to bhi260_support.c
+- [x] Add extern SemaphoreHandle_t i2c_mux; declaration
+- [x] Add semaphore usage in bhi260_i2c_write function

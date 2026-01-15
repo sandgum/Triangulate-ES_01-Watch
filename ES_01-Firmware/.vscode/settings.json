@@ -1,5 +1,20 @@
 {
-    "idf.espIdfPath": "/Users/sanyamsaharan/esp/v5.3.4/esp-idf",
-    "idf.toolsPath": "/Users/sanyamsaharan/.espressif",
-    "idf.pythonInstallPath": "/opt/miniconda3/bin/python"
+  "idf.espIdfPath": "/Users/sanyamsaharan/esp/v5.3.4/esp-idf",
+  "idf.toolsPath": "/Users/sanyamsaharan/.espressif",
+  "idf.pythonInstallPath": "C:\\Users\\sanya\\.espressif\\tools\\idf-python\\3.11.2\\python.exe",
+  "idf.espIdfPathWin": "C:\\Users\\sanya\\esp\\v5.3.4\\esp-idf",
+  "idf.toolsPathWin": "C:\\Users\\sanya\\.espressif",
+  "idf.openOcdConfigs": [
+    "board/esp32s3-builtin.cfg"
+  ],
+  "idf.customExtraVars": {
+    "IDF_TARGET": "esp32s3"
+  },
+  "clangd.path": "C:\\Users\\sanya\\.espressif\\tools\\esp-clang\\16.0.1-fe4f10a809\\esp-clang\\bin\\clangd.exe",
+  "clangd.arguments": [
+    "--background-index",
+    "--query-driver=**",
+    "--compile-commands-dir=c:\\Users\\sanya\\Documents\\GitHub\\Triangulate-ES_01-Watch\\ES_01-Firmware\\build"
+  ],
+  "cmake.parallelJobs": 8
 }

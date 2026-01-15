@@ -3,6 +3,8 @@
 
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
+#include "esp_sleep.h"
+#include "esp_log.h"
 
 #include "driver/gpio.h"
 #include "driver/spi_master.h"
@@ -20,6 +22,10 @@
 #include "esp_lcd_panel_ops.h"
 
 #include "max30102.h"
+
+#include "BHI260AP.fw.h"
+#include "bhy2.h"
+#include "bhy2_defs.h"
 
 /* =======================
  *  Display (SPI / EPD)
@@ -54,6 +60,13 @@
  #define HR_MIN_INTERVAL_MS   300     // 200 BPM max
  #define HR_MAX_INTERVAL_MS  2000     // 30 BPM min
  #define AC_WINDOW_SAMPLES   (HR_FREQUENCY_HZ * 2)   // 2 seconds
+ #define X 2
+ #define Y 1
+ #define Z 0
+
+ #define BHI260_INT_GPIO  GPIO_NUM_7
+
+ #define SEC_BTW_MEAS_IN_SLEEP 60 // The time in seconds between the ESP32 waking up to take HR measurements while it is sleeping
 
 /* =======================
  *  Globals
@@ -68,9 +81,29 @@ static esp_lcd_panel_io_handle_t io_hndl_oled2 = NULL;
 static esp_lcd_panel_handle_t oled2 = NULL;
 static max30102_t hr_sensor;
 static float heart_rate = 0.0;
-static bool hr_resuming = true;
+volatile bool hr_resuming = true;
 
 static TaskHandle_t hr_task_handle;
+
+struct bhy2_dev bhi260ap;
+uint8_t work_buffer[2048]; // FIFO data buffer
+uint8_t gesture_code; // BHI260AP wrist turn gesture code
+
+uint32_t steps; // Total stepo count since BHI260 reset
+
+typedef struct {
+    int16_t x;
+    int16_t y;
+    int16_t z;
+    int16_t w;
+    uint16_t accuracy; // estimated accuracy in radians * 2^14 (sometimes reserved)
+} bhy2_data_quaternion;
+
+float euler_angles[3] = {0.0f, 0.0f, 0.0f}; // Euler angles that were converted from quaternions
+
+SemaphoreHandle_t i2c_mux;
+
+static const char *TAG = "sleep_by_wrist";
 
 /* ===============================
  *  OLED flush callbacks forward declarations
@@ -102,12 +135,25 @@ static float rms_u32(const uint32_t *buf, int len, float mean)
     return sqrtf(sum_sq / len);
 }
 
+float fixed_to_float(int16_t val) {
+    return val / 16384.0f; // 2^14
+}
+
 /* =======================
  *  I2C init
  * ======================= */
 
 static void i2c_init(void)
 {
+    i2c_mux = xSemaphoreCreateMutex();
+
+    if (i2c_mux == NULL) {
+        printf("Failed to create I2C mutex\n");
+        while(1) {
+            vTaskDelay(pdMS_TO_TICKS(1000));
+        }
+    }
+
     i2c_config_t cfg = {
         .mode = I2C_MODE_MASTER,
         .sda_io_num = I2C_SDA,
@@ -414,9 +460,10 @@ static void lvgl_task(void *arg)
         vTaskDelay(pdMS_TO_TICKS(5));
     }
 }
-/* =======================
+
+/* ======================
 *  Heart Rate Init
-* ======================= */
+*  ====================== */
 
 static void heart_rate_init(void)
 {
@@ -439,7 +486,7 @@ static void heart_rate_init(void)
 
 /* ========================
 *  Heart Rate Reading Task
-* ========================= */
+*  ======================== */
 
 static void heart_rate_task(void *arg)
 {
@@ -515,6 +562,7 @@ static void heart_rate_task(void *arg)
                                 heart_rate = bpm_sum / bpm_count;
                                 bpm_sum = 0;
                                 bpm_count = 0;
+                                printf("Heart rate: %.2f bpm\n", heart_rate); // For debugging
                             }
                         }
                     }
@@ -530,7 +578,7 @@ static void heart_rate_task(void *arg)
 
 /* ===========================
 *  Stop heart rate measurement
-* ============================ */
+*  =========================== */
 
 void stop_hr_measurement(void)
 {
@@ -540,7 +588,7 @@ void stop_hr_measurement(void)
 
 /* =============================
 *  Resume heart rate measurement
-* ============================== */
+*  ============================= */
 
 void resume_hr_measurement(void)
 {
@@ -554,6 +602,171 @@ void resume_hr_measurement(void)
                    3,
                    3);
     vTaskResume(hr_task_handle);
+}
+
+
+/* ======================
+*  Orientation callback
+*  ====================== */
+
+void orientation_callback(const struct bhy2_fifo_parse_data_info *callback_info, void *callback_ref) {
+    bhy2_data_quaternion *quat_data = (bhy2_data_quaternion *)callback_info->data_ptr;
+    
+    float x = fixed_to_float(quat_data->x);
+    float y = fixed_to_float(quat_data->y);
+    float z = fixed_to_float(quat_data->z);
+    float w = fixed_to_float(quat_data->w);
+
+    printf("Orientation (quat): X:%.2f, Y:%.2f, Z:%.2f, W:%.2f\n", x, y, z, w);
+
+
+    // Convert from quaternion to Euler angles (in radians)
+
+    // X-axis
+    double sinr_cosp = 2 * (w * x + y * z);
+    double cosr_cosp = 1 - 2 * (x * x + y * y);
+    euler_angles[X] = atan2(sinr_cosp, cosr_cosp);
+
+    // Y-axis
+    double sinp = 2 * (w * y - z * x);
+    if (fabs(sinp) >= 1) {
+        euler_angles[Y] = copysign(M_PI / 2, sinp);
+    } else {
+        euler_angles[Y] = asin(sinp);
+    }
+
+    // Z-axis
+    double siny_cosp = 2 * (w * z + x * y);
+    double cosy_cosp = 1 - 2 * (y * y + z * z);
+    euler_angles[Z] = atan2(siny_cosp, cosy_cosp);
+}
+
+/* ======================
+*  Step counter callback
+*  ====================== */
+
+void step_counter_callback(const struct bhy2_fifo_parse_data_info *callback_info, void *callback_ref) {
+    
+    
+    // Copy the data from the FIFO pointer to our variable
+    // The driver usually provides 4 bytes for the step count
+    memcpy(&steps, callback_info->data_ptr, sizeof(steps));
+
+    printf("Total Steps: %lu\n", (unsigned long)steps);
+}
+
+/* ======================
+*  Wrist wakeup callback
+*  ====================== */
+
+void wrist_callback(const struct bhy2_fifo_parse_data_info *callback_info, void *callback_ref) {
+    // The data_ptr points to a 1-byte value for this sensor
+    gesture_code = *callback_info->data_ptr;
+
+    /* * Standard Bosch Gesture Codes:
+     * 0x01: Wrist Up (User looking at watch)
+     * 0x02: Wrist Down (User moved arm away)
+     */
+    if (gesture_code == 0x01) {
+        printf("Wrist Flick UP detected!\n");
+    } else if (gesture_code == 0x02) {
+        printf("Wrist Flick DOWN detected!\n");
+    }
+}
+
+/* ================================
+*  Inertial measurement unit setup
+*  ================================ */
+
+void bhi260_setup(void)
+{
+    bhy2_init(BHY2_I2C_INTERFACE,
+            bhi260_i2c_read,
+            bhi260_i2c_write,
+            bhi260_delay_us,
+            256,
+            NULL,
+            &bhi260ap);
+    
+    bhy2_soft_reset(&bhi260ap);
+    bhy2_upload_firmware_to_ram(bhy2_firmware_image, sizeof(bhy2_firmware_image), &bhi260ap);
+    bhy2_boot_from_ram(&bhi260ap);
+    bhy2_update_virtual_sensor_list(&bhi260ap);
+
+    uint8_t ornt_snsr_id = BHY2_SENSOR_ID_GAMERV;
+    bhy2_register_fifo_parse_callback(ornt_snsr_id, orientation_callback, NULL, &bhi260ap);
+
+    if (bhy2_is_sensor_available(ornt_snsr_id, &bhi260ap)) {
+        bhy2_set_virt_sensor_cfg(ornt_snsr_id, 100.0f, 0, &bhi260ap);
+        printf("Orientation sensor available\n");
+    } else {
+        printf("Error: Sensor not available\n");
+    }
+
+    uint8_t step_snsr_id = BHY2_SENSOR_ID_STC;
+
+    bhy2_register_fifo_parse_callback(step_snsr_id, step_counter_callback, NULL, &bhi260ap);
+
+    bhy2_set_virt_sensor_cfg(step_snsr_id, 1.0f, 0, &bhi260ap);
+
+    // BHY2_SENSOR_ID_WRIST_WEAR_WAKE_UP is usually ID 46
+    uint8_t wrist_snsr_id = BHY2_PHYS_SENSOR_ID_WRIST_WEAR_WAKEUP;
+
+    // 1. Register a callback (useful if the ESP32 is already awake)
+    bhy2_register_fifo_parse_callback(wrist_snsr_id, wrist_callback, NULL, &bhi260ap);
+
+    // 2. Enable the sensor
+    // Being a gesture sensor, the sample rate is often ignored, but set to 1.0Hz
+    bhy2_set_virt_sensor_cfg(wrist_snsr_id, 1.0f, 0, &bhi260ap);
+}
+
+/* ========================
+*  Puts ESP32 in light sleep
+*  ======================== */
+
+void go_to_sleep() {
+    // 1. Configure the pin as a wakeup source
+    // BHI260AP HIRQ is usually active HIGH (1.8V -> 3.3V via shifter)
+    /*
+    esp_sleep_enable_gpio_wakeup(1 << BHI260_INT_GPIO, ESP_GPIO_WAKEUP_GPIO_HIGH);
+    
+    printf("Entering light sleep. Flick wrist to wake!\n");
+    
+    // 2. Enter light sleep
+    esp_light_sleep_start();
+    */
+}
+
+/* ========================
+*  IMU task
+*  ======================== */
+
+static void bhi260_task(void *arg) {
+    while (1) {
+        // Only process if the HIRQ pin is high (Level shifter ensures 3.3V logic)
+        if (gpio_get_level(BHI260_INT_GPIO)) {
+            bhy2_get_and_process_fifo(work_buffer, sizeof(work_buffer), &bhi260ap);
+        }
+        vTaskDelay(pdMS_TO_TICKS(10)); // Poll every 10ms
+    }
+}
+
+/* ========================
+*  Main loop task
+*  ======================== */
+
+static void main_loop_task(void* arg)
+{
+    while (1) {
+
+        if (gesture_code == 0x02) {
+            esp_sleep_enable_timer_wakeup(SEC_BTW_MEAS_IN_SLEEP * 1000000);
+            stop_hr_measurement();
+            go_to_sleep();
+        } else {
+            resume_hr_measurement();
+        }
+    }
 }
 
 /* ==========================
@@ -608,7 +821,30 @@ void startup_sequence(void)
         &hr_task_handle,
         1
     );
+
+    bhi260_setup(); // Initialize inertial measurement unit
+
+    xTaskCreatePinnedToCore( // Create inertial measurement unit task
+        bhi260_task,
+        "bhi260",
+        4096,
+        NULL,
+        3,
+        NULL,
+        1
+    );
+
+    xTaskCreatePinnedToCore(
+        main_loop_task,
+        "main_loop",
+        4096,
+        NULL,
+        6,
+        NULL,
+        0
+    );
 }
+
 
 /* =======================
  *  app_main
@@ -616,7 +852,5 @@ void startup_sequence(void)
 
 void app_main(void)
 {
-startup_sequence();
-
-
+    startup_sequence();
 }
