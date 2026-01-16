@@ -1,4 +1,5 @@
-# Total Time Spent on Project: 36.0 hours
+# Total Time Spent on Project: 40.0 hours
+## Total Journal Entries: 10
 ---
 ---
 ---
@@ -286,3 +287,32 @@ Now here’s where a HUGE roadblock showed itself. I wanted to add in the two OL
 IT BUILDS!!! IT FINALLY BUILDS!!!!!!
 
 Now that the main displays are implemented, I can write the logic for BLE and the other sensors, like heart rate and altitude.
+
+---
+
+# Journal Entry 10: Implemented IMU and pressure/temp sensor in firmware (01/16/2026)
+*Time spent: 4.0 hours*
+
+After finishing my implementation of the first actual sensor that is in the watch’s PCB. I turned to implementing logic to control the next most important sensor in the whole project, which is the Bosch BHI260AP intelligent inertial measurement unit. What makes this IMU “intelligent” (and it’s also the reason I chose it for this project) is that Bosch have integrated not only a pretty accurate 3-axis accelerometer and 3-axis gyroscope into its package, they have also integrated an adorable little microcontroller into the same package which runs its own firmware, complete with algorithms which enable all sorts of cool functionality in the form of virtual sensors which the ESP32 can read data from.
+
+![Screenshot 2026-01-16 at 6 47 09 pm](https://github.com/user-attachments/assets/aabbb022-37d5-44ff-8fcd-a8836e4069d6)
+
+For example, the BHI260AP has its own internal sensor fusion algorithm which lets its microcontroller do some complex maths to give the ESP32 an idea of its general orientation, which is accurate enough to be used in VR game controllers and head tracking applications. Furthermore, the BHI260AP also has its own step-tracking feature, which runs a teeny-weeny little machine learning model (you heard that right) to detect and count every step when its mounted on a user’s wrist or placed in a pocket (Hmmm… I wonder what smart device is mounted on the user’s wrist?). Even better, the BHI260AP can send an interrupt signal to the ESP32, telling it to wake up because ANOTHER algorithm on the sensor said that the user raised their wrist to look at the smartwatch’s display.
+
+![Screenshot 2026-01-16 at 6 47 50 pm](https://github.com/user-attachments/assets/9f10780d-c62a-458b-bf6c-2715185b1bcb)
+
+ALL of the functions I have just said were implemented into the ES_01’s firmware, and having all of this happening on the sensor’s microcontroller frees up SO MANY resources on the main ESP32-S3 chip. Moreover, Bosch provides their own APIs which just drop into ESP-IDF and (most of the time) just WORK. I only needed a little bit of assistance from ChatGPT for this one, plus I learnt so much from this coding adventure.
+
+It was also at this time that I realised that for the interrupt function between the BHI260AP and the ESP32 to work, I had to add a logic level converter which converts from 1.8V logic (used by the BHI260AP) to 3.3V logic for the interruption to work. That then required a change in the PCB schematic, where I added a transistor and a couple of resistors to do the job, and was luckily able to find enough free space on the PCB to make room for those extra components. I also didn’t need to update the BoM since the minimum order quantity for all the resistors I’ll order are like 50 anyways.
+
+<img width="1800" height="1169" alt="Screenshot 2025-12-27 at 2 46 58 pm" src="https://github.com/user-attachments/assets/db72af37-2aef-4964-bf0f-14d30bb1ca57" />
+
+Next, it was time to integrate code for the Bosch BMP585 sensor to work in my firmware, which required a process very similar to that of implementing the other Bosch sensor. Actually, this one was much easier to do as well, since the BMP585 is way “dumber” than the BHI260AP, and so behaves much more like a normal sensor where it just spits out values and doesn’t care. Therefore, the API Bosch provided for this sensor was also much smaller and friendlier to an amateur like me.
+
+![Screenshot 2026-01-16 at 6 49 23 pm](https://github.com/user-attachments/assets/38e14034-26ee-45cc-be32-05fcfc823cb3)
+
+Finally, with the newfound functions and callbacks I had gained access to, I wanted to create a main task that schedules when the watch should sleep and wake up to hopefully make the battery last longer than the ones in the watches from a certain trillion-dollar fruit company. That required setting timers for when the ESP32 should go to sleep and wake up, and I implemented logic which would only wake up the watch every so often to take heart rate (the most power-intensive) measurements, and then force it back to sleep.
+
+![Screenshot 2026-01-16 at 6 49 53 pm](https://github.com/user-attachments/assets/76829d01-645b-4fac-8d92-dcb675cc1273)
+
+Anyways, this firmware is progressing very well, and I’ve finally done the task of integrating all my hardware and making my software recognise it. I also think I’m pretty close to resubmitting this project for review, and the next things to do in the firmware is to tackle another beast: the USER INTERFACE!!!
