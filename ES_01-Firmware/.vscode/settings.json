@@ -1,7 +1,7 @@
 {
   "idf.espIdfPath": "/Users/sanyamsaharan/esp/v5.3.4/esp-idf",
   "idf.toolsPath": "/Users/sanyamsaharan/.espressif",
-  "idf.pythonInstallPath": "C:\\Users\\sanya\\.espressif\\tools\\idf-python\\3.11.2\\python.exe",
+  "idf.pythonInstallPath": "/opt/miniconda3/bin/python",
   "idf.espIdfPathWin": "C:\\Users\\sanya\\esp\\v5.3.4\\esp-idf",
   "idf.toolsPathWin": "C:\\Users\\sanya\\.espressif",
   "idf.openOcdConfigs": [

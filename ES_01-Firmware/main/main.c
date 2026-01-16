@@ -1,10 +1,13 @@
 #include <stdio.h>
 #include <math.h>
+#include <stdint.h>
+#include <stddef.h>
 
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "esp_sleep.h"
 #include "esp_log.h"
+#include "esp_rom_sys.h"
 
 #include "driver/gpio.h"
 #include "driver/spi_master.h"
@@ -26,6 +29,9 @@
 #include "BHI260AP.fw.h"
 #include "bhy2.h"
 #include "bhy2_defs.h"
+
+#include "bmp5.h"
+#include "bmp5_defs.h"
 
 /* =======================
  *  Display (SPI / EPD)
@@ -67,6 +73,7 @@
  #define BHI260_INT_GPIO  GPIO_NUM_7
 
  #define SEC_BTW_MEAS_IN_SLEEP 60 // The time in seconds between the ESP32 waking up to take HR measurements while it is sleeping
+ #define INACTIVE_SEC_BEFORE_SLEEP 10 // Time in seconds of touch inactivity on E-ink display before going to sleep
 
 /* =======================
  *  Globals
@@ -83,13 +90,16 @@ static max30102_t hr_sensor;
 static float heart_rate = 0.0;
 volatile bool hr_resuming = true;
 
+static bool just_woke_up = false;
+
 static TaskHandle_t hr_task_handle;
+static TaskHandle_t lvgl_task_handle;
 
 struct bhy2_dev bhi260ap;
 uint8_t work_buffer[2048]; // FIFO data buffer
 uint8_t gesture_code; // BHI260AP wrist turn gesture code
 
-uint32_t steps; // Total stepo count since BHI260 reset
+uint32_t steps; // Total step count since BHI260 reset
 
 typedef struct {
     int16_t x;
@@ -103,18 +113,20 @@ float euler_angles[3] = {0.0f, 0.0f, 0.0f}; // Euler angles that were converted 
 
 SemaphoreHandle_t i2c_mux;
 
-static const char *TAG = "sleep_by_wrist";
+struct bmp5_dev bmp585;
 
-/* ===============================
+struct bmp5_sensor_data bmp585_data;
+
+/* ==========================================
  *  OLED flush callbacks forward declarations
- * =============================== */
+ * ========================================== */
 
 static void lv_oled1_flush_cb(lv_display_t *disp, const lv_area_t *area, uint8_t *px_map);
 static void lv_oled2_flush_cb(lv_display_t *disp, const lv_area_t *area, uint8_t *px_map);
 
-/* =======================
+/* ==========================
  *  Signal processing helpers
- * ======================= */
+ * ========================== */
 
 static float mean_u32(const uint32_t *buf, int len)
 {
@@ -146,6 +158,7 @@ float fixed_to_float(int16_t val) {
 static void i2c_init(void)
 {
     i2c_mux = xSemaphoreCreateMutex();
+    configASSERT(i2c_mux);
 
     if (i2c_mux == NULL) {
         printf("Failed to create I2C mutex\n");
@@ -727,14 +740,14 @@ void bhi260_setup(void)
 void go_to_sleep() {
     // 1. Configure the pin as a wakeup source
     // BHI260AP HIRQ is usually active HIGH (1.8V -> 3.3V via shifter)
-    /*
-    esp_sleep_enable_gpio_wakeup(1 << BHI260_INT_GPIO, ESP_GPIO_WAKEUP_GPIO_HIGH);
     
+    gpio_wakeup_enable(BHI260_INT_GPIO, GPIO_INTR_HIGH_LEVEL);
+    esp_sleep_enable_gpio_wakeup();
     printf("Entering light sleep. Flick wrist to wake!\n");
     
     // 2. Enter light sleep
     esp_light_sleep_start();
-    */
+    
 }
 
 /* ========================
@@ -751,21 +764,150 @@ static void bhi260_task(void *arg) {
     }
 }
 
+/* ============================
+*  I2C read function for BMP585
+*  ============================ */
+
+static int8_t bmp5_i2c_read(uint8_t reg_addr, uint8_t *data, uint32_t len, void *intf_ptr)
+{
+    i2c_port_t port = *(i2c_port_t *)intf_ptr;
+
+    if (xSemaphoreTake(i2c_mux, pdMS_TO_TICKS(100)) != pdTRUE) {
+        return BMP5_E_COM_FAIL;
+    }
+    esp_err_t err = i2c_master_write_read_device(
+        port,
+        BMP5_I2C_ADDR_PRIM,
+        &reg_addr,
+        1,
+        data,
+        len,
+        pdMS_TO_TICKS(100)
+    );
+
+    xSemaphoreGive(i2c_mux);
+
+    return (err == ESP_OK) ? BMP5_OK : BMP5_E_COM_FAIL;
+}
+
+/* =============================
+*  I2C write function for BMP585
+*  ============================= */
+
+static int8_t bmp5_i2c_write(uint8_t reg_addr, const uint8_t *data, uint32_t len, void *intf_ptr)
+{
+    i2c_port_t port = *(i2c_port_t *)intf_ptr;
+
+    uint8_t buf[len + 1];
+    buf[0] = reg_addr;
+    memcpy(&buf[1], data, len);
+
+    if (xSemaphoreTake(i2c_mux, pdMS_TO_TICKS(100)) != pdTRUE) {
+        return BMP5_E_COM_FAIL;
+    }
+
+    esp_err_t err = i2c_master_write_to_device(
+        port,
+        BMP5_I2C_ADDR_PRIM,
+        buf,
+        len + 1,
+        pdMS_TO_TICKS(100)
+    );
+
+    xSemaphoreGive(i2c_mux);
+
+    return (err == ESP_OK) ? BMP5_OK : BMP5_E_COM_FAIL;
+}
+
+/* ============================
+*  Delay function for BMP585
+*  ============================ */
+
+static void bmp5_delay_us(uint32_t period, void *intf_ptr)
+{
+    esp_rom_delay_us(period);
+}
+
+/* ============================
+*  BMP585 setup function
+*  ============================ */
+
+void bmp585_setup(void)
+{
+    i2c_port_t i2c_port = I2C_PORT;
+
+    bmp585.intf_ptr = &i2c_port;
+    bmp585.read = bmp5_i2c_read;
+    bmp585.write = bmp5_i2c_write;
+    bmp585.delay_us = bmp5_delay_us;
+
+    if (bmp5_init(&bmp585) != BMP5_OK) {
+        printf("Failed to initialize BMP585 sensor\n");
+        return;
+    }
+    bmp5_set_power_mode(BMP5_POWERMODE_NORMAL, &bmp585);
+    printf("BMP585 initialized successfully\n");
+}
+
+/* ============================
+*  BMP585 measurement task
+*  ============================ */
+
+static void bmp585_task(void *arg) {
+
+    struct bmp5_osr_odr_press_config bmp585_cfg = {
+        .osr_t = BMP5_OVERSAMPLING_8X,
+        .osr_p = BMP5_OVERSAMPLING_4X,
+        .press_en = BMP5_ENABLE, // Enable pressure measurement
+        .odr = BMP5_ODR_0_250_HZ // Output data rate at 0.25Hz, once every 4 seconds
+    };
+
+    while (1) {
+
+        if (bmp5_get_sensor_data(&bmp585_data, &bmp585_cfg, &bmp585) == BMP5_OK) {
+            printf("BMP585 - Pressure: %.2f Pa, Temperature: %.2f °C\n",
+                   bmp585_data.pressure,
+                   bmp585_data.temperature);
+        } else {
+            printf("Failed to read BMP585 sensor data\n");
+        }
+        vTaskDelay(pdMS_TO_TICKS(4000)); // Read every 4 seconds
+    }
+}
+
+
 /* ========================
 *  Main loop task
 *  ======================== */
 
 static void main_loop_task(void* arg)
 {
+    uint32_t last_wake_time = 0; // Last time the ESP32 woke up from sleep (ms)
+
     while (1) {
 
-        if (gesture_code == 0x02) {
+        uint32_t current_time = esp_timer_get_time() / 1000; // ms
+        uint32_t inactive_time = 0;
+
+        if (current_time - last_wake_time >= 7000) {
+            inactive_time = lv_disp_get_inactive_time(e_ink_disp);
+        }
+
+        if (gesture_code == 0x02 || inactive_time >= (INACTIVE_SEC_BEFORE_SLEEP * 1000)) {
+
             esp_sleep_enable_timer_wakeup(SEC_BTW_MEAS_IN_SLEEP * 1000000);
             stop_hr_measurement();
+            just_woke_up = true;
             go_to_sleep();
-        } else {
+
+        } 
+        
+        if (gesture_code == 0x01 || just_woke_up) {
             resume_hr_measurement();
+            just_woke_up = false;
+            last_wake_time = esp_timer_get_time() / 1000; // ms
         }
+
     }
 }
 
@@ -806,7 +948,7 @@ void startup_sequence(void)
         4096,
         NULL,
         5,
-        NULL,
+        &lvgl_task_handle,
         1
     ); 
 
@@ -834,7 +976,19 @@ void startup_sequence(void)
         1
     );
 
-    xTaskCreatePinnedToCore(
+    bmp585_setup(); // Initialize BMP585 sensor
+
+    xTaskCreatePinnedToCore( // Create BMP585 measurement task
+        bmp585_task,
+        "bmp585",
+        4096,
+        NULL,
+        2,
+        NULL,
+        1
+    );
+
+    xTaskCreatePinnedToCore( // Create main loop task (manages sleep/wake, sensor control)
         main_loop_task,
         "main_loop",
         4096,
@@ -843,8 +997,8 @@ void startup_sequence(void)
         NULL,
         0
     );
-}
 
+}
 
 /* =======================
  *  app_main
@@ -852,5 +1006,5 @@ void startup_sequence(void)
 
 void app_main(void)
 {
-    startup_sequence();
+    startup_sequence(); // Start EVERYTHING up
 }
