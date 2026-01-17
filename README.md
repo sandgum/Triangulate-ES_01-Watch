@@ -43,6 +43,7 @@ The main microcontroller running the watch is an Espressif ESP32-S3 running with
 - Top plates printed in LEDO 6060 resin from JLC3DP (can substitute with any rigid resin)
 - Bottom plates for OLED segments are CNC machined from 6061 Aluminium by JLCCNC (can substitute with any rigid material or also with SLA/MSLA printed resin)
 - Bottom plate for main E-ink segment 3D printed using an SLM printer in 316L stainless steel (can substitute with other rigid metal with high thermal conductivity)
+- Side flexible pieces printed in TPU by an FDM 3D printer
 
 ---
 
