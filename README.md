@@ -38,11 +38,10 @@ The main microcontroller running the watch is an Espressif ESP32-S3 running with
 
 ## Enclosure:
 
-- Main cases and top plates of easch segment 3D printed using an SLA/MSLA printer
-- Main cases printed in Black resin from JLC3DP (can substitute with any rigid resin)
-- Top plates printed in LEDO 6060 resin from JLC3DP (can substitute with any rigid resin)
+- Main cases and top plates of each segment 3D printed using PLA
 - Bottom plates for OLED segments are CNC machined from 6061 Aluminium by JLCCNC (can substitute with any rigid material or also with SLA/MSLA printed resin)
 - Bottom plate for main E-ink segment 3D printed using an SLM printer in 316L stainless steel (can substitute with other rigid metal with high thermal conductivity)
+- Side flexible pieces printed in TPU by an FDM 3D printer
 
 ---
 
@@ -133,17 +132,16 @@ Total: $85.43 USD
 
 | Description | Manufacturer | Material | Price (USD) |
 |-------------|--------------|----------|-------------|
-| 3D Printed Enclosure Main Cases | JLC3DP | Black Resin | 7.05 |
-| 3D Printed Enclosure Top Plates | JLC3DP | LEDO 6060 Resin | 2.11 |
+
 | CNC Machined OLED Segment Bottom Plates | JLCCNC | Aluminium 6061 | 17.46 |
 | SLM 3D Printed Main Segment Bottom Plate | JLC3DP | 316L Stainless Steel | 8.39 |
 | Main 4-layer Flex PCB | JLCPCB | Yellow 0.2mm Polyimide with 0.1mm FR4 Stiffener | 94.00 |
 | SMD Stencil for Main Flex PCB | JLCPCB | Steel | 7.47 |
 
-Total: $136.48 USD
+Total: $127.32 USD
 
 ---
-## Grand Total (Excl. Shipping): $221.91 USD
+## Grand Total (Excl. Shipping): $212.75 USD
 ---
 
 <img width="3840" height="2160" alt="render2" src="https://github.com/user-attachments/assets/f0ed52fa-0158-4048-8f5a-b0dd56644882" />
