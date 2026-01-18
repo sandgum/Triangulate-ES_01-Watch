@@ -47,7 +47,17 @@ extern "C" {
  * Fonts
  *----------------*/
 
-extern lv_font_t * Doto_Sans;
+extern lv_font_t * Doto_Sans_Bold;
+
+extern lv_font_t * Doto_Sans_Light;
+
+extern lv_font_t * Doto_Sans_Thin;
+
+extern lv_font_t * Smooch_Sans_Light;
+
+extern lv_font_t * Smooch_Sans_Semibold;
+
+extern lv_font_t * Smooch_Sans_Thin;
 
 /*----------------
  * Images
@@ -78,6 +88,9 @@ void ES_01_Firmware_LVGL_UI_init_gen(const char * asset_path);
 /**********************
  *   POST INCLUDES
  **********************/
+
+/*Include all the widget and components of this library*/
+#include "screens/helloworld/helloworld_gen.h"
 
 #ifdef __cplusplus
 } /*extern "C"*/

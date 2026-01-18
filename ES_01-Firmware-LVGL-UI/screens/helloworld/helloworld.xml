@@ -1,7 +1,30 @@
 <screen>
 	<view>
-		<lv_button align="center" width="166" height="96">
-			<lv_label text="sdhcvsudcv" style_text_font="Doto_Sans" align="center" />
-		</lv_button>
+
+			<lv_label 
+				text="Hello World!" 
+				style_text_font="Doto_Sans_Bold" 
+				align="center" 
+				style_text_color="0x000000"
+				y="-71"
+ 				x="0"/>
+			<lv_label 
+				text="Welcome to ES_01" 
+				style_text_font="Smooch_Sans_Semibold" 
+				style_text_color="0x000000" 
+				align="center" y="-40" x="0"/>
+			<lv_button 
+			align="top_mid"
+			style_bg_color="0xFFFFFF" 
+			style_border_color="0x000000" 
+			style_border_width="2"
+			style_radius="15"
+ 			width="170" height="84" x="0" y="100" style_shadow_color="0xffffff">
+				<lv_label 
+					text="Let's Go!" 
+					style_text_font="Smooch_Sans_Semibold" 
+					style_text_color="0x000000" 
+					align="center" y="0" x="0"/>
+			</lv_button>
 	</view>
 </screen>

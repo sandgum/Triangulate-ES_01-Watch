@@ -1,6 +1,12 @@
 list(
   APPEND
   PROJECT_SOURCES
+  ${CMAKE_CURRENT_LIST_DIR}/screens/helloworld/helloworld_gen.c
   ${CMAKE_CURRENT_LIST_DIR}/ES_01_Firmware_LVGL_UI_gen.c
   ${CMAKE_CURRENT_LIST_DIR}/ES_01_Firmware_LVGL_UI.c
-  ${CMAKE_CURRENT_LIST_DIR}/fonts/Doto_Rounded_Semibold_ttf_data.c)
+  ${CMAKE_CURRENT_LIST_DIR}/fonts/Doto_Bold_ttf_data.c
+  ${CMAKE_CURRENT_LIST_DIR}/fonts/Doto_Light_ttf_data.c
+  ${CMAKE_CURRENT_LIST_DIR}/fonts/Doto_Thin_ttf_data.c
+  ${CMAKE_CURRENT_LIST_DIR}/fonts/SmoochSans_Light_ttf_data.c
+  ${CMAKE_CURRENT_LIST_DIR}/fonts/SmoochSans_Semibold_ttf_data.c
+  ${CMAKE_CURRENT_LIST_DIR}/fonts/SmoochSans_Thin_ttf_data.c)

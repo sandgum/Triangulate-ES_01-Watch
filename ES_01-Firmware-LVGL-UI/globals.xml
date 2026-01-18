@@ -21,6 +21,11 @@
 
     <fonts>
         <!-- Add <bin> , <tiny_ttf>, <freetype> tags here -->
-        <tiny_ttf name="Doto_Sans" size="20" src_path="fonts/Doto_Rounded-Semibold.ttf"/>
+        <tiny_ttf name="Doto_Sans_Bold" size="22" src_path="fonts/Doto-Bold.ttf"/>
+        <tiny_ttf name="Doto_Sans_Light" size="22" src_path="fonts/Doto-Light.ttf"/>
+        <tiny_ttf name="Doto_Sans_Thin" size="22" src_path="fonts/Doto-Thin.ttf"/>
+        <tiny_ttf name="Smooch_Sans_Light" size="16" src_path="fonts/SmoochSans-Light.ttf"/>
+        <tiny_ttf name="Smooch_Sans_Semibold" size="16" src_path="fonts/SmoochSans-Semibold.ttf"/>
+        <tiny_ttf name="Smooch_Sans_Thin" size="16" src_path="fonts/SmoochSans-Thin.ttf"/>
     </fonts>
 </globals>
