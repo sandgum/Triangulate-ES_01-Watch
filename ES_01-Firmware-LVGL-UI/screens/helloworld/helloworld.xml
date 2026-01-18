@@ -1,0 +1,7 @@
+<screen>
+	<view>
+		<lv_button align="center" width="166" height="96">
+			<lv_label text="sdhcvsudcv" style_text_font="Doto_Sans" align="center" />
+		</lv_button>
+	</view>
+</screen>

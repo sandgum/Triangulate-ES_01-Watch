@@ -1,7 +1,9 @@
 <project>
 	<targets>
 		<target name="target1">
-			<display width="200" height="200" />
+			<display width="200" height="200" color_format="i1" />
+			<display width="128" height="32" color_format="i1" />
+			<display width="128" height="32" color_format="i1" />
 		</target>
 	</targets>
 </project>

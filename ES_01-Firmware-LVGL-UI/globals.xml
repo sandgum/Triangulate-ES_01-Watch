@@ -21,5 +21,6 @@
 
     <fonts>
         <!-- Add <bin> , <tiny_ttf>, <freetype> tags here -->
+        <tiny_ttf name="Doto_Sans" size="20" src_path="fonts/Doto_Rounded-Semibold.ttf"/>
     </fonts>
 </globals>

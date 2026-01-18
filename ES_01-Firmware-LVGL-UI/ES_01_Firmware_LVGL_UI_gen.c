@@ -43,6 +43,10 @@
  * Fonts
  *----------------*/
 
+lv_font_t * Doto_Sans;
+extern uint8_t Doto_Rounded_Semibold_ttf_data[];
+extern size_t Doto_Rounded_Semibold_ttf_data_size;
+
 /*----------------
  * Images
  *----------------*/
@@ -71,6 +75,9 @@ void ES_01_Firmware_LVGL_UI_init_gen(const char * asset_path)
      * Fonts
      *----------------*/
 
+    /* create tiny ttf font 'Doto_Sans' from C array */
+    Doto_Sans = lv_tiny_ttf_create_data(Doto_Rounded_Semibold_ttf_data, Doto_Rounded_Semibold_ttf_data_size, 20);
+
 
     /*----------------
      * Images
@@ -90,6 +97,7 @@ void ES_01_Firmware_LVGL_UI_init_gen(const char * asset_path)
     /* Register widgets */
 
     /* Register fonts */
+    lv_xml_register_font(NULL, "Doto_Sans", Doto_Sans);
 
     /* Register subjects */
 

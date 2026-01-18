@@ -47,6 +47,8 @@ extern "C" {
  * Fonts
  *----------------*/
 
+extern lv_font_t * Doto_Sans;
+
 /*----------------
  * Images
  *----------------*/

@@ -36,7 +36,7 @@ void ES_01_Firmware_LVGL_UI_init(const char * asset_path)
 {
     ES_01_Firmware_LVGL_UI_init_gen(asset_path);
 
-    /* Add your own custom code here if needed */
+    
 }
 
 /**********************
