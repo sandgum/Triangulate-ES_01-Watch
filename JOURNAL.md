@@ -1,5 +1,5 @@
-# Total Time Spent on Project: 40.0 hours
-## Total Journal Entries: 10
+# Total Time Spent on Project: 41.5 hours
+## Total Journal Entries: 11
 ---
 ---
 ---
@@ -316,3 +316,21 @@ Finally, with the newfound functions and callbacks I had gained access to, I wan
 ![Screenshot 2026-01-16 at 6 49 53 pm](https://github.com/user-attachments/assets/76829d01-645b-4fac-8d92-dcb675cc1273)
 
 Anyways, this firmware is progressing very well, and I’ve finally done the task of integrating all my hardware and making my software recognise it. I also think I’m pretty close to resubmitting this project for review, and the next things to do in the firmware is to tackle another beast: the USER INTERFACE!!!
+
+---
+
+# Journal Entry 11: Added support for DRV2605 haptic driver in firmware (01/20/2026)
+
+After submitting my project for review, a strong urge came upon me to continue the development of the ES_01's firmware IMMEDIATELY after. Now I understand why people code for a living, the profession just drags people gravitationally towards it. Jokes aside, I still hadn't integrated the last piece of hardware into my ESP-IDF project, which is one of the most important for cool factor, the DRV2605 haptic driver.
+
+First of all, I searched the ESP-IDF component registry for a library that could provide an easy path to integration, and my search was successful. I came across the DRV2605 library in the espp project, but upon downloading the component, I was shocked to see that it is written in C++ and is meant for ESP-IDF projects written in C++! I could possibly try and smash it into my project by using a bunch of C to C++ linker wrappers, but I decided that implementing I2C mutexes into the library's own I2C functions would be WAY too cumbersome.
+
+<img width="2521" height="1458" alt="Screenshot 2026-01-20 112025" src="https://github.com/user-attachments/assets/7def49f4-f263-4969-b357-59886fe23908" />
+
+See, an I2C mutex is what FreeRTOS uses to orchestrate I2C bus access across different tasks. Because my sensors and OLED displays each have their own tasks, but all share a SINGLE I2C bus (the same two wires), then a bunch of tasks running independently of each other would try and access the shared bus at the same time, which causes things to break SPECTACULARLY. An I2C mutex ensures that each task has to wait for other tasks to finish their I2C transactions before taking control of the bus for themselves. It was already a chore to go into all my hardware component files and tell them to manipulate an I2C mutex, but doing that IN C++!? Hell no.
+
+The only other DRV2605 library I found was one made for Arduino, which again, USES C++. After I was done crashing out at letters on a screen, I asked ChatGPT as a last resort to hopefully conjure up a clean ESP-IDF component (in C) which supported the many features of the DRV2605 (namely the ability to select from the chip's built-in library of haptic effects). And the component it spat out was surprisingly simple, and IT BUILDS!!!
+
+<img width="604" height="770" alt="Screenshot 2026-01-20 142759" src="https://github.com/user-attachments/assets/16b57493-4d29-44e0-be3a-045499b4dd19" />
+
+This journal entry was quite short, but I'm going to post another one like, today, which explains the ordeal of trying to develop UI for this thing. Byee!
