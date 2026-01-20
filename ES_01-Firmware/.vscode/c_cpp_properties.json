@@ -3,7 +3,9 @@
         {
             "name": "Win32",
             "includePath": [
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/**",
+                "c:\\Users\\sanya\\AppData\\Roaming\\Code\\User\\globalStorage\\themastercoder007.lvgl-live-preview\\lvgl\\9.4.0",
+                "c:\\Users\\sanya\\AppData\\Roaming\\Code\\User\\globalStorage\\themastercoder007.lvgl-live-preview\\lvgl\\9.4.0\\src"
             ],
             "defines": [
                 "_DEBUG",

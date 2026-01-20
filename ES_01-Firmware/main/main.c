@@ -33,6 +33,8 @@
 #include "bmp5.h"
 #include "bmp5_defs.h"
 
+#include "drv2605.h"
+
 /* =======================
  *  Display (SPI / EPD)
  * ======================= */
@@ -875,6 +877,26 @@ static void bmp585_task(void *arg) {
     }
 }
 
+/* ============================
+*  DRV2605 Setup
+*  ============================ */
+
+void drv2605_setup(void) {
+
+    ESP_ERROR_CHECK(drv2605_init(I2C_PORT));
+    ESP_ERROR_CHECK(drv2605_autocalibrate(I2C_PORT));
+
+    // Test pulse
+    drv2605_play_effect(I2C_PORT, 1);
+}
+
+/* ====================================
+*  UI Haptic driver callback (on touch)
+*  ==================================== */
+
+void haptic_touch_cb(void) {
+    drv2605_play_effect(I2C_PORT, 1);
+}
 
 /* ========================
 *  Main loop task
@@ -987,6 +1009,8 @@ void startup_sequence(void)
         NULL,
         1
     );
+
+    drv2605_setup(); // Initialise DRV2605 haptic driver
 
     xTaskCreatePinnedToCore( // Create main loop task (manages sleep/wake, sensor control)
         main_loop_task,
