@@ -1,6 +1,6 @@
 {
   "navigation": {
-    "selectedUserPageObject": "[ES_01-UI-OLED1.eez-project]:/userPages/1",
+    "selectedUserPageObject": "[ES_01-UI-OLED1.eez-project]:/userPages/2",
     "selectedFontObject": "[ES_01-UI-OLED1.eez-project]:/fonts/0",
     "subnavigationSelectedItems": {}
   },
@@ -226,10 +226,10 @@
                 {
                   "type": "tab",
                   "id": "#cc552784-101a-49e4-834e-634fee364861",
-                  "name": "Time and weather Watch Face",
+                  "name": "Workout time and actual time",
                   "component": "editor",
                   "config": {
-                    "objectPath": "[ES_01-UI-OLED1.eez-project]:/userPages/1",
+                    "objectPath": "[ES_01-UI-OLED1.eez-project]:/userPages/2",
                     "permanent": false
                   },
                   "icon": "svg:page"
@@ -1012,7 +1012,7 @@
           "x": -298.4737688337052,
           "y": -96.41993538992745
         },
-        "scale": 2.5
+        "scale": 4
       },
       "timeline": {
         "isEditorActive": false,
@@ -1034,10 +1034,10 @@
       },
       "transform": {
         "translate": {
-          "x": -248.94814563764476,
-          "y": -69.13044071078384
+          "x": -40.42218408056371,
+          "y": -144.437393912745
         },
-        "scale": 2.5
+        "scale": 1.1
       },
       "timeline": {
         "isEditorActive": false,
@@ -1057,10 +1057,10 @@
       },
       "transform": {
         "translate": {
-          "x": -233.04648950970386,
-          "y": -80.40701805434011
+          "x": -201.04648950970386,
+          "y": -101.40701805434011
         },
-        "scale": 2.5
+        "scale": 1.1
       },
       "timeline": {
         "isEditorActive": false,
@@ -1090,6 +1090,6 @@
   ],
   "showInactiveFlowsInDebugger": true,
   "globalFlowZoom": true,
-  "flowZoom": 2.5,
+  "flowZoom": 1.1,
   "implementationLanguage": "C"
 }
