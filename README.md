@@ -132,10 +132,9 @@ Total: $85.43 USD
 
 | Description | Manufacturer | Material | Price (USD) |
 |-------------|--------------|----------|-------------|
-
-| CNC Machined OLED Segment Bottom Plates | JLCCNC | Aluminium 6061 | 17.46 |
-| SLM 3D Printed Main Segment Bottom Plate | JLC3DP | 316L Stainless Steel | 8.39 |
-| Main 4-layer Flex PCB | JLCPCB | Yellow 0.2mm Polyimide with 0.1mm FR4 Stiffener | 94.00 |
+| CNC Machined OLED Segment Bottom Plates | JLCCNC | Aluminium 6061 | 17.46 
+| SLM 3D Printed Main Segment Bottom Plate | JLC3DP | 316L Stainless Steel | 8.39 
+| Main 4-layer Flex PCB | JLCPCB | Yellow 0.2mm Polyimide with 0.1mm FR4 Stiffener | 94.00 
 | SMD Stencil for Main Flex PCB | JLCPCB | Steel | 7.47 |
 
 Total: $127.32 USD
