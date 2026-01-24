@@ -1,5 +1,5 @@
-# Total Time Spent on Project: 46.5 hours
-## Total Journal Entries: 12
+# Total Time Spent on Project: 53.0 hours
+## Total Journal Entries: 13
 ---
 ---
 ---
@@ -380,3 +380,43 @@ Next, I built the screens which show on the OLEDs during workouts, showing senso
 <img width="390" height="104" alt="Screenshot 2026-01-21 at 11 14 57 am" src="https://github.com/user-attachments/assets/8f3e5e07-ca73-41d7-ad29-ee4f99516909" />
 
 So far, this UI doesn’t look so bad, and I tried to make it different to the various cloned UIs that most smartwatches use, while still making it look neat with concentric rounding radii and leaning into the low-resolution, monochrome nature of the displays.
+
+---
+
+# Journal Entry 13: Implemented Workout and Barometer "Apps" in UI (01/25/2026)
+*Time spent: 6.5 hours*
+
+After creating the basis upon which the ES_01’s user interface will be built, including the all-important design and aesthetic direction I would be heading, it was time to flesh out the watch’s basic navigational UI (basically, how is the user going to get around the different “apps” and functions of the watch?).
+
+<img width="433" height="449" alt="Screenshot 2026-01-25 at 9 49 55 am" src="https://github.com/user-attachments/assets/9a0a01f4-ef6d-49a6-871a-dc76890698ee" />
+
+First of all, I have decided to go with an “apps” structure for how functions will be laid out in the watch, with each sensor reading or calculated value appearing in its own “app” complete with other relevant stats and numbers. This is quite similar to how many low-cost smartwatches structure their UIs, such as examples from Huawei. Higher-end watches like the Apple Watch and Samsung Galaxy watches use a more “phone-like” approach to their UIs, where most raw sensor numbers are calculated into insights or trends for the user to see. This, of course, introduces A LOT of computing overhead, which the beefy chips in those high-end watches can easily handle. The same cannot be said about the ESP32-S3 I am using.
+
+So, I needed to create a “Home Screen” of apps on the ES_01, but I was significantly limited by the capabilities of the e-ink display I am using. Since even a fast refresh of that panel takes about 1.5 seconds, it would be INSANELY clunky for the user to be able to scroll through the various apps and menus in the UI. Plus, the goal with any E-ink display is to do as few refreshes as possible, because even though the panel consumes no power when its just sitting there, refreshing the panel consumes quite a lot and frequent refreshes can outweigh the power savings e-ink panels are known for. That’s why I decided on reserving the top of the watch’s screen EXCLUSIVELY for navigation buttons, like forward, back and switching between tabs.
+
+<img width="458" height="494" alt="Screenshot 2026-01-25 at 9 50 49 am" src="https://github.com/user-attachments/assets/b2f7ad5b-7d5e-46a3-9efc-6e3730dd9b45" />
+
+Placing the navigation buttons in a consistent place, and always colouring them in white creates a sort of muscle memory for the user, very similar to how Android phones always have the back button on the bottom of the screen. I have also designed the placement of each back button in my UI to make it so that if a user keeps pressing the top-left corner of the screen repeatedly, they will always end up back at the watch face. Also, since my “Home Screen” only has two pages, it’s not that bad to navigate between them using buttons.
+
+Most of the “apps” that I will develop for this watch will have more than one page, in which case I have settled for using a “tab switcher” element at the top to switch between two or more pages. This makes sure the user can switch between every page very easily, and doesn’t have to use back and forward buttons which they could easily get lost in the UI with.
+
+Ok, Ok, enough about me blabbering about the UI’s actual design, let’s get to the two “apps” that I have implemented so far. First on the list is one of the most complicated “apps”, the Workout app. Clicking on its icon in the Home Screen takes you to the New screen, in which you can choose your workout to do right now, or you can switch to the Stats screen, which shows your workout activity in a zoomable graph, and your three favourite workouts plus how many times you did them.
+
+<img width="426" height="443" alt="Screenshot 2026-01-25 at 9 51 47 am" src="https://github.com/user-attachments/assets/dae666b0-99c0-4b87-ab4d-f0b2fd38b5f7" />
+<img width="424" height="426" alt="Screenshot 2026-01-25 at 9 51 53 am" src="https://github.com/user-attachments/assets/95b294cb-87c1-46ae-86da-b81053eba7e0" />
+
+Selecting a new workout takes you to the active workout page, which starts the workout (which will be a task in ESP_IDF) and shows you your total calories burned, pause and end buttons, and a HUGE button that maps to a counter which can count pretty much whatever you want. If you’re running or cycling, you can use it to count laps, or you can use it to count sets if you’re weight training. It’s super useful, and I haven’t really seen it implemented in any other watch. On this screen, you only see one stat. This is on purpose, as most of the workout data is shown on the OLEDs, as the data is rapidly changing. Calories only update like once every 10 seconds, so that’s fine to show on the E-ink display. I have specifically designed the buttons in the active workout page to be as large as possible, so they’re easy to press in the heat of the moment.
+
+<img width="429" height="448" alt="Screenshot 2026-01-25 at 9 59 48 am" src="https://github.com/user-attachments/assets/0715c1ac-5e86-4c56-82d5-49fcd12a4217" />
+<img width="424" height="433" alt="Screenshot 2026-01-25 at 9 52 48 am" src="https://github.com/user-attachments/assets/077d4395-5e53-403a-8563-96066ec665f8" />
+
+After pressing the End button, you are taken to a confirmation screen which asks you whether to actually end the workout, and if you press End, then you are taken to a workout summary page specific to the workout you just did. This shows a graph of either heart rate, calories, or distance/reps over time (By tapping the button that says “Tap”), and also shows average heart rate, calories and the total time spent in the workout.
+
+<img width="429" height="443" alt="Screenshot 2026-01-25 at 10 00 26 am" src="https://github.com/user-attachments/assets/8bebda8f-f03b-4797-94e9-dd318ff304af" />
+
+That’s the workout “app” done, after which I moved onto creating the Barometer “app’s” UI. This consists of two pages, one showing the current altitude and stats relating to it (including a zoomable graph), and an identical page showing the same data about air pressure in hPa, which can be used to roughly forecast weather. I have also mapped the Altitude icon in the watch face to this app.
+
+<img width="430" height="433" alt="Screenshot 2026-01-25 at 9 53 43 am" src="https://github.com/user-attachments/assets/80ea9dc3-10bd-4526-9a38-32c9d6133eb1" />
+<img width="442" height="450" alt="Screenshot 2026-01-25 at 9 53 50 am" src="https://github.com/user-attachments/assets/fa443c1f-99af-434a-b8c3-25c385f72aca" />
+
+There we have it! The first two “apps” are fully fleshed out, and there are now six to go!
