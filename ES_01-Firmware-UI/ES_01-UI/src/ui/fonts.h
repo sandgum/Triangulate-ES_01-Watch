@@ -11,6 +11,11 @@ extern const lv_font_t ui_font_bitcount_single_extra_light;
 extern const lv_font_t ui_font_bitcount_single_light;
 extern const lv_font_t ui_font_barlow_condensed_medium;
 extern const lv_font_t ui_font_bitcount_single_medium;
+extern const lv_font_t ui_font_barlow_condensed_semibold_large;
+extern const lv_font_t ui_font_barlow_condensed_semibold_extra_large;
+extern const lv_font_t ui_font_doto_medium_xxl;
+extern const lv_font_t ui_font_doto_medium_l;
+extern const lv_font_t ui_font_doto_medium_l_2;
 
 
 #ifdef __cplusplus

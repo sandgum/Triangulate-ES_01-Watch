@@ -10,7 +10,7 @@
       "lvglVersion": "9.4.0",
       "extensions": [],
       "imports": [],
-      "flowSupport": true,
+      "flowSupport": false,
       "displayWidth": 128,
       "displayHeight": 32,
       "displayBorderRadius": 22,
@@ -106,7 +106,104 @@
   },
   "variables": {
     "objID": "c6c71e16-53e1-217f-d03b-cef56c6b037a",
-    "globalVariables": [],
+    "globalVariables": [
+      {
+        "objID": "ec23e59d-90da-4082-e90c-dd73159fa1fc",
+        "name": "time_hr_min_oled1",
+        "type": "string",
+        "defaultValue": "\"\"",
+        "persistent": false,
+        "native": false
+      },
+      {
+        "objID": "de97f3fa-076a-441b-932e-7b17543247ae",
+        "name": "time_sec_oled1",
+        "type": "string",
+        "defaultValue": "\"\"",
+        "persistent": false,
+        "native": false
+      },
+      {
+        "objID": "624228c7-38f6-4d91-fe07-c5d8b5a9f1ab",
+        "name": "am_or_pm_oled1",
+        "type": "string",
+        "defaultValue": "\"\"",
+        "persistent": false,
+        "native": false
+      },
+      {
+        "objID": "c0658650-a51a-46c9-da86-89c111437611",
+        "name": "curr_temp_oled1",
+        "type": "string",
+        "defaultValue": "\"\"",
+        "persistent": false,
+        "native": false
+      },
+      {
+        "objID": "ab5d1799-3fbf-48b9-9b4a-9d81c40df6b1",
+        "name": "isweather_sunny",
+        "type": "boolean",
+        "defaultValue": "false",
+        "persistent": false,
+        "native": false
+      },
+      {
+        "objID": "bbbbdab1-c6fe-4239-97b3-ce37169dca20",
+        "name": "isweather_rainy",
+        "type": "boolean",
+        "defaultValue": "false",
+        "persistent": false,
+        "native": false
+      },
+      {
+        "objID": "a9d812af-70a6-4b87-bcd0-dbeb396ef85a",
+        "name": "isweather_cloudy",
+        "type": "boolean",
+        "defaultValue": "false",
+        "persistent": false,
+        "native": false
+      },
+      {
+        "objID": "cdc28b01-6c7a-48a6-e105-e9d88ea80c3b",
+        "name": "isweather_storm",
+        "type": "boolean",
+        "defaultValue": "false",
+        "persistent": false,
+        "native": false
+      },
+      {
+        "objID": "1c662060-062a-4b89-855b-8eef72d6e726",
+        "name": "isweather_snowy",
+        "type": "boolean",
+        "defaultValue": "false",
+        "persistent": false,
+        "native": false
+      },
+      {
+        "objID": "00365906-dabf-47ae-b372-6902d67a46c3",
+        "name": "isweather_windy",
+        "type": "boolean",
+        "defaultValue": "false",
+        "persistent": false,
+        "native": false
+      },
+      {
+        "objID": "c19b6c7b-385d-49b8-f8c5-f91b063e267f",
+        "name": "curr_workout_hr_min_oled1",
+        "type": "string",
+        "defaultValue": "\"\"",
+        "persistent": false,
+        "native": false
+      },
+      {
+        "objID": "8b090df1-dcc4-4398-c86d-cfc0da308702",
+        "name": "curr_workout_sec_oled1",
+        "type": "string",
+        "defaultValue": "\"\"",
+        "persistent": false,
+        "native": false
+      }
+    ],
     "structures": [],
     "enums": []
   },
@@ -309,10 +406,11 @@
               },
               "group": "",
               "groupIndex": 0,
-              "text": "10:08",
-              "textType": "literal",
+              "text": "time_hr_min_oled1",
+              "textType": "expression",
               "longMode": "WRAP",
-              "recolor": false
+              "recolor": false,
+              "previewValue": "10:08"
             },
             {
               "objID": "9c6659a6-334e-433d-e7a5-89c99050260c",
@@ -397,10 +495,11 @@
               },
               "group": "",
               "groupIndex": 0,
-              "text": ":36",
-              "textType": "literal",
+              "text": "time_sec_oled1",
+              "textType": "expression",
               "longMode": "WRAP",
-              "recolor": false
+              "recolor": false,
+              "previewValue": ":36"
             },
             {
               "objID": "e0be3d66-f057-4b2e-ad9a-7a1122e9166e",
@@ -440,10 +539,11 @@
               },
               "group": "",
               "groupIndex": 0,
-              "text": "am",
-              "textType": "literal",
+              "text": "am_or_pm_oled1",
+              "textType": "expression",
               "longMode": "WRAP",
-              "recolor": false
+              "recolor": false,
+              "previewValue": "am"
             },
             {
               "objID": "813b87db-518f-423f-efa6-4520eda0aab6",
@@ -468,54 +568,11 @@
               "heightUnit": "px",
               "children": [
                 {
-                  "objID": "8dcde5d2-1e08-4ca2-b80d-f891a60f3ea6",
-                  "type": "LVGLLabelWidget",
-                  "left": 19,
-                  "top": 7,
-                  "width": 7,
-                  "height": 15,
-                  "customInputs": [],
-                  "customOutputs": [],
-                  "style": {
-                    "objID": "e9560a11-684f-4f6d-def4-bb4ad0fe481a",
-                    "useStyle": "default",
-                    "conditionalStyles": [],
-                    "childStyles": []
-                  },
-                  "timeline": [],
-                  "eventHandlers": [],
-                  "leftUnit": "px",
-                  "topUnit": "px",
-                  "widthUnit": "content",
-                  "heightUnit": "content",
-                  "children": [],
-                  "widgetFlags": "CLICK_FOCUSABLE|GESTURE_BUBBLE|PRESS_LOCK|SCROLLABLE|SCROLL_CHAIN_HOR|SCROLL_CHAIN_VER|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_WITH_ARROW|SNAPPABLE",
-                  "hiddenFlagType": "literal",
-                  "clickableFlagType": "literal",
-                  "flagScrollbarMode": "",
-                  "flagScrollDirection": "",
-                  "scrollSnapX": "",
-                  "scrollSnapY": "",
-                  "checkedStateType": "literal",
-                  "disabledStateType": "literal",
-                  "states": "",
-                  "useStyle": "Small Title",
-                  "localStyles": {
-                    "objID": "98c0d642-b482-4077-f84e-16a7f3aad5ac"
-                  },
-                  "group": "",
-                  "groupIndex": 0,
-                  "text": "C",
-                  "textType": "literal",
-                  "longMode": "WRAP",
-                  "recolor": false
-                },
-                {
                   "objID": "f8764c01-5ef9-4552-817e-028f26790789",
                   "type": "LVGLLabelWidget",
                   "left": 5,
                   "top": 7,
-                  "width": 12,
+                  "width": 22,
                   "height": 15,
                   "customInputs": [],
                   "customOutputs": [],
@@ -548,10 +605,11 @@
                   },
                   "group": "",
                   "groupIndex": 0,
-                  "text": "32",
-                  "textType": "literal",
+                  "text": "curr_temp_oled1",
+                  "textType": "expression",
                   "longMode": "WRAP",
-                  "recolor": false
+                  "recolor": false,
+                  "previewValue": "32 C"
                 },
                 {
                   "objID": "ba68acd3-0819-4963-ace3-f49d734d0137",
@@ -576,7 +634,8 @@
                   "heightUnit": "content",
                   "children": [],
                   "widgetFlags": "ADV_HITTEST|CLICK_FOCUSABLE|GESTURE_BUBBLE|PRESS_LOCK|SCROLLABLE|SCROLL_CHAIN_HOR|SCROLL_CHAIN_VER|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_WITH_ARROW|SNAPPABLE",
-                  "hiddenFlagType": "literal",
+                  "hiddenFlag": "isweather_sunny",
+                  "hiddenFlagType": "expression",
                   "clickableFlagType": "literal",
                   "flagScrollbarMode": "",
                   "flagScrollDirection": "",
@@ -601,6 +660,286 @@
                   "group": "",
                   "groupIndex": 0,
                   "image": "Weather Sunny",
+                  "setPivot": false,
+                  "pivotX": 0,
+                  "pivotY": 0,
+                  "zoom": 256,
+                  "angle": 0,
+                  "innerAlign": "CENTER"
+                },
+                {
+                  "objID": "e411f81f-46c8-4275-f9f9-c458a7fa775c",
+                  "type": "LVGLImageWidget",
+                  "left": 26,
+                  "top": -2,
+                  "width": 32,
+                  "height": 32,
+                  "customInputs": [],
+                  "customOutputs": [],
+                  "style": {
+                    "objID": "97941c21-5a3f-4fa7-d963-ee7752b341b1",
+                    "useStyle": "default",
+                    "conditionalStyles": [],
+                    "childStyles": []
+                  },
+                  "timeline": [],
+                  "eventHandlers": [],
+                  "leftUnit": "px",
+                  "topUnit": "px",
+                  "widthUnit": "content",
+                  "heightUnit": "content",
+                  "children": [],
+                  "widgetFlags": "ADV_HITTEST|CLICK_FOCUSABLE|GESTURE_BUBBLE|PRESS_LOCK|SCROLLABLE|SCROLL_CHAIN_HOR|SCROLL_CHAIN_VER|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_WITH_ARROW|SNAPPABLE",
+                  "hiddenFlag": "isweather_rainy",
+                  "hiddenFlagType": "expression",
+                  "clickableFlagType": "literal",
+                  "flagScrollbarMode": "",
+                  "flagScrollDirection": "",
+                  "scrollSnapX": "",
+                  "scrollSnapY": "",
+                  "checkedStateType": "literal",
+                  "disabledStateType": "literal",
+                  "states": "",
+                  "localStyles": {
+                    "objID": "f2b8c6fa-6a17-4276-f3e9-7827f54fb252",
+                    "definition": {
+                      "MAIN": {
+                        "DEFAULT": {
+                          "transform_scale_x": 200,
+                          "transform_scale_y": 200,
+                          "transform_pivot_x": 16,
+                          "transform_pivot_y": 16
+                        }
+                      }
+                    }
+                  },
+                  "group": "",
+                  "groupIndex": 0,
+                  "image": "Weather Rainy",
+                  "setPivot": false,
+                  "pivotX": 0,
+                  "pivotY": 0,
+                  "zoom": 256,
+                  "angle": 0,
+                  "innerAlign": "CENTER"
+                },
+                {
+                  "objID": "4e0524d2-d7b9-459d-e662-8efb4b5cf58d",
+                  "type": "LVGLImageWidget",
+                  "left": 26,
+                  "top": -2,
+                  "width": 32,
+                  "height": 32,
+                  "customInputs": [],
+                  "customOutputs": [],
+                  "style": {
+                    "objID": "510b648b-c580-493a-a811-b5efcd9076fb",
+                    "useStyle": "default",
+                    "conditionalStyles": [],
+                    "childStyles": []
+                  },
+                  "timeline": [],
+                  "eventHandlers": [],
+                  "leftUnit": "px",
+                  "topUnit": "px",
+                  "widthUnit": "content",
+                  "heightUnit": "content",
+                  "children": [],
+                  "widgetFlags": "ADV_HITTEST|CLICK_FOCUSABLE|GESTURE_BUBBLE|PRESS_LOCK|SCROLLABLE|SCROLL_CHAIN_HOR|SCROLL_CHAIN_VER|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_WITH_ARROW|SNAPPABLE",
+                  "hiddenFlag": "isweather_cloudy",
+                  "hiddenFlagType": "expression",
+                  "clickableFlagType": "literal",
+                  "flagScrollbarMode": "",
+                  "flagScrollDirection": "",
+                  "scrollSnapX": "",
+                  "scrollSnapY": "",
+                  "checkedStateType": "literal",
+                  "disabledStateType": "literal",
+                  "states": "",
+                  "localStyles": {
+                    "objID": "c5f090c0-b860-4edf-d2e4-a356a3b5738c",
+                    "definition": {
+                      "MAIN": {
+                        "DEFAULT": {
+                          "transform_scale_x": 200,
+                          "transform_scale_y": 200,
+                          "transform_pivot_x": 16,
+                          "transform_pivot_y": 16
+                        }
+                      }
+                    }
+                  },
+                  "group": "",
+                  "groupIndex": 0,
+                  "image": "Weather Cloudy",
+                  "setPivot": false,
+                  "pivotX": 0,
+                  "pivotY": 0,
+                  "zoom": 256,
+                  "angle": 0,
+                  "innerAlign": "CENTER"
+                },
+                {
+                  "objID": "bb9a96c5-802a-443f-f0a5-fc92a3f7612c",
+                  "type": "LVGLImageWidget",
+                  "left": 26,
+                  "top": -2,
+                  "width": 32,
+                  "height": 32,
+                  "customInputs": [],
+                  "customOutputs": [],
+                  "style": {
+                    "objID": "a2b199c0-ae58-4629-bb35-9464ba8391dd",
+                    "useStyle": "default",
+                    "conditionalStyles": [],
+                    "childStyles": []
+                  },
+                  "timeline": [],
+                  "eventHandlers": [],
+                  "leftUnit": "px",
+                  "topUnit": "px",
+                  "widthUnit": "content",
+                  "heightUnit": "content",
+                  "children": [],
+                  "widgetFlags": "ADV_HITTEST|CLICK_FOCUSABLE|GESTURE_BUBBLE|PRESS_LOCK|SCROLLABLE|SCROLL_CHAIN_HOR|SCROLL_CHAIN_VER|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_WITH_ARROW|SNAPPABLE",
+                  "hiddenFlag": "isweather_storm",
+                  "hiddenFlagType": "expression",
+                  "clickableFlagType": "literal",
+                  "flagScrollbarMode": "",
+                  "flagScrollDirection": "",
+                  "scrollSnapX": "",
+                  "scrollSnapY": "",
+                  "checkedStateType": "literal",
+                  "disabledStateType": "literal",
+                  "states": "",
+                  "localStyles": {
+                    "objID": "3ed01077-4188-4c57-a02b-c904245a8786",
+                    "definition": {
+                      "MAIN": {
+                        "DEFAULT": {
+                          "transform_scale_x": 200,
+                          "transform_scale_y": 200,
+                          "transform_pivot_x": 16,
+                          "transform_pivot_y": 16
+                        }
+                      }
+                    }
+                  },
+                  "group": "",
+                  "groupIndex": 0,
+                  "image": "Weather Storm",
+                  "setPivot": false,
+                  "pivotX": 0,
+                  "pivotY": 0,
+                  "zoom": 256,
+                  "angle": 0,
+                  "innerAlign": "CENTER"
+                },
+                {
+                  "objID": "a7b9e7d9-ae82-4765-a7e7-d1f7161e63d7",
+                  "type": "LVGLImageWidget",
+                  "left": 26,
+                  "top": -2,
+                  "width": 32,
+                  "height": 32,
+                  "customInputs": [],
+                  "customOutputs": [],
+                  "style": {
+                    "objID": "99a25d46-77bd-45fc-e8db-916968e473cb",
+                    "useStyle": "default",
+                    "conditionalStyles": [],
+                    "childStyles": []
+                  },
+                  "timeline": [],
+                  "eventHandlers": [],
+                  "leftUnit": "px",
+                  "topUnit": "px",
+                  "widthUnit": "content",
+                  "heightUnit": "content",
+                  "children": [],
+                  "widgetFlags": "ADV_HITTEST|CLICK_FOCUSABLE|GESTURE_BUBBLE|PRESS_LOCK|SCROLLABLE|SCROLL_CHAIN_HOR|SCROLL_CHAIN_VER|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_WITH_ARROW|SNAPPABLE",
+                  "hiddenFlag": "isweather_snowy",
+                  "hiddenFlagType": "expression",
+                  "clickableFlagType": "literal",
+                  "flagScrollbarMode": "",
+                  "flagScrollDirection": "",
+                  "scrollSnapX": "",
+                  "scrollSnapY": "",
+                  "checkedStateType": "literal",
+                  "disabledStateType": "literal",
+                  "states": "",
+                  "localStyles": {
+                    "objID": "272d2cf3-a689-46b4-cde5-cbabcfb204c5",
+                    "definition": {
+                      "MAIN": {
+                        "DEFAULT": {
+                          "transform_scale_x": 200,
+                          "transform_scale_y": 200,
+                          "transform_pivot_x": 16,
+                          "transform_pivot_y": 16
+                        }
+                      }
+                    }
+                  },
+                  "group": "",
+                  "groupIndex": 0,
+                  "image": "Weather Snowy",
+                  "setPivot": false,
+                  "pivotX": 0,
+                  "pivotY": 0,
+                  "zoom": 256,
+                  "angle": 0,
+                  "innerAlign": "CENTER"
+                },
+                {
+                  "objID": "e5011163-fcf6-4aa9-9a48-b634cb8613f7",
+                  "type": "LVGLImageWidget",
+                  "left": 26,
+                  "top": -2,
+                  "width": 32,
+                  "height": 32,
+                  "customInputs": [],
+                  "customOutputs": [],
+                  "style": {
+                    "objID": "5d0fcff7-ef39-4126-96d4-c31051496d8e",
+                    "useStyle": "default",
+                    "conditionalStyles": [],
+                    "childStyles": []
+                  },
+                  "timeline": [],
+                  "eventHandlers": [],
+                  "leftUnit": "px",
+                  "topUnit": "px",
+                  "widthUnit": "content",
+                  "heightUnit": "content",
+                  "children": [],
+                  "widgetFlags": "ADV_HITTEST|CLICK_FOCUSABLE|GESTURE_BUBBLE|PRESS_LOCK|SCROLLABLE|SCROLL_CHAIN_HOR|SCROLL_CHAIN_VER|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_WITH_ARROW|SNAPPABLE",
+                  "hiddenFlag": "isweather_windy",
+                  "hiddenFlagType": "expression",
+                  "clickableFlagType": "literal",
+                  "flagScrollbarMode": "",
+                  "flagScrollDirection": "",
+                  "scrollSnapX": "",
+                  "scrollSnapY": "",
+                  "checkedStateType": "literal",
+                  "disabledStateType": "literal",
+                  "states": "",
+                  "localStyles": {
+                    "objID": "4ecf942b-afee-4ef2-ce91-acfa89e27609",
+                    "definition": {
+                      "MAIN": {
+                        "DEFAULT": {
+                          "transform_scale_x": 200,
+                          "transform_scale_y": 200,
+                          "transform_pivot_x": 16,
+                          "transform_pivot_y": 16
+                        }
+                      }
+                    }
+                  },
+                  "group": "",
+                  "groupIndex": 0,
+                  "image": "Weather Windy",
                   "setPivot": false,
                   "pivotX": 0,
                   "pivotY": 0,
@@ -777,10 +1116,11 @@
               },
               "group": "",
               "groupIndex": 0,
-              "text": "10:08",
-              "textType": "literal",
+              "text": "time_hr_min_oled1",
+              "textType": "expression",
               "longMode": "WRAP",
-              "recolor": false
+              "recolor": false,
+              "previewValue": "10:08"
             },
             {
               "objID": "b0942573-f48e-4be9-e019-76efbde0dd4b",
@@ -820,10 +1160,11 @@
               },
               "group": "",
               "groupIndex": 0,
-              "text": ":36",
-              "textType": "literal",
+              "text": "time_sec_oled1",
+              "textType": "expression",
               "longMode": "WRAP",
-              "recolor": false
+              "recolor": false,
+              "previewValue": ":36"
             },
             {
               "objID": "24341f2e-5f62-4c77-ce97-5aee268921e6",
@@ -863,10 +1204,11 @@
               },
               "group": "",
               "groupIndex": 0,
-              "text": "am",
-              "textType": "literal",
+              "text": "am_or_pm_oled1",
+              "textType": "expression",
               "longMode": "WRAP",
-              "recolor": false
+              "recolor": false,
+              "previewValue": "am"
             },
             {
               "objID": "c73ffae7-7c0d-44be-d86c-4f0f403899d5",
@@ -950,7 +1292,7 @@
                   "type": "LVGLLabelWidget",
                   "left": 13,
                   "top": 14,
-                  "width": 14,
+                  "width": 17,
                   "height": 15,
                   "customInputs": [],
                   "customOutputs": [],
@@ -983,10 +1325,11 @@
                   },
                   "group": "",
                   "groupIndex": 0,
-                  "text": ":21",
-                  "textType": "literal",
+                  "text": "curr_workout_sec_oled1",
+                  "textType": "expression",
                   "longMode": "WRAP",
-                  "recolor": false
+                  "recolor": false,
+                  "previewValue": ":48"
                 },
                 {
                   "objID": "30fc14d9-795f-49f1-ab0d-5efaf5f9c510",
@@ -1026,10 +1369,11 @@
                   },
                   "group": "",
                   "groupIndex": 0,
-                  "text": "0:35",
-                  "textType": "literal",
+                  "text": "curr_workout_hr_min_oled1",
+                  "textType": "expression",
                   "longMode": "WRAP",
-                  "recolor": false
+                  "recolor": false,
+                  "previewValue": "0:35"
                 }
               ],
               "widgetFlags": "CLICK_FOCUSABLE|GESTURE_BUBBLE|PRESS_LOCK|SCROLL_CHAIN_HOR|SCROLL_CHAIN_VER|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_WITH_ARROW|SNAPPABLE",

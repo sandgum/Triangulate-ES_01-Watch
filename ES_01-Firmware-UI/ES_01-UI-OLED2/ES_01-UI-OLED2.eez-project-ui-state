@@ -1,9 +1,12 @@
 {
   "navigation": {
-    "selectedUserPageObject": "[ES_01-UI-OLED2.eez-project]:/userPages/2",
+    "selectedUserPageObject": "[ES_01-UI-OLED2.eez-project]:/userPages/1",
+    "selectedGlobalVariableObject": "[ES_01-UI-OLED2.eez-project]:/variables/globalVariables/5",
     "selectedFontObject": "[ES_01-UI-OLED2.eez-project]:/fonts/1",
     "selectedBitmapObject": "[ES_01-UI-OLED2.eez-project]:/bitmaps/15",
-    "subnavigationSelectedItems": {}
+    "subnavigationSelectedItems": {
+      "variables-tab/sub-navigation/selected-item": "Global"
+    }
   },
   "layoutModel": {
     "rootEditor": {
@@ -66,14 +69,6 @@
                 "component": "lvgl-groups",
                 "enableClose": false,
                 "icon": "material:view_compact"
-              },
-              {
-                "type": "tab",
-                "id": "BREAKPOINTS_PALETTE",
-                "name": "Breakpoints",
-                "component": "breakpointsPanel",
-                "enableClose": false,
-                "icon": "svg:breakpoints_panel"
               }
             ]
           },
@@ -196,17 +191,30 @@
             {
               "type": "tabset",
               "id": "EDITORS",
-              "weight": 65,
+              "weight": 50.406976744186046,
+              "selected": 1,
               "enableDeleteWhenEmpty": false,
               "enableClose": false,
               "children": [
                 {
                   "type": "tab",
-                  "id": "#c1d814a0-3f0c-4399-a3de-06e25b40efe7",
-                  "name": "Workout Stats w Reps",
+                  "id": "#96dfa425-c783-4938-b75c-a5ff12985003",
+                  "name": "Settings",
                   "component": "editor",
                   "config": {
-                    "objectPath": "[ES_01-UI-OLED2.eez-project]:/userPages/2",
+                    "objectPath": "[ES_01-UI-OLED2.eez-project]:/settings",
+                    "subObjectPath": "[ES_01-UI-OLED2.eez-project]:/settings",
+                    "permanent": false
+                  },
+                  "icon": "material:settings"
+                },
+                {
+                  "type": "tab",
+                  "id": "#c1d814a0-3f0c-4399-a3de-06e25b40efe7",
+                  "name": "Notifications_WatchFace",
+                  "component": "editor",
+                  "config": {
+                    "objectPath": "[ES_01-UI-OLED2.eez-project]:/userPages/1",
                     "permanent": false
                   },
                   "icon": "svg:page"
@@ -228,7 +236,7 @@
             {
               "type": "row",
               "id": "#5d99c836-5ae5-431b-affa-2993857ac391",
-              "weight": 20,
+              "weight": 34.593023255813954,
               "children": [
                 {
                   "type": "tabset",
@@ -996,10 +1004,10 @@
       },
       "transform": {
         "translate": {
-          "x": -204.99082121085303,
-          "y": -49.223930358886676
+          "x": -228.62117550452209,
+          "y": -105.96830431620279
         },
-        "scale": 3
+        "scale": 5
       },
       "timeline": {
         "isEditorActive": false,
@@ -1011,17 +1019,18 @@
     "[ES_01-UI-OLED2.eez-project]:/userPages/1[flow-state]": {
       "selection": {
         "0": {
+          "1": {},
           "2": {
-            "1": {}
+            "2": {}
           }
         }
       },
       "transform": {
         "translate": {
-          "x": -180.1947844446134,
-          "y": -57.68957612999595
+          "x": -308.6139018011878,
+          "y": 15.39489796937329
         },
-        "scale": 2
+        "scale": 5
       },
       "timeline": {
         "isEditorActive": false,
@@ -1033,15 +1042,16 @@
     "[ES_01-UI-OLED2.eez-project]:/userPages/2[flow-state]": {
       "selection": {
         "0": {
+          "1": {},
           "2": {}
         }
       },
       "transform": {
         "translate": {
-          "x": -198.77281163863813,
-          "y": -99.71103141971824
+          "x": -309.3618768178436,
+          "y": 33.68272018102351
         },
-        "scale": 2
+        "scale": 5
       },
       "timeline": {
         "isEditorActive": false,
@@ -1058,10 +1068,10 @@
       },
       "transform": {
         "translate": {
-          "x": -163.65472630092074,
-          "y": -84.4725072951544
+          "x": -288.60472630092085,
+          "y": 54.82749270484561
         },
-        "scale": 2
+        "scale": 5
       },
       "timeline": {
         "isEditorActive": false,
@@ -1087,10 +1097,11 @@
   "lvglState": "DEFAULT",
   "lvglExpandedPropertiesGroup": [
     "POSITION AND SIZE",
-    "LINE"
+    "LINE",
+    "TEXT"
   ],
   "showInactiveFlowsInDebugger": true,
   "globalFlowZoom": true,
-  "flowZoom": 2,
+  "flowZoom": 5,
   "implementationLanguage": "C"
 }

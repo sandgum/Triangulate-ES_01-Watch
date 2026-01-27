@@ -1,8 +1,11 @@
 {
   "navigation": {
     "selectedUserPageObject": "[ES_01-UI-OLED1.eez-project]:/userPages/2",
+    "selectedGlobalVariableObject": "[ES_01-UI-OLED1.eez-project]:/variables/globalVariables/11",
     "selectedFontObject": "[ES_01-UI-OLED1.eez-project]:/fonts/0",
-    "subnavigationSelectedItems": {}
+    "subnavigationSelectedItems": {
+      "variables-tab/sub-navigation/selected-item": "Global"
+    }
   },
   "layoutModel": {
     "rootEditor": {
@@ -65,14 +68,6 @@
                 "component": "lvgl-groups",
                 "enableClose": false,
                 "icon": "material:view_compact"
-              },
-              {
-                "type": "tab",
-                "id": "BREAKPOINTS_PALETTE",
-                "name": "Breakpoints",
-                "component": "breakpointsPanel",
-                "enableClose": false,
-                "icon": "svg:breakpoints_panel"
               }
             ]
           },
@@ -124,7 +119,7 @@
             {
               "type": "row",
               "id": "#37db0834-0bf6-4675-aca2-0515f0db0600",
-              "weight": 15,
+              "weight": 24.382207578253706,
               "children": [
                 {
                   "type": "tabset",
@@ -195,34 +190,10 @@
             {
               "type": "tabset",
               "id": "EDITORS",
-              "weight": 65,
-              "selected": 2,
+              "weight": 49.57679154416147,
               "enableDeleteWhenEmpty": false,
               "enableClose": false,
               "children": [
-                {
-                  "type": "tab",
-                  "id": "#f2b09aba-d419-4d2e-9738-f24ac1086b27",
-                  "name": "Barlow Condensed Medium",
-                  "component": "editor",
-                  "config": {
-                    "objectPath": "[ES_01-UI-OLED1.eez-project]:/fonts/0",
-                    "permanent": false
-                  },
-                  "icon": "material:font_download"
-                },
-                {
-                  "type": "tab",
-                  "id": "#2cbf9fc5-aa07-4546-8032-4388b6768bd1",
-                  "name": "Settings",
-                  "component": "editor",
-                  "config": {
-                    "objectPath": "[ES_01-UI-OLED1.eez-project]:/settings",
-                    "subObjectPath": "[ES_01-UI-OLED1.eez-project]:/settings",
-                    "permanent": false
-                  },
-                  "icon": "material:settings"
-                },
                 {
                   "type": "tab",
                   "id": "#cc552784-101a-49e4-834e-634fee364861",
@@ -240,7 +211,7 @@
             {
               "type": "row",
               "id": "#569baa0f-449f-44f0-88b9-bb0e2868e363",
-              "weight": 20,
+              "weight": 26.041000877584814,
               "children": [
                 {
                   "type": "tabset",
@@ -1009,10 +980,10 @@
       },
       "transform": {
         "translate": {
-          "x": -298.4737688337052,
-          "y": -96.41993538992745
+          "x": -324.88360371492325,
+          "y": -31.21988923987564
         },
-        "scale": 4
+        "scale": 5
       },
       "timeline": {
         "isEditorActive": false,
@@ -1028,16 +999,16 @@
           "2": {},
           "3": {},
           "4": {
-            "2": {}
+            "1": {}
           }
         }
       },
       "transform": {
         "translate": {
-          "x": -40.42218408056371,
-          "y": -144.437393912745
+          "x": -331.47149727712997,
+          "y": 16.288867288282177
         },
-        "scale": 1.1
+        "scale": 5
       },
       "timeline": {
         "isEditorActive": false,
@@ -1057,10 +1028,10 @@
       },
       "transform": {
         "translate": {
-          "x": -201.04648950970386,
-          "y": -101.40701805434011
+          "x": -261.6562984736281,
+          "y": -1.391946179588743
         },
-        "scale": 1.1
+        "scale": 2.5
       },
       "timeline": {
         "isEditorActive": false,
@@ -1076,6 +1047,7 @@
   "searchMatchWholeWord": false,
   "replaceEnabled": false,
   "replaceText": "",
+  "pageRuntimeFrontFace": true,
   "breakpoints": {},
   "watchExpressions": [],
   "showComponentDescriptions": true,
@@ -1090,6 +1062,6 @@
   ],
   "showInactiveFlowsInDebugger": true,
   "globalFlowZoom": true,
-  "flowZoom": 1.1,
+  "flowZoom": 2.5,
   "implementationLanguage": "C"
 }
