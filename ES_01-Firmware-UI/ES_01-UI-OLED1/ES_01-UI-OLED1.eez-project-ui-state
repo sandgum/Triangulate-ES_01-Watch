@@ -1,7 +1,7 @@
 {
   "navigation": {
-    "selectedUserPageObject": "[ES_01-UI-OLED1.eez-project]:/userPages/2",
-    "selectedGlobalVariableObject": "[ES_01-UI-OLED1.eez-project]:/variables/globalVariables/11",
+    "selectedUserPageObject": "[ES_01-UI-OLED1.eez-project]:/userPages/3",
+    "selectedGlobalVariableObject": "[ES_01-UI-OLED1.eez-project]:/variables/globalVariables/15",
     "selectedFontObject": "[ES_01-UI-OLED1.eez-project]:/fonts/0",
     "subnavigationSelectedItems": {
       "variables-tab/sub-navigation/selected-item": "Global"
@@ -197,10 +197,10 @@
                 {
                   "type": "tab",
                   "id": "#cc552784-101a-49e4-834e-634fee364861",
-                  "name": "Workout time and actual time",
+                  "name": "Timer and actual time",
                   "component": "editor",
                   "config": {
-                    "objectPath": "[ES_01-UI-OLED1.eez-project]:/userPages/2",
+                    "objectPath": "[ES_01-UI-OLED1.eez-project]:/userPages/3",
                     "permanent": false
                   },
                   "icon": "svg:page"
@@ -1005,8 +1005,8 @@
       },
       "transform": {
         "translate": {
-          "x": -331.47149727712997,
-          "y": 16.288867288282177
+          "x": -537.8048102654112,
+          "y": -115.71113271171782
         },
         "scale": 5
       },
@@ -1020,6 +1020,7 @@
     "[ES_01-UI-OLED1.eez-project]:/userPages/2[flow-state]": {
       "selection": {
         "0": {
+          "1": {},
           "4": {
             "0": {},
             "2": {}
@@ -1028,10 +1029,37 @@
       },
       "transform": {
         "translate": {
-          "x": -261.6562984736281,
-          "y": -1.391946179588743
+          "x": -745.7263474963968,
+          "y": -166.24630632111524
         },
-        "scale": 2.5
+        "scale": 5
+      },
+      "timeline": {
+        "isEditorActive": false,
+        "position": 0,
+        "secondToPx": 200,
+        "scrollLeft": 0
+      }
+    },
+    "[ES_01-UI-OLED1.eez-project]:/userPages/3[flow-state]": {
+      "selection": {
+        "0": {
+          "0": {
+            "$selected": true
+          },
+          "1": {},
+          "2": {},
+          "4": {
+            "0": {}
+          }
+        }
+      },
+      "transform": {
+        "translate": {
+          "x": -307.7127905771455,
+          "y": -25.967562292530104
+        },
+        "scale": 5
       },
       "timeline": {
         "isEditorActive": false,
@@ -1053,15 +1081,17 @@
   "showComponentDescriptions": true,
   "logsPanelFilter": "all",
   "selectedStylePropertyName": "",
-  "lvglPart": "MAIN",
+  "lvglPart": "INDICATOR",
   "lvglState": "DEFAULT",
   "lvglExpandedPropertiesGroup": [
     "POSITION AND SIZE",
     "MISCELLANEOUS",
-    "BORDER"
+    "BORDER",
+    "ARC",
+    "TEXT"
   ],
   "showInactiveFlowsInDebugger": true,
   "globalFlowZoom": true,
-  "flowZoom": 2.5,
+  "flowZoom": 5,
   "implementationLanguage": "C"
 }

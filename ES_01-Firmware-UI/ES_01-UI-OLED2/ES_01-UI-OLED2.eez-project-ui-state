@@ -1027,10 +1027,10 @@
       },
       "transform": {
         "translate": {
-          "x": -308.6139018011878,
-          "y": 15.39489796937329
+          "x": -158.26737725148476,
+          "y": -101.00637753828339
         },
-        "scale": 5
+        "scale": 2.5
       },
       "timeline": {
         "isEditorActive": false,
@@ -1051,7 +1051,7 @@
           "x": -309.3618768178436,
           "y": 33.68272018102351
         },
-        "scale": 5
+        "scale": 2.5
       },
       "timeline": {
         "isEditorActive": false,
@@ -1071,7 +1071,7 @@
           "x": -288.60472630092085,
           "y": 54.82749270484561
         },
-        "scale": 5
+        "scale": 2.5
       },
       "timeline": {
         "isEditorActive": false,
@@ -1102,6 +1102,6 @@
   ],
   "showInactiveFlowsInDebugger": true,
   "globalFlowZoom": true,
-  "flowZoom": 5,
+  "flowZoom": 2.5,
   "implementationLanguage": "C"
 }
