@@ -1,12 +1,12 @@
 {
   "navigation": {
-    "selectedUserPageObject": "[ES_01-UI.eez-project]:/userPages/1",
+    "selectedUserPageObject": "[ES_01-UI.eez-project]:/userPages/20",
     "selectedActionObject": "[ES_01-UI.eez-project]:/actions/19",
-    "selectedGlobalVariableObject": "[ES_01-UI.eez-project]:/variables/globalVariables/35",
+    "selectedGlobalVariableObject": "[ES_01-UI.eez-project]:/variables/globalVariables/46",
     "selectedFontObject": "[ES_01-UI.eez-project]:/fonts/2",
-    "selectedBitmapObject": "[ES_01-UI.eez-project]:/bitmaps/29",
+    "selectedBitmapObject": "[ES_01-UI.eez-project]:/bitmaps/34",
     "subnavigationSelectedItems": {
-      "variables-tab/sub-navigation/selected-item": "Actions"
+      "variables-tab/sub-navigation/selected-item": "Global"
     }
   },
   "layoutModel": {
@@ -220,10 +220,10 @@
                 {
                   "type": "tab",
                   "id": "#048c97db-be43-4080-a03c-95bf28d80d23",
-                  "name": "Watch Face",
+                  "name": "Weather forecast page",
                   "component": "editor",
                   "config": {
-                    "objectPath": "[ES_01-UI.eez-project]:/userPages/1",
+                    "objectPath": "[ES_01-UI.eez-project]:/userPages/20",
                     "permanent": false
                   },
                   "icon": "svg:page"
@@ -1012,15 +1012,17 @@
       "selection": {
         "0": {
           "0": {},
-          "1": {}
+          "1": {},
+          "2": {},
+          "5": {}
         }
       },
       "transform": {
         "translate": {
-          "x": -427.78956601060827,
-          "y": -189.78016267457713
+          "x": -384.5782652553596,
+          "y": -296.5034738369246
         },
-        "scale": 1.1
+        "scale": 1.5
       },
       "timeline": {
         "isEditorActive": false,
@@ -1045,10 +1047,10 @@
       },
       "transform": {
         "translate": {
-          "x": -362.58483372750493,
-          "y": -100.84698214285936
+          "x": -372.49777809903696,
+          "y": -244.75070209963116
         },
-        "scale": 0.9
+        "scale": 2
       },
       "timeline": {
         "isEditorActive": false,
@@ -1079,10 +1081,10 @@
       },
       "transform": {
         "translate": {
-          "x": -227.79984410736478,
-          "y": -104.09292155424012
+          "x": -120.20933318705247,
+          "y": -217.3019219765061
         },
-        "scale": 0.9
+        "scale": 2
       },
       "timeline": {
         "isEditorActive": false,
@@ -1115,14 +1117,17 @@
           },
           "5": {},
           "6": {}
+        },
+        "5": {
+          "$selected": true
         }
       },
       "transform": {
         "translate": {
-          "x": -383.5304811937993,
-          "y": -235.38215880576087
+          "x": 31.210908060563085,
+          "y": -124.98553713601669
         },
-        "scale": 0.8
+        "scale": 1
       },
       "timeline": {
         "isEditorActive": false,
@@ -1170,10 +1175,10 @@
       },
       "transform": {
         "translate": {
-          "x": -184.46369600191804,
-          "y": -440.02956342994173
+          "x": -161.51505996802075,
+          "y": -237.44897907965947
         },
-        "scale": 0.8
+        "scale": 3
       },
       "timeline": {
         "isEditorActive": false,
@@ -1203,10 +1208,10 @@
       },
       "transform": {
         "translate": {
-          "x": -347.6513252005579,
-          "y": -263.27077927931316
+          "x": -203.2307542094319,
+          "y": -351.1767821884723
         },
-        "scale": 0.9
+        "scale": 5
       },
       "timeline": {
         "isEditorActive": false,
@@ -1254,10 +1259,10 @@
       },
       "transform": {
         "translate": {
-          "x": -218.71734320976884,
-          "y": -192.40845722740937
+          "x": -272.19993073112755,
+          "y": -261.1679266732627
         },
-        "scale": 0.8
+        "scale": 5
       },
       "timeline": {
         "isEditorActive": false,
@@ -1275,10 +1280,10 @@
       },
       "transform": {
         "translate": {
-          "x": -182.89320603143597,
-          "y": -194.20115835522842
+          "x": -401.51700091846095,
+          "y": -765.4815318246679
         },
-        "scale": 0.8
+        "scale": 5
       },
       "timeline": {
         "isEditorActive": false,
@@ -1430,10 +1435,10 @@
       },
       "transform": {
         "translate": {
-          "x": -298.5208911337745,
-          "y": -144.4419971680264
+          "x": -188.12366580987725,
+          "y": -389.66388288141263
         },
-        "scale": 0.8
+        "scale": 3
       },
       "timeline": {
         "isEditorActive": false,
@@ -1460,10 +1465,10 @@
       },
       "transform": {
         "translate": {
-          "x": -297.4784850362852,
-          "y": -197.38041044648728
+          "x": -248.1964395183266,
+          "y": -298.38254591071376
         },
-        "scale": 0.8
+        "scale": 3
       },
       "timeline": {
         "isEditorActive": false,
@@ -1490,7 +1495,7 @@
           "x": -307.1619237985319,
           "y": -162.78697212789533
         },
-        "scale": 0.9
+        "scale": 3
       },
       "timeline": {
         "isEditorActive": false,
@@ -1536,10 +1541,10 @@
       },
       "transform": {
         "translate": {
-          "x": -265.28144366522224,
-          "y": -194.29889489986192
+          "x": -231.04706762510432,
+          "y": -190.81020932472566
         },
-        "scale": 0.8
+        "scale": 2
       },
       "timeline": {
         "isEditorActive": false,
@@ -1568,10 +1573,10 @@
       },
       "transform": {
         "translate": {
-          "x": -716.185070778301,
-          "y": -149.0156778808995
+          "x": -319.04708493739366,
+          "y": -124.83437178761201
         },
-        "scale": 0.8
+        "scale": 2.5
       },
       "timeline": {
         "isEditorActive": false,
@@ -1641,16 +1646,17 @@
           },
           "4": {},
           "12": {
-            "0": {}
+            "0": {},
+            "$selected": true
           }
         }
       },
       "transform": {
         "translate": {
-          "x": -433.48186319341187,
-          "y": -221.10873006551867
+          "x": -325.02106856088886,
+          "y": -181.7315172366628
         },
-        "scale": 0.8
+        "scale": 3
       },
       "timeline": {
         "isEditorActive": false,
@@ -1667,11 +1673,13 @@
             "0": {}
           },
           "12": {
-            "0": {}
+            "0": {},
+            "$selected": true
           },
           "13": {
             "0": {},
-            "1": {}
+            "1": {},
+            "$selected": true
           }
         },
         "1": {},
@@ -1680,10 +1688,10 @@
       },
       "transform": {
         "translate": {
-          "x": -208.59566543076141,
-          "y": -482.05161783407124
+          "x": -713.2623524424802,
+          "y": -428.051556798915
         },
-        "scale": 0.8
+        "scale": 2
       },
       "timeline": {
         "isEditorActive": false,
@@ -1840,10 +1848,10 @@
       },
       "transform": {
         "translate": {
-          "x": -303.83976762486367,
-          "y": -370.9018056042893
+          "x": -364.6693881202314,
+          "y": -165.88747830324496
         },
-        "scale": 0.8
+        "scale": 2.5
       },
       "timeline": {
         "isEditorActive": false,
@@ -1865,10 +1873,10 @@
       },
       "transform": {
         "translate": {
-          "x": 171.59694040774866,
-          "y": -441.1658986728371
+          "x": -319.70650773762645,
+          "y": -439.0294686237256
         },
-        "scale": 0.8
+        "scale": 1
       },
       "timeline": {
         "isEditorActive": false,
@@ -1932,7 +1940,10 @@
       "selection": {
         "0": {
           "0": {},
-          "2": {},
+          "1": {},
+          "2": {
+            "0": {}
+          },
           "3": {},
           "4": {},
           "5": {},
@@ -1941,10 +1952,10 @@
       },
       "transform": {
         "translate": {
-          "x": -146.09576419180087,
-          "y": -69.79976419928798
+          "x": -160.3185011107285,
+          "y": -192.28560702179567
         },
-        "scale": 0.9
+        "scale": 1
       },
       "timeline": {
         "isEditorActive": false,
@@ -1973,16 +1984,17 @@
           "2": {},
           "3": {},
           "6": {},
+          "8": {},
           "9": {}
         },
         "7": {}
       },
       "transform": {
         "translate": {
-          "x": -32.336036837189,
-          "y": -134.84404679770455
+          "x": -538.4820238933546,
+          "y": 77.66288865472524
         },
-        "scale": 0.9
+        "scale": 1
       },
       "timeline": {
         "isEditorActive": false,
@@ -2020,6 +2032,58 @@
         },
         "scale": 1
       }
+    },
+    "[ES_01-UI.eez-project]:/userPages/19[flow-state]": {
+      "selection": {
+        "0": {
+          "0": {},
+          "1": {},
+          "2": {},
+          "4": {},
+          "5": {},
+          "17": {}
+        },
+        "3": {}
+      },
+      "transform": {
+        "translate": {
+          "x": -153.02657644428746,
+          "y": -108.8553792780096
+        },
+        "scale": 1
+      },
+      "timeline": {
+        "isEditorActive": false,
+        "position": 0,
+        "secondToPx": 200,
+        "scrollLeft": 0
+      }
+    },
+    "[ES_01-UI.eez-project]:/userPages/20[flow-state]": {
+      "selection": {
+        "0": {
+          "3": {},
+          "11": {},
+          "12": {},
+          "13": {
+            "1": {}
+          }
+        },
+        "1": {}
+      },
+      "transform": {
+        "translate": {
+          "x": -176.3821833982919,
+          "y": -166.27421211447034
+        },
+        "scale": 2
+      },
+      "timeline": {
+        "isEditorActive": false,
+        "position": 0,
+        "secondToPx": 200,
+        "scrollLeft": 0
+      }
     }
   },
   "activeOutputSection": 0,
@@ -2034,21 +2098,21 @@
   "showComponentDescriptions": true,
   "logsPanelFilter": "all",
   "selectedStylePropertyName": "",
-  "lvglPart": "SELECTED",
+  "lvglPart": "MAIN",
   "lvglState": "DEFAULT",
   "lvglExpandedPropertiesGroup": [
     "MISCELLANEOUS",
-    "POSITION AND SIZE",
     "IMAGE",
     "BACKGROUND",
     "LAYOUT",
     "BORDER",
     "LINE",
     "ARC",
-    "TEXT"
+    "TEXT",
+    "POSITION AND SIZE"
   ],
   "showInactiveFlowsInDebugger": true,
   "globalFlowZoom": true,
-  "flowZoom": 0.9,
+  "flowZoom": 2,
   "implementationLanguage": "C"
 }

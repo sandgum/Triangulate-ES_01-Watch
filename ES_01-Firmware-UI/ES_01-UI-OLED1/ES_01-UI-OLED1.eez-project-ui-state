@@ -1044,9 +1044,7 @@
     "[ES_01-UI-OLED1.eez-project]:/userPages/3[flow-state]": {
       "selection": {
         "0": {
-          "0": {
-            "$selected": true
-          },
+          "0": {},
           "1": {},
           "2": {},
           "4": {
