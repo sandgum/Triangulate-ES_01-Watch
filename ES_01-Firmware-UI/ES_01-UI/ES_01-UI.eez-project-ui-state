@@ -1,6 +1,6 @@
 {
   "navigation": {
-    "selectedUserPageObject": "[ES_01-UI.eez-project]:/userPages/20",
+    "selectedUserPageObject": "[ES_01-UI.eez-project]:/userPages/16",
     "selectedActionObject": "[ES_01-UI.eez-project]:/actions/19",
     "selectedGlobalVariableObject": "[ES_01-UI.eez-project]:/variables/globalVariables/46",
     "selectedFontObject": "[ES_01-UI.eez-project]:/fonts/2",
@@ -220,10 +220,10 @@
                 {
                   "type": "tab",
                   "id": "#048c97db-be43-4080-a03c-95bf28d80d23",
-                  "name": "Weather forecast page",
+                  "name": "Watch Face",
                   "component": "editor",
                   "config": {
-                    "objectPath": "[ES_01-UI.eez-project]:/userPages/20",
+                    "objectPath": "[ES_01-UI.eez-project]:/userPages/1",
                     "permanent": false
                   },
                   "icon": "svg:page"
@@ -1019,10 +1019,10 @@
       },
       "transform": {
         "translate": {
-          "x": -384.5782652553596,
-          "y": -296.5034738369246
+          "x": -198.5782652553596,
+          "y": -235.50347383692463
         },
-        "scale": 1.5
+        "scale": 2
       },
       "timeline": {
         "isEditorActive": false,
@@ -1047,10 +1047,10 @@
       },
       "transform": {
         "translate": {
-          "x": -372.49777809903696,
-          "y": -244.75070209963116
+          "x": -299.49722262379623,
+          "y": -239.31337762453893
         },
-        "scale": 2
+        "scale": 2.5
       },
       "timeline": {
         "isEditorActive": false,
@@ -2073,8 +2073,8 @@
       },
       "transform": {
         "translate": {
-          "x": -176.3821833982919,
-          "y": -166.27421211447034
+          "x": -149.3821833982919,
+          "y": -115.27421211447034
         },
         "scale": 2
       },
@@ -2113,6 +2113,6 @@
   ],
   "showInactiveFlowsInDebugger": true,
   "globalFlowZoom": true,
-  "flowZoom": 2,
+  "flowZoom": 2.5,
   "implementationLanguage": "C"
 }
