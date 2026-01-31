@@ -1,6 +1,6 @@
 {
   "navigation": {
-    "selectedUserPageObject": "[ES_01-UI.eez-project]:/userPages/16",
+    "selectedUserPageObject": "[ES_01-UI.eez-project]:/userPages/20",
     "selectedActionObject": "[ES_01-UI.eez-project]:/actions/19",
     "selectedGlobalVariableObject": "[ES_01-UI.eez-project]:/variables/globalVariables/46",
     "selectedFontObject": "[ES_01-UI.eez-project]:/fonts/2",
@@ -220,10 +220,10 @@
                 {
                   "type": "tab",
                   "id": "#048c97db-be43-4080-a03c-95bf28d80d23",
-                  "name": "Watch Face",
+                  "name": "Weather forecast page",
                   "component": "editor",
                   "config": {
-                    "objectPath": "[ES_01-UI.eez-project]:/userPages/1",
+                    "objectPath": "[ES_01-UI.eez-project]:/userPages/20",
                     "permanent": false
                   },
                   "icon": "svg:page"
@@ -1048,7 +1048,7 @@
       "transform": {
         "translate": {
           "x": -299.49722262379623,
-          "y": -239.31337762453893
+          "y": -339.31337762453904
         },
         "scale": 2.5
       },
@@ -1262,7 +1262,7 @@
           "x": -272.19993073112755,
           "y": -261.1679266732627
         },
-        "scale": 5
+        "scale": 2.5
       },
       "timeline": {
         "isEditorActive": false,
@@ -1283,7 +1283,7 @@
           "x": -401.51700091846095,
           "y": -765.4815318246679
         },
-        "scale": 5
+        "scale": 2.5
       },
       "timeline": {
         "isEditorActive": false,
@@ -1438,7 +1438,7 @@
           "x": -188.12366580987725,
           "y": -389.66388288141263
         },
-        "scale": 3
+        "scale": 2.5
       },
       "timeline": {
         "isEditorActive": false,
@@ -1468,7 +1468,7 @@
           "x": -248.1964395183266,
           "y": -298.38254591071376
         },
-        "scale": 3
+        "scale": 2.5
       },
       "timeline": {
         "isEditorActive": false,
@@ -1495,7 +1495,7 @@
           "x": -307.1619237985319,
           "y": -162.78697212789533
         },
-        "scale": 3
+        "scale": 2.5
       },
       "timeline": {
         "isEditorActive": false,
@@ -1541,10 +1541,10 @@
       },
       "transform": {
         "translate": {
-          "x": -231.04706762510432,
-          "y": -190.81020932472566
+          "x": -288.0470676251043,
+          "y": -232.81020932472566
         },
-        "scale": 2
+        "scale": 2.5
       },
       "timeline": {
         "isEditorActive": false,
@@ -1573,8 +1573,8 @@
       },
       "transform": {
         "translate": {
-          "x": -319.04708493739366,
-          "y": -124.83437178761201
+          "x": -277.04708493739366,
+          "y": -234.834371787612
         },
         "scale": 2.5
       },
@@ -1646,17 +1646,16 @@
           },
           "4": {},
           "12": {
-            "0": {},
-            "$selected": true
+            "0": {}
           }
         }
       },
       "transform": {
         "translate": {
-          "x": -325.02106856088886,
-          "y": -181.7315172366628
+          "x": -253.02106856088886,
+          "y": -220.7315172366628
         },
-        "scale": 3
+        "scale": 2.5
       },
       "timeline": {
         "isEditorActive": false,
@@ -1673,25 +1672,25 @@
             "0": {}
           },
           "12": {
-            "0": {},
-            "$selected": true
+            "0": {}
           },
           "13": {
             "0": {},
-            "1": {},
-            "$selected": true
+            "1": {}
           }
         },
         "1": {},
-        "2": {},
+        "2": {
+          "$selected": true
+        },
         "3": {}
       },
       "transform": {
         "translate": {
-          "x": -713.2623524424802,
-          "y": -428.051556798915
+          "x": -326.26235244248016,
+          "y": -329.05155679891504
         },
-        "scale": 2
+        "scale": 2.5
       },
       "timeline": {
         "isEditorActive": false,
@@ -1848,8 +1847,8 @@
       },
       "transform": {
         "translate": {
-          "x": -364.6693881202314,
-          "y": -165.88747830324496
+          "x": -226.66938812023142,
+          "y": -296.88747830324496
         },
         "scale": 2.5
       },
@@ -1873,10 +1872,10 @@
       },
       "transform": {
         "translate": {
-          "x": -319.70650773762645,
-          "y": -439.0294686237256
+          "x": -295.70650773762645,
+          "y": -322.0294686237256
         },
-        "scale": 1
+        "scale": 2.5
       },
       "timeline": {
         "isEditorActive": false,
@@ -1952,10 +1951,10 @@
       },
       "transform": {
         "translate": {
-          "x": -160.3185011107285,
-          "y": -192.28560702179567
+          "x": -266.3185011107285,
+          "y": -273.28560702179567
         },
-        "scale": 1
+        "scale": 2.5
       },
       "timeline": {
         "isEditorActive": false,
@@ -1991,10 +1990,10 @@
       },
       "transform": {
         "translate": {
-          "x": -538.4820238933546,
-          "y": 77.66288865472524
+          "x": -307.4820238933546,
+          "y": -233.33711134527476
         },
-        "scale": 1
+        "scale": 2.5
       },
       "timeline": {
         "isEditorActive": false,
@@ -2047,10 +2046,10 @@
       },
       "transform": {
         "translate": {
-          "x": -153.02657644428746,
-          "y": -108.8553792780096
+          "x": -290.02657644428746,
+          "y": -234.8553792780096
         },
-        "scale": 1
+        "scale": 2.5
       },
       "timeline": {
         "isEditorActive": false,
@@ -2073,10 +2072,10 @@
       },
       "transform": {
         "translate": {
-          "x": -149.3821833982919,
-          "y": -115.27421211447034
+          "x": -296.3821833982919,
+          "y": -218.27421211447034
         },
-        "scale": 2
+        "scale": 2.5
       },
       "timeline": {
         "isEditorActive": false,
