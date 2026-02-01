@@ -27,15 +27,19 @@ The main microcontroller running the watch is an Espressif ESP32-S3 running with
 - Added 0.1mm FR4 stiffeners
 - All resistors and capacitors are 0402 size
 
-*Schematics:*
-<img width="3508" height="2481" alt="E-ink watch_Page_1" src="https://github.com/user-attachments/assets/8557f5ce-50b9-4a70-bc67-07ef80d45b39" />
-<img width="3508" height="2481" alt="E-ink watch_Page_2" src="https://github.com/user-attachments/assets/6b48b829-c0db-4831-97b4-03c067bcd552" />
-<img width="3508" height="2481" alt="E-ink watch_Page_3" src="https://github.com/user-attachments/assets/1923c514-c36d-40d3-8bb7-d231716e2212" />
-<img width="3508" height="2481" alt="E-ink watch_Page_4" src="https://github.com/user-attachments/assets/ab370c10-27c5-4128-a0f0-e80f1baa1fbb" />
+### Schematics:
 
-*PCB Layout and render:*
-<img width="1454" height="585" alt="Screenshot 2025-12-14 at 1 22 46 pm" src="https://github.com/user-attachments/assets/16a535e6-246d-4e0d-91d4-3cafa5ae3504" />
+![ES_01 Schematics_Page_1](https://github.com/user-attachments/assets/88b7987f-04a0-4dab-a3ab-8f802a322a69)
+![ES_01 Schematics_Page_2](https://github.com/user-attachments/assets/077428bc-5292-4a9f-91aa-7e468086819a)
+![ES_01 Schematics_Page_3](https://github.com/user-attachments/assets/c4f1e9c9-c1c8-4d54-8532-753975428df1)
+![ES_01 Schematics_Page_4](https://github.com/user-attachments/assets/f2fbc8cf-1f49-4cc6-ab54-8635b9fefff5)
+
+### PCB Layout and render:
+
+<img width="2958" height="1235" alt="Screenshot 2026-02-02 084207" src="https://github.com/user-attachments/assets/9135ee44-bce8-4878-8ac7-79167cd24a6a" />
 <img width="2560" height="1440" alt="render4" src="https://github.com/user-attachments/assets/a82eb673-f5c0-45c7-9ac9-8d790fc45b2b" />
+
+*Render is out of date*
 
 ---
 
@@ -50,7 +54,7 @@ The main microcontroller running the watch is an Espressif ESP32-S3 running with
 
 ## Assembly instructions:
 
-*To manufacture the PCB, refer to the instructions in `PCB/README.md`*
+### To manufacture the PCB, refer to the instructions [here](PCB/README.md)
 
 1. Use the solder stencil to squeegee solder paste onto main PCB
 2. Place each component onto its respective pads on the main PCB
@@ -79,7 +83,7 @@ The main microcontroller running the watch is an Espressif ESP32-S3 running with
 
 ## Bill of materials:
 
-*Electronic Components: (Order quantities account for minimum order quantity of parts from the chosen retailer)*
+### Electronic Components: (Order quantities account for minimum order quantity of parts from the chosen retailer)
 
 | Manufacturer Part Number | Mfr.                        | Order Qty. | Unit Price(USD) | Ext.Price(USD) | Package                                | Description                                                                                                                | Product Link                                                                                                                                                                                                                                                                                                                                   |
 | ------------------------ | --------------------------- | ---------- | --------------- | -------------- | -------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -132,7 +136,7 @@ The main microcontroller running the watch is an Espressif ESP32-S3 running with
 
 Total: $85.43 USD
 
-*Manufactured Components*
+### Manufactured Components
 
 | Description                              | Manufacturer | Material                                        | Price (USD) |
 | ---------------------------------------- | ------------ | ----------------------------------------------- | ----------- |
