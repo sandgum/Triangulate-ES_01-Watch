@@ -475,3 +475,25 @@ And lastly, I created the Weather "app" , which shows the user weather data whic
 
 This user interface is almost completely done now, with the only elements left to implement being the settings page where the user should have plenty of choices to customise the UI to their taste. I also still have to implement blood oxygen sensing algorithms in the main firmware, and also need to add BLE support to the firmware. But for now, I'll focus on the hardware to make this watch come to FRUITION!  
 
+## 2/2/2026 - Fixed PCB Errors and added Fuel Gauge chip  
+
+_Time spent: 2.5h_  
+
+As I recently got my grant from Blueprint (Finally!!!), I can now start work on actually ordering the hardware that will make the ES_01 come to life. But first, I had to check all of my PCB documents to make ABSOLUTELY sure that my PCB was wired and arranged correctly, and I'm glad that I did do that.
+
+![image](https://blueprint.hackclub.com/user-attachments/blobs/proxy/eyJfcmFpbHMiOnsiZGF0YSI6OTY3NDYsInB1ciI6ImJsb2JfaWQifX0=--de54284a7c4c25cb94c1b03dfdf9adb14936cd3e/image.png)
+
+Looking at my schematic, I found that the circuit for the main E-ink display was wired wrong enough that the PCB would not work at all if it was manufactured with that defect. After correcting the errors in the E-ink display circuit so that it matched the application circuit in the datasheet, I also found out that the connections to the touch panel for the E-ink display were wired in the wrong order. As the cables from the E-ink display have to bend around to reach the connectors on the PCB, the physical contacts are reversed, which I hadn't accounted for when wiring the touch panel's connector. Thankfully, that was also a quick fix. These schematic modifications did not result in major changes in the PCB layout either, so it was all done quite quickly.
+
+![image](https://blueprint.hackclub.com/user-attachments/blobs/proxy/eyJfcmFpbHMiOnsiZGF0YSI6OTY3NDgsInB1ciI6ImJsb2JfaWQifX0=--631a11b5a6981aa5376060a1539f17abe44fd918/image.png)
+
+I also made another modification to the schematic, which involved adding new components entirely. Specifically, I wanted added a MAX17048 fuel gauge chip which can measure the voltage and also calculate the amount of energy flowing through the batteries in the watch to provide an accurate estimate of the battery percentage. This is very similar to chips used in phones and laptops, and crucially allows for the watch to put itself in deep sleep when the battery gets to a low enough percentage so as to not damage the cells. I chose this specific chip mostly because it's extremely small and widely supported by the ESP32 community, so I won't have to write any sketchy drivers for it.
+
+![image](https://blueprint.hackclub.com/user-attachments/blobs/proxy/eyJfcmFpbHMiOnsiZGF0YSI6OTY3NTAsInB1ciI6ImJsb2JfaWQifX0=--cd95134cfd9186e96cf4bd9234b2dc394605d78d/image.png)
+
+Because the chip is so small, it was able to fit easily in the less dense parts of the flex PCB which are underneath the OLED panels. Plus, the fuel gauge communicated via I2C, so those lines were easily connected to the same lines used to drive the OLEDs.
+
+![image](https://blueprint.hackclub.com/user-attachments/blobs/proxy/eyJfcmFpbHMiOnsiZGF0YSI6OTY3NTIsInB1ciI6ImJsb2JfaWQifX0=--a1abb07e00b6927adba3e76ef16ced896504895f/image.png)
+
+Now all that is left is to actually order the parts!  
+
