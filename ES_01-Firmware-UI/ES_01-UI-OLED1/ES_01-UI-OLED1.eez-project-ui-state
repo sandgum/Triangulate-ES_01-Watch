@@ -1,6 +1,6 @@
 {
   "navigation": {
-    "selectedUserPageObject": "[ES_01-UI-OLED1.eez-project]:/userPages/3",
+    "selectedUserPageObject": "[ES_01-UI-OLED1.eez-project]:/userPages/2",
     "selectedGlobalVariableObject": "[ES_01-UI-OLED1.eez-project]:/variables/globalVariables/15",
     "selectedFontObject": "[ES_01-UI-OLED1.eez-project]:/fonts/0",
     "subnavigationSelectedItems": {
@@ -197,10 +197,10 @@
                 {
                   "type": "tab",
                   "id": "#cc552784-101a-49e4-834e-634fee364861",
-                  "name": "Timer and actual time",
+                  "name": "Stopwatch and actual time",
                   "component": "editor",
                   "config": {
-                    "objectPath": "[ES_01-UI-OLED1.eez-project]:/userPages/3",
+                    "objectPath": "[ES_01-UI-OLED1.eez-project]:/userPages/2",
                     "permanent": false
                   },
                   "icon": "svg:page"
@@ -1029,8 +1029,8 @@
       },
       "transform": {
         "translate": {
-          "x": -745.7263474963968,
-          "y": -166.24630632111524
+          "x": -285.7263474963968,
+          "y": -127.24630632111524
         },
         "scale": 5
       },

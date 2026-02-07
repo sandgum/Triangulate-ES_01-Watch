@@ -1,6 +1,6 @@
 {
   "navigation": {
-    "selectedUserPageObject": "[ES_01-UI-OLED2.eez-project]:/userPages/1",
+    "selectedUserPageObject": "[ES_01-UI-OLED2.eez-project]:/userPages/3",
     "selectedGlobalVariableObject": "[ES_01-UI-OLED2.eez-project]:/variables/globalVariables/5",
     "selectedFontObject": "[ES_01-UI-OLED2.eez-project]:/fonts/1",
     "selectedBitmapObject": "[ES_01-UI-OLED2.eez-project]:/bitmaps/15",
@@ -211,10 +211,10 @@
                 {
                   "type": "tab",
                   "id": "#c1d814a0-3f0c-4399-a3de-06e25b40efe7",
-                  "name": "Notifications_WatchFace",
+                  "name": "Workout Stats w Distance",
                   "component": "editor",
                   "config": {
-                    "objectPath": "[ES_01-UI-OLED2.eez-project]:/userPages/1",
+                    "objectPath": "[ES_01-UI-OLED2.eez-project]:/userPages/3",
                     "permanent": false
                   },
                   "icon": "svg:page"
@@ -1027,8 +1027,8 @@
       },
       "transform": {
         "translate": {
-          "x": -158.26737725148476,
-          "y": -101.00637753828339
+          "x": -89.26737725148476,
+          "y": -130.0063775382834
         },
         "scale": 2.5
       },
@@ -1048,10 +1048,10 @@
       },
       "transform": {
         "translate": {
-          "x": -309.3618768178436,
-          "y": 33.68272018102351
+          "x": -205.54566957521644,
+          "y": -27.540981043695716
         },
-        "scale": 2.5
+        "scale": 4
       },
       "timeline": {
         "isEditorActive": false,
@@ -1068,10 +1068,10 @@
       },
       "transform": {
         "translate": {
-          "x": -288.60472630092085,
-          "y": 54.82749270484561
+          "x": -210.60472630092085,
+          "y": -35.17250729515439
         },
-        "scale": 2.5
+        "scale": 4
       },
       "timeline": {
         "isEditorActive": false,
@@ -1102,6 +1102,6 @@
   ],
   "showInactiveFlowsInDebugger": true,
   "globalFlowZoom": true,
-  "flowZoom": 2.5,
+  "flowZoom": 4,
   "implementationLanguage": "C"
 }
