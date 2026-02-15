@@ -525,3 +525,20 @@ Lastly, I added a Shot Button to the main menu, which, when tapped, triggers the
 
 Now that the 3D model of the ES_01 is completely refined as well, I think it’s now FINALLY FINALLY time to order the parts!  
 
+# 2/15/2026 - PARTS ORDERED!!!!  
+
+_Time spent: 2.5h_  
+
+I FINALLY ORDERED THE PARTS!!! After like so much time meticulously looking over and refining the scariest parts of the ES_01 (namely, the PCB), I have activated my Hack Club grant and have ordered the majority of the parts from LCSC and AliExpress, and also the PCB and Metal 3D-printed E-ink bottom plate from JLC.
+
+Firstly, just to make sure I wasn't going to order the wrong parts, I reloaded the Electronics_BOM.csv file from my repository onto LCSC, and good thing I did cause I found a couple of problems. There were 4 models of resistor in my BOM which were completely out of stock and backordered on LCSC, and they would've taken *60 DAYS* to get back in stock (Yikes), so I quickly changed those resistors out for ones that were in stock.
+
+Also, looking at my AliExpress cart, I found that the 401225 batteries I was going to usei in the ES_01 were not available anymore, but that wasn't a really big deal as there were like 20 other listings selling the same thing. However, looking at these listings, I found a battery which was almost the same size as the 401225 batteries I was going to use, but have 30mAh more capacity each. 
+
+![image](https://blueprint.hackclub.com/user-attachments/blobs/proxy/eyJfcmFpbHMiOnsiZGF0YSI6MTA0NTc5LCJwdXIiOiJibG9iX2lkIn19--571f3b59fbc8860b36697cbf9a3a4c7e2c1fc660/image.png)
+
+These are 401230 batteries, with them being 30mm long instead of 25. After a quick check with my 3D model, I found that these batteries can easily fit into the battery compartments in the ES_01, so I set out to work modifying those segments from the inside to fit the extra 5mm. That turned out successfully, and now the ES_01 has a significant boost in battery capacity, going up from an already hefty (for a smartwatch) 300mAh to just under **390mAh!** For comparison, this is roughly 50% MORE capacity than an Apple Watch (non-Ultra), which uses a much more power-hungry S-series chip and OLED panel, so the ES_01 should now last ridiculously long, even with its ESP32-S3 chip.
+
+As of now, I have still yet to order some random very specific connector (from Alibaba) for my OLED displays to work, but those only cost like $7. I've also gotten 3D-printing arranged as well (Shoutout to 0x62)!!!
+  
+
