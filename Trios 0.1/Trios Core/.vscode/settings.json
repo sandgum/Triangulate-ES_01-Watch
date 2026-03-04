@@ -16,5 +16,6 @@
     "--query-driver=**",
     "--compile-commands-dir=c:\\Users\\sanya\\Documents\\GitHub\\Triangulate-ES_01-Watch\\ES_01-Firmware\\build"
   ],
-  "cmake.parallelJobs": 8
+  "cmake.parallelJobs": 8,
+  "idf.currentSetup": "/Users/sanyamsaharan/.espressif/v5.3.4/esp-idf"
 }

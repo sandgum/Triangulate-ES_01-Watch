@@ -542,3 +542,32 @@ These are 401230 batteries, with them being 30mm long instead of 25. After a qui
 As of now, I have still yet to order some random very specific connector (from Alibaba) for my OLED displays to work, but those only cost like $7. I've also gotten 3D-printing arranged as well (Shoutout to 0x62)!!!
   
 
+# 3/4/2026 - Reworked Trios UI, added Timetable app, and parts arrived!  
+
+_Time spent: 3.5h_  
+
+Sorry for being silent for a while, cause these parts are do take their time! Anyways, this journal entry is an update on what has been happening in the past two-ish weeks, and BOY do I have some updates to give.
+
+I continued with the firmware development process of the ES_01, with a bunch of newly-added functions which I still had to actually develop. But before I did that, I started reworking the internals of the UI which Trios (Yes, I came up with a name for the firmware) runs on. 
+
+Looking back at my EEZ Studio project, especially the timekeeping app could have a bunch of its logic offloaded to EEZ Flow instead of implementing it in Trios core (the main ESP-IDF project). Both the stopwatch and timer features can be implemented in the EEZ Flow engine, so that’s exactly what I did, and it works!!
+
+![Screenshot 2026-03-04 at 7.18.36 pm](https://blueprint.hackclub.com/user-attachments/blobs/proxy/eyJfcmFpbHMiOnsiZGF0YSI6MTE0OTIxLCJwdXIiOiJibG9iX2lkIn19--183b395473bce5a32e51cc34375059c1a34b08eb/Screenshot%202026-03-04%20at%207.18.36%E2%80%AFpm.png)
+![Screenshot 2026-03-04 at 7.19.07 pm](https://blueprint.hackclub.com/user-attachments/blobs/proxy/eyJfcmFpbHMiOnsiZGF0YSI6MTE0OTIzLCJwdXIiOiJibG9iX2lkIn19--c4a34cbc9cc56023bfc06b6b8722c40074bd8dbc/Screenshot%202026-03-04%20at%207.19.07%E2%80%AFpm.png)
+
+*Ignore the blue lines, those are just flow logic arrows which won't be visible while running*
+
+After that, I started with redoing the notifications section in Trios. Before, Trios could only store a maximum of 32 notifications at a time, and ALL of them were loaded into the ES_01’s RAM on startup. Since strings take up a LOT of data, this would both eat RAM and restrict the number of notifications users can see. This was unacceptable, so I reworked it so that only 4 notifications are loaded into RAM at a time, and Trios will get any other notifications from the ES_01’s internal flash that can store WAY more data. Of course, implementing actual flash file storing logic is beyond the scope of the UI, so I just let the UI call some functions which I’ll define in Trios core later.
+
+![Screenshot 2026-03-04 at 7.19.38 pm](https://blueprint.hackclub.com/user-attachments/blobs/proxy/eyJfcmFpbHMiOnsiZGF0YSI6MTE0OTI0LCJwdXIiOiJibG9iX2lkIn19--90b559389ff6ad0c264de2ae96938de9c4c80e22/Screenshot%202026-03-04%20at%207.19.38%E2%80%AFpm.png)
+
+The third thing I added in Trios’s UI was the timetable app. This app shows upcoming events for the whole week, and it will have its timetable events loaded onto it by the ES_01’s iPhone app. To implement this, I created two rollers, one that scrolls through the events happening today, and another which scrolls through the days of the week, updating the first roller each time. Since a user can have an arbitrary number of timetable events, it would be terrible to have them all loaded into RAM for every day of the week, so only a single day’s events are actually in RAM. Trios will fetch the timetable events for each day from the ES_01’s internal flash when they are requested by the user. Lastly, I created a timetable screen which flashes 5 minutes (or a configurable amount of time) before a timetable event to notify the user.
+
+![Screenshot 2026-03-04 at 7.20.04 pm](https://blueprint.hackclub.com/user-attachments/blobs/proxy/eyJfcmFpbHMiOnsiZGF0YSI6MTE0OTI1LCJwdXIiOiJibG9iX2lkIn19--40928710884491030a575736946f535ae2472b36/Screenshot%202026-03-04%20at%207.20.04%E2%80%AFpm.png)
+![Screenshot 2026-03-04 at 7.20.17 pm](https://blueprint.hackclub.com/user-attachments/blobs/proxy/eyJfcmFpbHMiOnsiZGF0YSI6MTE0OTI2LCJwdXIiOiJibG9iX2lkIn19--aa53727a4463d09ff24e91582cc102ad8aaa7bf1/Screenshot%202026-03-04%20at%207.20.17%E2%80%AFpm.png)
+![Screenshot 2026-03-04 at 7.20.35 pm](https://blueprint.hackclub.com/user-attachments/blobs/proxy/eyJfcmFpbHMiOnsiZGF0YSI6MTE0OTI3LCJwdXIiOiJibG9iX2lkIn19--086435ef183871eaf8624e724c20aec2856b590b/Screenshot%202026-03-04%20at%207.20.35%E2%80%AFpm.png)
+
+Apart from the progress I made on Trios, the first of the ordered components for the ES_01 finally arrived today, which includes the huge box of tiny SMD components ordered from LCSC electronics! The flex PCB should arrive within the next week, after which I can finally start assembling the electronics for the watch! Stay tuned for further updates!
+
+![IMG_1018](https://blueprint.hackclub.com/user-attachments/blobs/proxy/eyJfcmFpbHMiOnsiZGF0YSI6MTE0OTMxLCJwdXIiOiJibG9iX2lkIn19--b3281382eefcf2c06b54e112fa9f6e5fe39f5007/IMG_1018.jpg)  
+

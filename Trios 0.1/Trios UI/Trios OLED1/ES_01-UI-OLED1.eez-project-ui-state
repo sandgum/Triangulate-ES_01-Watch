@@ -1,8 +1,9 @@
 {
   "navigation": {
-    "selectedUserPageObject": "[ES_01-UI-OLED1.eez-project]:/userPages/2",
-    "selectedGlobalVariableObject": "[ES_01-UI-OLED1.eez-project]:/variables/globalVariables/15",
+    "selectedUserPageObject": "[ES_01-UI-OLED1.eez-project]:/userPages/1",
+    "selectedGlobalVariableObject": "[ES_01-UI-OLED1.eez-project]:/variables/globalVariables/18",
     "selectedFontObject": "[ES_01-UI-OLED1.eez-project]:/fonts/0",
+    "selectedBitmapObject": "[ES_01-UI-OLED1.eez-project]:/bitmaps/10",
     "subnavigationSelectedItems": {
       "variables-tab/sub-navigation/selected-item": "Global"
     }
@@ -197,10 +198,10 @@
                 {
                   "type": "tab",
                   "id": "#cc552784-101a-49e4-834e-634fee364861",
-                  "name": "Stopwatch and actual time",
+                  "name": "Time and weather Watch Face",
                   "component": "editor",
                   "config": {
-                    "objectPath": "[ES_01-UI-OLED1.eez-project]:/userPages/2",
+                    "objectPath": "[ES_01-UI-OLED1.eez-project]:/userPages/1",
                     "permanent": false
                   },
                   "icon": "svg:page"
@@ -490,6 +491,88 @@
                       "id": "DEBUGGER_LOGS",
                       "name": "Logs",
                       "component": "logs",
+                      "enableClose": false,
+                      "icon": "svg:log"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "rootDockerSimulator": {
+      "version": 1,
+      "json": {
+        "global": {
+          "splitterSize": 4,
+          "splitterExtra": 4,
+          "tabEnableRename": false,
+          "borderEnableAutoHide": true
+        },
+        "borders": [],
+        "layout": {
+          "type": "row",
+          "id": "#d1aa26ba-c607-40e2-8f43-f5a06d9fc939",
+          "children": [
+            {
+              "type": "tabset",
+              "id": "#478410b1-e773-4315-bf2b-b364f46ef5b2",
+              "weight": 70,
+              "enableDrop": false,
+              "enableDrag": false,
+              "enableClose": false,
+              "enableTabStrip": true,
+              "children": [
+                {
+                  "type": "tab",
+                  "id": "DOCKER_SIMULATOR_PREVIEW",
+                  "name": "Preview",
+                  "component": "dockerSimulatorPreview",
+                  "enableClose": false,
+                  "icon": "material:computer"
+                }
+              ]
+            },
+            {
+              "type": "row",
+              "id": "#cf226172-ce38-4253-b626-e6b6c0855d79",
+              "weight": 30,
+              "children": [
+                {
+                  "type": "tabset",
+                  "id": "#199f209e-6649-4fa3-8e66-ac2c2616c937",
+                  "weight": 50,
+                  "enableDrop": false,
+                  "enableDrag": false,
+                  "enableClose": false,
+                  "enableTabStrip": true,
+                  "children": [
+                    {
+                      "type": "tab",
+                      "id": "DOCKER_SIMULATOR_LOGS",
+                      "name": "Build Logs",
+                      "component": "dockerSimulatorLogs",
+                      "enableClose": false,
+                      "icon": "svg:log"
+                    }
+                  ]
+                },
+                {
+                  "type": "tabset",
+                  "id": "#b22585bb-bff2-4d65-b601-4961662d8c3f",
+                  "weight": 50,
+                  "enableDrop": false,
+                  "enableDrag": false,
+                  "enableClose": false,
+                  "enableTabStrip": true,
+                  "children": [
+                    {
+                      "type": "tab",
+                      "id": "DOCKER_SIMULATOR_PREVIEW_LOGS",
+                      "name": "Preview Logs",
+                      "component": "dockerSimulatorPreviewLogs",
                       "enableClose": false,
                       "icon": "svg:log"
                     }
@@ -983,14 +1066,16 @@
           "x": -324.88360371492325,
           "y": -31.21988923987564
         },
-        "scale": 5
+        "scale": 4
       },
       "timeline": {
         "isEditorActive": false,
         "position": 0,
         "secondToPx": 200,
         "scrollLeft": 0
-      }
+      },
+      "selectionFront": {},
+      "selectionBack": {}
     },
     "[ES_01-UI-OLED1.eez-project]:/userPages/1[flow-state]": {
       "selection": {
@@ -1005,17 +1090,19 @@
       },
       "transform": {
         "translate": {
-          "x": -537.8048102654112,
-          "y": -115.71113271171782
+          "x": -207.3238256440261,
+          "y": -16.737044237239274
         },
-        "scale": 5
+        "scale": 2.5
       },
       "timeline": {
         "isEditorActive": false,
         "position": 0,
         "secondToPx": 200,
         "scrollLeft": 0
-      }
+      },
+      "selectionFront": {},
+      "selectionBack": {}
     },
     "[ES_01-UI-OLED1.eez-project]:/userPages/2[flow-state]": {
       "selection": {
@@ -1029,17 +1116,19 @@
       },
       "transform": {
         "translate": {
-          "x": -285.7263474963968,
-          "y": -127.24630632111524
+          "x": -1194.828967185248,
+          "y": -163.59144145069703
         },
-        "scale": 5
+        "scale": 6
       },
       "timeline": {
         "isEditorActive": false,
         "position": 0,
         "secondToPx": 200,
         "scrollLeft": 0
-      }
+      },
+      "selectionFront": {},
+      "selectionBack": {}
     },
     "[ES_01-UI-OLED1.eez-project]:/userPages/3[flow-state]": {
       "selection": {
@@ -1054,10 +1143,46 @@
       },
       "transform": {
         "translate": {
-          "x": -307.7127905771455,
-          "y": -25.967562292530104
+          "x": -554.9490585899345,
+          "y": -144.63410101264486
         },
-        "scale": 5
+        "scale": 6
+      },
+      "timeline": {
+        "isEditorActive": false,
+        "position": 0,
+        "secondToPx": 200,
+        "scrollLeft": 0
+      },
+      "selectionFront": {},
+      "selectionBack": {
+        "0": {
+          "4": {},
+          "5": {
+            "$selected": true
+          }
+        }
+      }
+    },
+    "[ES_01-UI-OLED1.eez-project]:/userPages/4[flow-state]": {
+      "selectionFront": {},
+      "selectionBack": {
+        "0": {
+          "4": {
+            "0": {},
+            "1": {
+              "$selected": true
+            },
+            "2": {}
+          }
+        }
+      },
+      "transform": {
+        "translate": {
+          "x": -1033.8042205638494,
+          "y": -200.29879240162822
+        },
+        "scale": 10
       },
       "timeline": {
         "isEditorActive": false,
@@ -1079,7 +1204,7 @@
   "showComponentDescriptions": true,
   "logsPanelFilter": "all",
   "selectedStylePropertyName": "",
-  "lvglPart": "INDICATOR",
+  "lvglPart": "MAIN",
   "lvglState": "DEFAULT",
   "lvglExpandedPropertiesGroup": [
     "POSITION AND SIZE",
@@ -1090,6 +1215,7 @@
   ],
   "showInactiveFlowsInDebugger": true,
   "globalFlowZoom": true,
-  "flowZoom": 5,
-  "implementationLanguage": "C"
+  "flowZoom": 2.5,
+  "implementationLanguage": "C",
+  "openDialogDefaultPath": "/Users/sanyamsaharan/Documents/GitHub/Triangulate-ES_01-Watch/Trios 0.1/Trios UI Engine/Assets/Icons/bolt_20dp_FFFFFF_FILL0_wght400_GRAD0_opsz20.png"
 }
