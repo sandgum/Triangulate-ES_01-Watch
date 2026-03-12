@@ -135,7 +135,7 @@ The main microcontroller running the watch is an Espressif ESP32-S3 running with
 | -                        | -                           | 50         | 0.0264          | 1.32           | -                                      | M1.4 Torx countersunk machine screw 4mm length                                                                             | https://www.aliexpress.com/item/33006942612.html?spm=a2g0o.cart.0.0.172438dayDrOXJ&mp=1&pdp_npi=5%40dis%21USD%21USD%201.32%21USD%201.32%21%21USD%201.32%21%21%21%402103212317668074428231957e8041%2167012387977%21ct%21AU%216047249797%21%211%210                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | -                        | -                           | 50         | 0.0244          | 1.22           | -                                      | M1.4 Brass threaded inserts 1.5mm length                                                                                   | https://www.aliexpress.com/item/1005007653131713.html?spm=a2g0o.cart.0.0.785138daOe1hVa&mp=1&pdp_npi=5%40dis%21USD%21USD%201.36%21USD%201.22%21%21USD%201.22%21%21%21%402101e2b217668079638444750e2ddc%2112000041667111405%21ct%21AU%216047249797%21%211%210&pdp_ext_f=%7B%22cart2PdpParams%22%3A%7B%22pdpBusinessMode%22%3A%22retail%22%7D%7D                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 
-Total: $87.68 USD
+Total: $88.97 USD
 
 ### Manufactured Components
 
@@ -150,7 +150,7 @@ Total: $127.32 USD
 
 ---
 
-## Grand Total (Excl. Shipping): $215.00 USD
+## Grand Total (Excl. Shipping): $216.29 USD
 
 ---
 
