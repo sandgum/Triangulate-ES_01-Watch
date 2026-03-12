@@ -1090,10 +1090,10 @@
       },
       "transform": {
         "translate": {
-          "x": -207.3238256440261,
-          "y": -16.737044237239274
+          "x": -231.38859077283132,
+          "y": -25.78445308468713
         },
-        "scale": 2.5
+        "scale": 3
       },
       "timeline": {
         "isEditorActive": false,
@@ -1215,7 +1215,7 @@
   ],
   "showInactiveFlowsInDebugger": true,
   "globalFlowZoom": true,
-  "flowZoom": 2.5,
+  "flowZoom": 3,
   "implementationLanguage": "C",
   "openDialogDefaultPath": "/Users/sanyamsaharan/Documents/GitHub/Triangulate-ES_01-Watch/Trios 0.1/Trios UI Engine/Assets/Icons/bolt_20dp_FFFFFF_FILL0_wght400_GRAD0_opsz20.png"
 }
