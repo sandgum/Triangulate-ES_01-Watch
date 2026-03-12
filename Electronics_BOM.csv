@@ -31,8 +31,8 @@ CL05A475MP5NRNC,Samsung Electro-Mechanics,50,0.0055,0.28,0402,4.7uF ±20% 10V Ce
 0402WGF2201TCE,UNI-ROYAL,100,0.0008,0.08,0402,2.2k? ±1% 62.5mW 0402 Thick Film Resistor,https://www.lcsc.com/product-detail/C25879.html
 0402WGF4701TCE,UNI-ROYAL,100,0.0008,0.08,0402,4.7k? ±1% 62.5mW 0402 Thick Film Resistor,https://www.lcsc.com/product-detail/C25900.html
 ANR4012T470M,APV,10,0.0544,0.54,"SMD,4x4mm","500mA 47uH 500mA Magnetic Shielded Inductor ±20% SMD,4x4mm Fixed Inductors RoHS",https://www.lcsc.com/product-detail/C7497063.html
-MAX30102EFD+T,MAXIM,1,13.0636,13.06,OESIP-14,I2C OESIP-14 Specialized Sensors RoHS,https://www.lcsc.com/product-detail/C6454833.html
-MAX17048G+T10,MAXIM,1,2.4693,2.47,Lithium Battery I2C DFN-8-EP(2x2) Battery Management RoHS,https://www.lcsc.com/product-detail/C2682616.html
+MAX30102EFD+T,MAXIM,1,13.0636,13.06,"OESIP-14","I2C OESIP-14 Specialized Sensors RoHS",https://www.lcsc.com/product-detail/C6454833.html
+MAX17048G+T10,MAXIM,1,2.4693,2.47,DFN-8-EP(2x2),Lithium Battery I2C DFN-8-EP(2x2) Battery Management RoHS,https://www.lcsc.com/product-detail/C2682616.html
 1N4148,onsemi,50,0.0353,1.77,DO-35,Diode 100V 200mA Through Hole DO-35,https://www.lcsc.com/product-detail/C258182.html
 FRC0402F1001TS,FOJAN,100,0.0006,0.06,0402,1k? ±1% 62.5mW 0402 Thick Film Resistor,https://www.lcsc.com/product-detail/C2906864.html
 FRC0402F22R0TS,FOJAN,100,0.0006,0.06,0402,22? ±1% 62.5mW 0402 Thick Film Resistor,https://www.lcsc.com/product-detail/C2929994.html
