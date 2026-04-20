@@ -571,3 +571,55 @@ Apart from the progress I made on Trios, the first of the ordered components for
 
 ![IMG_1018](https://blueprint.hackclub.com/user-attachments/blobs/proxy/eyJfcmFpbHMiOnsiZGF0YSI6MTE0OTMxLCJwdXIiOiJibG9iX2lkIn19--b3281382eefcf2c06b54e112fa9f6e5fe39f5007/IMG_1018.jpg)  
 
+# 3/5/2026 - PCB has arrived!!!  
+
+_Time spent: 0.5h_  
+
+All of the parts from JLC have arrived! This includes the all-important main flex PCB, the solder stencil for it, and the one metal 3D-printed part meant for cooling the really hot ESP32-S3 chip!
+
+![IMG_1020](https://blueprint.hackclub.com/user-attachments/blobs/proxy/eyJfcmFpbHMiOnsiZGF0YSI6MTE1NTAyLCJwdXIiOiJibG9iX2lkIn19--a5ca0e19897892123a8daa1f75adb5ca59d27fe5/IMG_1020.jpeg)
+
+The PCBs turned out basically flawless, with them having just the right rigidity in the parts with stiffeners, and just the right amount of flexibility in the parts that bend. It’s only now that I realise how crazy small the components in the ES_01 really are, but I’m reassured because now I have a proper stencil.
+
+![IMG_1021](https://blueprint.hackclub.com/user-attachments/blobs/proxy/eyJfcmFpbHMiOnsiZGF0YSI6MTE1NTAzLCJwdXIiOiJibG9iX2lkIn19--b3ba966c1858f4c3ca2017569148e96c2a18518b/IMG_1021.jpeg)
+
+The stencil is really huge compared to the PCB it’s for, and I guess I’ll frame it and hang it up in my room after I don’t need it anymore! There is a small problem with the metal 3D printed part though.
+
+![IMG_1022](https://blueprint.hackclub.com/user-attachments/blobs/proxy/eyJfcmFpbHMiOnsiZGF0YSI6MTE1NTA0LCJwdXIiOiJibG9iX2lkIn19--c59c0ec1b4e4e65a6951c35f52988ac95ed2ef06/IMG_1022.jpeg)
+
+It is quite warped, and I was notified of this issue by JLCPCB, but I insisted that they manufacture the part. This isn’t that big of a deal however, as since the part is made from steel, I can heat it up on a hotplate and bend it back into shape if I’m careful. Otherwise, this haul from JLCPCB was successful, and I look forward to assembling the PCB of the ES_01!!!  
+
+# 3/12/2026 - Assembled PCB, Troubleshooting  
+
+_Time spent: 7.0h_  
+
+After receiving the PCB for ES_01, I immediately began work on assembling it.
+First, I started with taping the actual PCB to my workspace, after which I precisely aligned the solder stencil with the gold pads on the PCB.
+Using an old ruler as a squeegee, I spread solder paste over the stencil, and made sure that every pad was covered with just the right amount of solder past while ensuring that none leaked out.
+
+After this, it was time to place each component on its respective pad. The main ICs were relatively straightforward to place, but the tiny 0402 sized resistors and capacitors were right at the limit of what could be manipulated with my tweezers. For more precise placement, I used a small sewing needle to push each component to exactly where it needed to be. A lifesaving design decision I made when creating the PCB was to use hand-solderable pads for all my 0402 components, which have much more area so it’s easier to place components by hand. Ideally, if the ES_01 were to be mass manufactured, it would need a pick-and-place machine to do this task with a higher precision.
+
+![IMG_1023](https://blueprint.hackclub.com/user-attachments/blobs/proxy/eyJfcmFpbHMiOnsiZGF0YSI6MTE5ODAzLCJwdXIiOiJibG9iX2lkIn19--7c7c600f13fae5e098b5ab05b254f608e3471fc9/IMG_1023.jpg)
+
+During placing these parts, I encountered a problem with one of the packages I ordered. The MAX17048 Fuel Gauge IC which was supposed to be in a relatively small QFN package actually came in a ridiculously small BGA package. I’ll update the electronics BOM to reflect this mistake. After placing all the components, I brought the PCB to my reflow hotplate, where the solder melted and joined pretty much all the pads to the right pins with the exception of some pads on the ESP32-S3 chip and the tiny LGA pads on the Bosch BHI260AP. The solder bridges between these pads were easily solved by removing the chips while the solder was still molten, and using a small soldering iron to wick away some of the excess solder, after which the chips were placed back onto their pads.
+
+Lastly, I cut up an old USB cable and wired the data and power connections to their respective pads on the PCB. These are effectively debug and firmware flashing pads.
+
+![IMG_1026](https://blueprint.hackclub.com/user-attachments/blobs/proxy/eyJfcmFpbHMiOnsiZGF0YSI6MTE5ODA0LCJwdXIiOiJibG9iX2lkIn19--f5f3e81db2495f08fb15ebb8ed1402b8c8547b0b/IMG_1026.jpg)
+
+After TRIPLE-CHECKING all the connections were perfect on the PCB, I finally decided to plug the board into my PC. A great sign was that there was no magic smoke or burnt components anywhere. And a USB connection was even being initialised! This, however, didn’t work out, and Windows kept telling me that my device was malfunctioning.
+
+Now came the troubleshooting. I theorised that the ESP32 chip was booting up, but the USB connection was failing because the 3.3V rail took too long to reach its voltage upon being plugged into USB power. I connected my multimeter to the rail, and it took roughly 0.3-0.4 seconds for the rail to stabilise, and this might have been too late as the USB connection starts communication almost immediately. The voltage mismatch between the board’s 3.3V rail and the USB’s 3.3V signals might have been enough to disrupt the connection.
+
+To confirm this, I wired the 3.3V rail to a clean 3.3V source from my bench power supply, and the board was consuming a steady 17mA, which was promising. This confirmed that the ESP32-S3 was alive and well. However, I plugged in the USB, and again, the same problem emerged.
+
+At this point, I pretty much had no other leads as to why this USB connection issue was happening, until I took a closer look at the schematic for the ESP32-S3 ZERO dev board I based my schematic around. Despite their same appearance and apparent microcontroller cores, the dev board used a specific model of the ESP32-S3 with built in SPI flash in the package. The “plain” ESP32-S3 chip I had ordered did not come with ANY flash, and needs external SPI flash to even boot up and connect to USB!
+
+![image](https://blueprint.hackclub.com/user-attachments/blobs/proxy/eyJfcmFpbHMiOnsiZGF0YSI6MTE5ODA1LCJwdXIiOiJibG9iX2lkIn19--e2ea59b7cf5b1610d5a80febcda3ac6c2480dee8/image.png)
+
+Through an incredible stroke of luck, however, the ESP32-S3FH4R2 (the model I was supposed to use) is exactly pin-compatible with the regular ESP32-S3, and can simply slot into the same place the old chip was in. This should provide around 4MB of flash memory to actually store programs, and the ESP32-S3 should initiate USB communication with the PC now. The only thing left was to actually get the chip…
+
+![image](https://blueprint.hackclub.com/user-attachments/blobs/proxy/eyJfcmFpbHMiOnsiZGF0YSI6MTE5ODA2LCJwdXIiOiJibG9iX2lkIn19--8759227ac95b5e55e36e4808175fb510e50c4c1f/image.png)
+
+To avoid the expensive shipping fees (and long wait times) from vendors like DigiKey and LCSC, I resorted to buying an actual ESP32-S3 ZERO dev board from AliExpress, which I plan to harvest its chip from to put into the ES_01. It should arrive around the 16th of March, so it’s much faster than the other vendors I mentioned before. See you then!  
+

@@ -1,16 +1,16 @@
 Manufacturer Part Number,Mfr.,Order Qty.,Unit Price(USD),Ext.Price(USD),Package,Description,Product Link
-CC0402JRNPO9BN110,YAGEO,100,0.0013,0.13,0402,11pF ±5% 50V Ceramic Capacitor NP0 0402,https://www.lcsc.com/product-detail/C527000.html
-GRM155R61E475ME15D,muRata,20,0.0403,0.81,0402,4.7uF ±20% 25V Ceramic Capacitor X5R 0402,https://www.lcsc.com/product-detail/C2858031.html
-ESP32-S3,ESPRESSIF,1,3.0048,3,QFN-56-EP(7x7),-98.4dBm 150Mbps 2.412GHz~2.484GHz 2.4GHz 3V~3.6V QFN-56-EP(7x7) RF Transceiver ICs RoHS,https://www.lcsc.com/product-detail/C2913192.html
+CC0402JRNPO9BN110,YAGEO,100,0.0013,0.13,0402,11pF Â±5% 50V Ceramic Capacitor NP0 0402,https://www.lcsc.com/product-detail/C527000.html
+GRM155R61E475ME15D,muRata,20,0.0403,0.81,0402,4.7uF Â±20% 25V Ceramic Capacitor X5R 0402,https://www.lcsc.com/product-detail/C2858031.html
+ESP32-S3FH4R2,ESPRESSIF,1,4.2940,4.29,QFN-56(7x7),2.4GHz LX7 Chip -104.5dBm QFN-56(7x7) RF Transceiver Modules and Modems RoHS,https://www.lcsc.com/product-detail/C3013940.html
 2328702-6,TE Connectivity,5,0.2027,1.01,"SMD,P=0.5mm,Surface Mount,Right Angle","FFC/FPC Connector 6 Position 0.5mm Pitch Double-Sided Contacts, Top and Bottom Entry Surface Mount, Right Angle -40?~+85?",https://www.lcsc.com/product-detail/C3151647.html
 FFC2B28-24-G,Global Connector Technology,1,0.5754,0.58,"SMD,P=0.5mm,Surface Mount,Right Angle","FFC/FPC Connector 24 Position 0.5mm Pitch Double-Sided Contacts, Top and Bottom Entry Surface Mount, Right Angle -25?~+85?",https://www.lcsc.com/product-detail/C3151659.html
 BHI260AP,Bosch,1,9.8338,9.83,LGA-44,LGA-44 IMUs (Inertial Measurement Units) RoHS,https://www.lcsc.com/product-detail/C3288651.html
 SI1308EDL-T1-GE3,VISHAY,5,0.1543,0.77,SOT-323,N-Channel 30V 1.5A 0.4W Surface Mount SOT-323,https://www.lcsc.com/product-detail/C469327.html
 XC6206P302MR,HXY MOSFET,50,0.0176,0.88,SOT-23,Linear Voltage Regulator IC Positive Fixed 1 Output 300mA SOT-23,https://www.lcsc.com/product-detail/C5148691.html
 MBR0530,Huixin,20,0.0296,0.59,SOD-123,5.5A 1 Independent 30V 500mV@500mA 500mA SOD-123 Single Diodes RoHS,https://www.lcsc.com/product-detail/C49435625.html
-0402WGF1004TCE,UNI-ROYAL,100,0.0008,0.08,0402,1M? ±1% 62.5mW 0402 Thick Film Resistor,https://www.lcsc.com/product-detail/C26083.html
-CL05A105KA5NQNC,Samsung Electro-Mechanics,100,0.0033,0.33,0402,1uF ±10% 25V Ceramic Capacitor X5R 0402,https://www.lcsc.com/product-detail/C52923.html
-XL2EL89CPI-111YLC-40M,YXC Crystal Oscillators,10,0.0619,0.62,SMD3225-4P,Crystal 40MHz ±10ppm 15pF SMD3225-4P,https://www.lcsc.com/product-detail/C5444549.html
+0402WGF1004TCE,UNI-ROYAL,100,0.0008,0.08,0402,1M? Â±1% 62.5mW 0402 Thick Film Resistor,https://www.lcsc.com/product-detail/C26083.html
+CL05A105KA5NQNC,Samsung Electro-Mechanics,100,0.0033,0.33,0402,1uF Â±10% 25V Ceramic Capacitor X5R 0402,https://www.lcsc.com/product-detail/C52923.html
+XL2EL89CPI-111YLC-40M,YXC Crystal Oscillators,10,0.0619,0.62,SMD3225-4P,Crystal 40MHz Â±10ppm 15pF SMD3225-4P,https://www.lcsc.com/product-detail/C5444549.html
 TS-1088-AR02016,XUNPU,10,0.0455,0.46,"SMD,4x3mm",Tactile Switch SPST 160gf 2mm SMD (SMT) Tab 4mm x 3mm Surface Mount,https://www.lcsc.com/product-detail/C720477.html
 BSS138,R+O,50,0.0172,0.86,SOT-23,N-Channel 50V 340mA 350mW Surface Mount SOT-23,https://www.lcsc.com/product-detail/C7420339.html
 "TCR2EF33,LM(CT",TOSHIBA,5,0.1077,0.54,TSOT-25,"3.3V 5.5V Positive Fixed TSOT-25 Voltage Regulators - Linear, Low Drop Out (LDO) Regulators RoHS",https://www.lcsc.com/product-detail/C843273.html
@@ -18,26 +18,26 @@ LQG15HS3N3S02D,muRata,100,0.0079,0.79,0402,800mA 3.3nH 170m? Multilayer inductor
 MRA4003T3G,onsemi,10,0.1152,1.15,SMA(DO-214AC),Diode 300V 1A Surface Mount SMA(DO-214AC),https://www.lcsc.com/product-detail/C94410.html
 DRV2605LDGSR,TI,1,1.3734,1.37,VSSOP-10-0.5mm,"I2C VSSOP-10-0.5mm Motor Drivers, Controllers RoHS",https://www.lcsc.com/product-detail/C527464.html
 LQG15HS2N0S02D,muRata,100,0.0084,0.84,0402,900mA 2nH 100m? Multilayer inductor 0402 Fixed Inductors RoHS,https://www.lcsc.com/product-detail/C18216.html
-0402WGF5603TCE,UNI-ROYAL,100,0.0006,0.06,0402,560k? ±1% 62.5mW 0402 Thick Film Resistor,https://www.lcsc.com/product-detail/C132339.html
-CL05B103KB5NNNC,Samsung Electro-Mechanics,100,0.0014,0.14,0402,10nF ±10% 50V Ceramic Capacitor X7R 0402,https://www.lcsc.com/product-detail/C15195.html
-0402B102K500NT,FH,100,0.0012,0.12,0402,1nF ±10% 50V Ceramic Capacitor X7R 0402,https://www.lcsc.com/product-detail/C1523.html
-CL05B104KO5NNNC,Samsung Electro-Mechanics,100,0.0013,0.13,0402,100nF ±10% 16V Ceramic Capacitor X7R 0402,https://www.lcsc.com/product-detail/C1525.html
+0402WGF5603TCE,UNI-ROYAL,100,0.0006,0.06,0402,560k? Â±1% 62.5mW 0402 Thick Film Resistor,https://www.lcsc.com/product-detail/C132339.html
+CL05B103KB5NNNC,Samsung Electro-Mechanics,100,0.0014,0.14,0402,10nF Â±10% 50V Ceramic Capacitor X7R 0402,https://www.lcsc.com/product-detail/C15195.html
+0402B102K500NT,FH,100,0.0012,0.12,0402,1nF Â±10% 50V Ceramic Capacitor X7R 0402,https://www.lcsc.com/product-detail/C1523.html
+CL05B104KO5NNNC,Samsung Electro-Mechanics,100,0.0013,0.13,0402,100nF Â±10% 16V Ceramic Capacitor X7R 0402,https://www.lcsc.com/product-detail/C1525.html
 0402CG1R0C500NT,FH,100,0.0012,0.12,0402,1pF 50V Ceramic Capacitor C0G 0402,https://www.lcsc.com/product-detail/C1550.html
-CL05A106MQ5NUNC,Samsung Electro-Mechanics,100,0.0056,0.56,0402,10uF ±20% 6.3V Ceramic Capacitor X5R 0402,https://www.lcsc.com/product-detail/C15525.html
-CL05B224KO5NNNC,Samsung Electro-Mechanics,100,0.0041,0.41,0402,220nF ±10% 16V Ceramic Capacitor X7R 0402,https://www.lcsc.com/product-detail/C16772.html
+CL05A106MQ5NUNC,Samsung Electro-Mechanics,100,0.0056,0.56,0402,10uF Â±20% 6.3V Ceramic Capacitor X5R 0402,https://www.lcsc.com/product-detail/C15525.html
+CL05B224KO5NNNC,Samsung Electro-Mechanics,100,0.0041,0.41,0402,220nF Â±10% 16V Ceramic Capacitor X7R 0402,https://www.lcsc.com/product-detail/C16772.html
 BMP585,Bosch,1,3.5109,3.51,LGA-9(3.3x3.3),"30Kpa~1.25bar LGA-9(3.3x3.3) Pressure Sensors, Transducers RoHS",https://www.lcsc.com/product-detail/C18184976.html
 LD39200PU33R,ST,1,1.0184,1.02,DFN-6(3x3),"3.3V 6V Positive Fixed DFN-6(3x3) Voltage Regulators - Linear, Low Drop Out (LDO) Regulators RoHS",https://www.lcsc.com/product-detail/C222192.html
-CL05A475MP5NRNC,Samsung Electro-Mechanics,50,0.0055,0.28,0402,4.7uF ±20% 10V Ceramic Capacitor X5R 0402,https://www.lcsc.com/product-detail/C23733.html
-0402WGF2201TCE,UNI-ROYAL,100,0.0008,0.08,0402,2.2k? ±1% 62.5mW 0402 Thick Film Resistor,https://www.lcsc.com/product-detail/C25879.html
-0402WGF4701TCE,UNI-ROYAL,100,0.0008,0.08,0402,4.7k? ±1% 62.5mW 0402 Thick Film Resistor,https://www.lcsc.com/product-detail/C25900.html
-ANR4012T470M,APV,10,0.0544,0.54,"SMD,4x4mm","500mA 47uH 500mA Magnetic Shielded Inductor ±20% SMD,4x4mm Fixed Inductors RoHS",https://www.lcsc.com/product-detail/C7497063.html
-MAX30102EFD+T,MAXIM,1,13.0636,13.06,OESIP-14,I2C OESIP-14 Specialized Sensors RoHS,https://www.lcsc.com/product-detail/C6454833.html
-MAX17048X+T10,MAXIM,1,1.1576,1.16,WLP-8(0.9x1.8),Lithium Battery I2C WLP-8(0.9x1.8) Battery Management RoHS,https://www.lcsc.com/product-detail/C7497002.html
+CL05A475MP5NRNC,Samsung Electro-Mechanics,50,0.0055,0.28,0402,4.7uF Â±20% 10V Ceramic Capacitor X5R 0402,https://www.lcsc.com/product-detail/C23733.html
+0402WGF2201TCE,UNI-ROYAL,100,0.0008,0.08,0402,2.2k? Â±1% 62.5mW 0402 Thick Film Resistor,https://www.lcsc.com/product-detail/C25879.html
+0402WGF4701TCE,UNI-ROYAL,100,0.0008,0.08,0402,4.7k? Â±1% 62.5mW 0402 Thick Film Resistor,https://www.lcsc.com/product-detail/C25900.html
+ANR4012T470M,APV,10,0.0544,0.54,"SMD,4x4mm","500mA 47uH 500mA Magnetic Shielded Inductor Â±20% SMD,4x4mm Fixed Inductors RoHS",https://www.lcsc.com/product-detail/C7497063.html
+MAX30102EFD+T,MAXIM,1,13.0636,13.06,"OESIP-14","I2C OESIP-14 Specialized Sensors RoHS",https://www.lcsc.com/product-detail/C6454833.html
+MAX17048G+T10,MAXIM,1,2.4693,2.47,DFN-8-EP(2x2),Lithium Battery I2C DFN-8-EP(2x2) Battery Management RoHS,https://www.lcsc.com/product-detail/C2682616.html
 1N4148,onsemi,50,0.0353,1.77,DO-35,Diode 100V 200mA Through Hole DO-35,https://www.lcsc.com/product-detail/C258182.html
-FRC0402F1001TS,FOJAN,100,0.0006,0.06,0402,1k? ±1% 62.5mW 0402 Thick Film Resistor,https://www.lcsc.com/product-detail/C2906864.html
-FRC0402F22R0TS,FOJAN,100,0.0006,0.06,0402,22? ±1% 62.5mW 0402 Thick Film Resistor,https://www.lcsc.com/product-detail/C2929994.html
-FRC0402F2R20TS,FOJAN,100,0.0008,0.08,0402,2.2? ±1% 62.5mW 0402 Thick Film Resistor,https://www.lcsc.com/product-detail/C2909330.html
-FRC0402F1002TS,FOJAN,100,0.0006,0.06,0402,10k? ±1% 62.5mW 0402 Thick Film Resistor,https://www.lcsc.com/product-detail/C2906861.html
+FRC0402F1001TS,FOJAN,100,0.0006,0.06,0402,1k? Â±1% 62.5mW 0402 Thick Film Resistor,https://www.lcsc.com/product-detail/C2906864.html
+FRC0402F22R0TS,FOJAN,100,0.0006,0.06,0402,22? Â±1% 62.5mW 0402 Thick Film Resistor,https://www.lcsc.com/product-detail/C2929994.html
+FRC0402F2R20TS,FOJAN,100,0.0008,0.08,0402,2.2? Â±1% 62.5mW 0402 Thick Film Resistor,https://www.lcsc.com/product-detail/C2909330.html
+FRC0402F1002TS,FOJAN,100,0.0006,0.06,0402,10k? Â±1% 62.5mW 0402 Thick Film Resistor,https://www.lcsc.com/product-detail/C2906861.html
 LW06121,WENDA,100,0.07,7,"SMD,P=0.62mm,Surface Mount,Right Angle",1.2H 14Pin 0.62mm Pitch OLED FPC/FFC Upper Contact Pull-Out Horizontal SMD Flat Connector,https://www.alibaba.com/product-detail/WENDA-LW06121-1-2H-14Pin-0_1601292173873.html
 GDEY0154D67-T03,Goodisplay,1,11.32,11.32,-,1.54Inch Touch E-Paper 200x200 E-Ink Display,https://www.aliexpress.com/item/1005005200574055.html
 SSD1306,-,2,0.72,1.44,-,0.91 Inch I2C OLED Module,https://www.aliexpress.com/item/1005004415958608.html?spm=a2g0o.tesla.0.0.4820nU7CnU7Cr1&pdp_npi=6%40dis%21AUD%21AU%241.39%21AU%241.05%21%21%21%21%21%402103122117624689217517794e3108%2112000046550658291%21btfpre%21%21%21%211%210%21&afTraceInfo=1005004415958608__pc__c_ppc_item_bridge_pc_main__vt8pak6__1762468921809
